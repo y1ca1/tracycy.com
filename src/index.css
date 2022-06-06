@@ -1,0 +1,4 @@
+/* stylelint-disable font-family-name-quotes */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

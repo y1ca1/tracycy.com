@@ -1,8 +1,7 @@
 import React from 'react';
-import './App.less';
 
 const App: React.FC<Record<string, never>> = () => (
-  <p>Hello, world! Test ~~~</p>
+  <h1 className="text-3xl font-bold underline">Hello world!</h1>
 );
 
 export default App;

@@ -1,6 +1,12 @@
 import http from 'http';
+import path from 'path';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import esbuild from 'esbuild';
-import { lessLoader } from 'esbuild-plugin-less';
+
+import stylePlugin from 'esbuild-style-plugin';
+
+const dirName = dirname(fileURLToPath(import.meta.url));
 
 esbuild
   .serve(
@@ -11,12 +17,16 @@ esbuild
     },
     {
       logLevel: 'debug',
-      entryPoints: ['src/index.tsx'],
+      entryPoints: [path.resolve(dirName, 'src/index.tsx')],
       bundle: true,
       sourcemap: true,
       color: true,
-      outfile: 'public/dist/out.js',
-      plugins: [lessLoader()],
+      outfile: path.resolve(dirName, 'public/dist/out.js'),
+      plugins: [
+        stylePlugin({
+          postcssConfigFile: path.resolve(dirName, 'postcss.config.js'),
+        }),
+      ],
     },
   )
   .then(server => {
