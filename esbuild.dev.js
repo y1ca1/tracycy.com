@@ -24,6 +24,11 @@ esbuild
       sourcemap: true,
       color: true,
       outfile: path.resolve(dirName, 'public/dist/out.js'),
+      loader: {
+        '.png': 'dataurl',
+        '.jpg': 'dataurl',
+        '.jpeg': 'dataurl',
+      },
       plugins: [
         stylePlugin({
           postcssConfigFile: path.resolve(dirName, 'postcss.config.js'),
