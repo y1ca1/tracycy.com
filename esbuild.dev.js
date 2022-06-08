@@ -1,12 +1,14 @@
-import http from 'http';
 import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import express from 'express';
 import esbuild from 'esbuild';
 
 import stylePlugin from 'esbuild-style-plugin';
+import svgrPlugin from 'esbuild-plugin-svgr';
 
 const dirName = dirname(fileURLToPath(import.meta.url));
+const startTime = new Date().getTime();
 
 esbuild
   .serve(
@@ -26,43 +28,28 @@ esbuild
         stylePlugin({
           postcssConfigFile: path.resolve(dirName, 'postcss.config.js'),
         }),
+        svgrPlugin(),
       ],
     },
   )
   .then(server => {
     const { host, port } = server;
-    http
-      .createServer((req, res) => {
-        const options = {
-          hostname: host,
-          port: port,
-          path: req.url,
-          method: req.method,
-          headers: req.headers,
-        };
+    const app = express();
 
-        // Forward each incoming request to esbuild
-        const proxyReq = http.request(options, proxyRes => {
-          // If esbuild returns "not found", send a custom 404 page
-          if (proxyRes.statusCode === 404) {
-            res.writeHead(404, { 'Content-Type': 'text/html' });
-            res.end('<h2>NOT FOUND! </h2>');
-            return;
-          }
+    app.get('/*', function (req, res) {
+      res.sendFile(path.resolve(dirName, 'public/index.html'), function (err) {
+        if (err) {
+          res.status(500).send(err);
+        }
+      });
+    });
 
-          // Otherwise, forward the response from esbuild to the client
-          res.writeHead(proxyRes.statusCode, proxyRes.headers);
-          proxyRes.pipe(res, { end: true });
-        });
+    app.listen(3000);
 
-        // Forward the body of the request to esbuild
-        req.pipe(proxyReq, { end: true });
-      })
-      .listen(3000);
+    const endTime = new Date().getTime();
+    const timeDiff = endTime - startTime;
     console.log(
-      `😽 Build success, development server started at: \n👉 http://${host}:3000`,
+      `😽 Build successfully in ${timeDiff} ms, development server started at: \n👉 http://${host}:3000`,
     );
-    // Call "stop" on the web server to stop serving
-    // server.stop()
   })
   .catch(() => process.exit(1));

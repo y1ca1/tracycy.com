@@ -52,7 +52,12 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": ["**/webpack.*.ts", "./scripts/*.ts"]
+        "devDependencies": [
+          "./*.js",
+          "./*.cjs",
+          "**/*.test.ts",
+          "**/*.test.tsx"
+        ]
       }
     ],
     "import/order": [
