@@ -18,6 +18,11 @@
     "prettier"
   ],
   "plugins": ["react", "jsx-a11y", "import", "prettier", "@typescript-eslint"],
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
   "rules": {
     "prettier/prettier": ["error"],
     "jsx-a11y/label-has-associated-control": [

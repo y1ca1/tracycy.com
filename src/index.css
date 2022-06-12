@@ -1,4 +1,30 @@
-/* stylelint-disable font-family-name-quotes */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  @apply dark;
+}
+
+.light {
+  --color-bg-primary: #f0f0ef;
+  --color-bg-secondary: #afaaa5;
+  --color-text-primary: #4b433d;
+  --color-text-secondary: #9a9180;
+  --color-text-subtle: #f6f6f4;
+  --color-accent: #d78553;
+}
+
+.dark {
+  --color-bg-primary: #323d41;
+  --color-bg-secondary: #4b554c;
+  --color-text-primary: #eef0eb;
+  --color-text-secondary: #f6e9d6;
+  --color-text-subtle: #2b373b;
+  --color-accent: #e0b07e;
+}
+
+body {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+}
