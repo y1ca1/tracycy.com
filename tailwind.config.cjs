@@ -15,6 +15,14 @@ module.exports = {
       colors: {
         accent: 'var(--color-accent)',
       },
+      spacing: {
+        128: '32rem',
+        136: '34rem',
+        144: '36rem',
+      },
+      fontSize: {
+        '4xl': ['36px', '48px'],
+      },
       animation: {
         'blob-spin': 'blobbing 25s linear infinite',
       },

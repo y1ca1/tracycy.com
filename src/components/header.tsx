@@ -19,15 +19,9 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-type Navigation = {
-  name: string;
-  href: string;
-  current: boolean;
-};
-
-const MainNavigation = (): JSX.Element => {
+const Header = (): JSX.Element => {
   const [navigation, setNavigation] = React.useState<Navigation[]>([
-    { name: 'Home', href: '/home', current: true },
+    { name: 'Blog', href: '/blog', current: false },
     { name: 'Education', href: '/education', current: false },
     { name: 'Experience', href: '/experience', current: false },
     { name: 'Projects', href: '/projects', current: false },
@@ -40,7 +34,7 @@ const MainNavigation = (): JSX.Element => {
     <Disclosure as="nav" className="bg-primary ">
       {({ open }) => (
         <>
-          <div className="max-w-screen-lg mx-auto px-2 sm:px-6 lg:px-8">
+          <div className="max-w-screen-xl mx-auto pt-6 px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center lg:hidden">
                 {/* Mobile menu button*/}
@@ -54,38 +48,53 @@ const MainNavigation = (): JSX.Element => {
                 </Disclosure.Button>
               </div>
               <div className="flex-1 flex items-center justify-center lg:items-stretch lg:justify-start">
-                <div className="flex-shrink-0 flex items-center">
-                  {currentThemeMode === ThemeMode.Dark ? (
-                    <>
-                      <CLight className="block h-8 w-auto" />
-                      <ALight className="block h-8 w-auto" />
-                      <ILight className="block h-8 w-auto" />
-                      <YLight className="block h-8 w-auto" />
-                      <ILight className="block h-8 w-auto" />
-                    </>
-                  ) : (
-                    <>
-                      <CDark className="block h-8 w-auto" />
-                      <ADark className="block h-8 w-auto" />
-                      <IDark className="block h-8 w-auto" />
-                      <YDark className="block h-8 w-auto" />
-                      <IDark className="block h-8 w-auto" />
-                    </>
-                  )}
-                </div>
+                <NavLink
+                  to="/"
+                  aria-label="Cai Yi's Website logo, go to homepage."
+                >
+                  <div
+                    className="flex-shrink-0 flex items-center overflow-hidden transition-transform ease-in-out rounded-full hover:scale-125 hover:rotate-12"
+                    onClick={() =>
+                      setNavigation(
+                        navigation.map(navs => ({
+                          ...navs,
+                          current: false,
+                        })),
+                      )
+                    }
+                  >
+                    {currentThemeMode === ThemeMode.Dark ? (
+                      <>
+                        <CLight className="block h-8 w-auto" />
+                        <ALight className="block h-8 w-auto" />
+                        <ILight className="block h-8 w-auto" />
+                        <YLight className="block h-8 w-auto" />
+                        <ILight className="block h-8 w-auto" />
+                      </>
+                    ) : (
+                      <>
+                        <CDark className="block h-8 w-auto" />
+                        <ADark className="block h-8 w-auto" />
+                        <IDark className="block h-8 w-auto" />
+                        <YDark className="block h-8 w-auto" />
+                        <IDark className="block h-8 w-auto" />
+                      </>
+                    )}
+                  </div>
+                </NavLink>
                 <div className="hidden lg:block lg:ml-6">
                   <div className="flex space-x-4">
-                    {navigation.map((item, index) => (
+                    {navigation.map((nav, index) => (
                       <NavLink
-                        key={item.name}
-                        to={item.href}
+                        key={nav.name}
+                        to={nav.href}
                         className={classNames(
-                          item.current
+                          nav.current
                             ? 'bg-secondary text-primary'
                             : 'text-secondary hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-primary',
-                          'px-3 py-2 rounded-md text-sm font-medium',
+                          'px-3 py-2 rounded-md text-md font-medium',
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={nav.current ? 'page' : undefined}
                         onClick={() =>
                           setNavigation(
                             navigation.map((navs, i) => ({
@@ -95,7 +104,7 @@ const MainNavigation = (): JSX.Element => {
                           )
                         }
                       >
-                        {item.name}
+                        {nav.name}
                       </NavLink>
                     ))}
                   </div>
@@ -132,31 +141,31 @@ const MainNavigation = (): JSX.Element => {
           >
             <Disclosure.Panel className="lg:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
-                {navigation.map((item, index) => (
+                {navigation.map((nav, index) => (
                   <Disclosure.Button
-                    key={item.name}
+                    key={nav.name}
                     className={classNames(
-                      item.current
+                      nav.current
                         ? 'bg-secondary text-primary'
                         : 'text-secondary hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-primary',
                       'block px-3 py-2 rounded-md text-base font-medium',
                     )}
-                    aria-current={item.current ? 'page' : undefined}
+                    aria-current={nav.current ? 'page' : undefined}
                   >
                     <NavLink
                       className="py-2"
-                      key={item.name}
-                      to={item.href}
+                      key={nav.name}
+                      to={nav.href}
                       onClick={() =>
                         setNavigation(
-                          navigation.map((navs, i) => ({
-                            ...navs,
+                          navigation.map((item, i) => ({
+                            ...item,
                             current: i === index,
                           })),
                         )
                       }
                     >
-                      {item.name}
+                      {nav.name}
                     </NavLink>
                   </Disclosure.Button>
                 ))}
@@ -169,4 +178,4 @@ const MainNavigation = (): JSX.Element => {
   );
 };
 
-export default MainNavigation;
+export default Header;
