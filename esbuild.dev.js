@@ -18,7 +18,7 @@ esbuild
       port: 4000,
     },
     {
-      logLevel: 'debug',
+      logLevel: 'info',
       entryPoints: [path.resolve(dirName, 'src/index.tsx')],
       bundle: true,
       sourcemap: true,
@@ -28,6 +28,7 @@ esbuild
         '.png': 'dataurl',
         '.jpg': 'dataurl',
         '.jpeg': 'dataurl',
+        '.gif': 'dataurl',
       },
       plugins: [
         stylePlugin({
