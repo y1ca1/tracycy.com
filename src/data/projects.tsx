@@ -7,7 +7,7 @@ import Events from '@/assets/icons/projects/events.svg';
 import TypeInference from '@/assets/icons/projects/type-inference.svg';
 import CY from '@/assets/icons/projects/cy.svg';
 import HandRecognition from '@/assets/icons/projects/hand-recog.svg';
-import Music2Score from '@/assets/icons/projects/music2score.svg';
+import music2ScoreUrl from '@/assets/icons/projects/music2score.png';
 
 export interface ProjectInfo {
   name: string;
@@ -40,7 +40,7 @@ export const projects: ProjectInfo[] = [
   },
   {
     name: 'Music to Score',
-    icon: <Music2Score className="w-2/3 h-2/3" />,
+    icon: <img src={music2ScoreUrl} className="w-2/3 h-2/3" />,
     description: `I also want to grab some full-stack software engineering and Agile methodology practices. So I joined a team of developers to build the
     a music to score converter web app that can facilitate the ability to generate sheet music from midi files.`,
     link: 'https://github.com/music2score/music2score',
