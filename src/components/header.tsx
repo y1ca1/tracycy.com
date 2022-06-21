@@ -6,14 +6,14 @@ import { DarkModeSwitch } from 'react-toggle-dark-mode';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { ThemeMode } from '@/types/theme';
 import avatarUrl from '@/assets/pics/me.jpg';
-import CDark from '@/assets/icons/letter-c-dark.svg';
-import ADark from '@/assets/icons/letter-a-dark.svg';
-import IDark from '@/assets/icons/letter-i-dark.svg';
-import YDark from '@/assets/icons/letter-y-dark.svg';
-import CLight from '@/assets/icons/letter-c-light.svg';
-import ALight from '@/assets/icons/letter-a-light.svg';
-import ILight from '@/assets/icons/letter-i-light.svg';
-import YLight from '@/assets/icons/letter-y-light.svg';
+import CDark from '@/assets/icons/caiyi/letter-c-dark.svg';
+import ADark from '@/assets/icons/caiyi/letter-a-dark.svg';
+import IDark from '@/assets/icons/caiyi/letter-i-dark.svg';
+import YDark from '@/assets/icons/caiyi/letter-y-dark.svg';
+import CLight from '@/assets/icons/caiyi/letter-c-light.svg';
+import ALight from '@/assets/icons/caiyi/letter-a-light.svg';
+import ILight from '@/assets/icons/caiyi/letter-i-light.svg';
+import YLight from '@/assets/icons/caiyi/letter-y-light.svg';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -22,13 +22,15 @@ function classNames(...classes: string[]) {
 const Header = (): JSX.Element => {
   const [navigation, setNavigation] = React.useState<Navigation[]>([
     { name: 'Blog', href: '/blog', current: false },
-    { name: 'Education', href: '/education', current: false },
     { name: 'Experience', href: '/experience', current: false },
     { name: 'Projects', href: '/projects', current: false },
-    { name: 'Coursework', href: '/coursework', current: false },
+    { name: 'About', href: '/about', current: false },
   ]);
 
   const [currentThemeMode, setThemeMode] = useThemeMode();
+
+  const toggleThemeMode = (checked = currentThemeMode === ThemeMode.Dark) =>
+    setThemeMode(checked ? ThemeMode.Dark : ThemeMode.Light);
 
   return (
     <Disclosure as="nav" className="bg-primary ">
@@ -111,18 +113,24 @@ const Header = (): JSX.Element => {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 lg:static lg:inset-auto lg:ml-6 lg:pr-0">
-                <DarkModeSwitch
-                  checked={currentThemeMode === ThemeMode.Dark}
-                  onChange={(checked: boolean) =>
-                    setThemeMode(checked ? ThemeMode.Dark : ThemeMode.Light)
-                  }
-                  size={35}
-                />
+                <button
+                  aria-label="Toggle dark mode"
+                  onKeyDown={e => e.code === 'Enter' && toggleThemeMode()}
+                >
+                  <DarkModeSwitch
+                    className="h-8 w-8 md:h-12 md:w-12"
+                    checked={currentThemeMode === ThemeMode.Dark}
+                    onChange={toggleThemeMode}
+                  />
+                </button>
                 <Menu as="div" className="ml-3 relative">
                   <div>
                     <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                       <span className="sr-only">Open user menu</span>
-                      <img className="h-8 w-8 rounded-full" src={avatarUrl} />
+                      <img
+                        className="h-8 w-8 md:h-12 md:w-12 rounded-full"
+                        src={avatarUrl}
+                      />
                     </Menu.Button>
                   </div>
                 </Menu>

@@ -2,13 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
-import { Education } from '@/pages/education';
 import { Blog } from '@/pages/blog';
 import { NotFound } from '@/pages/404';
 import { Home } from '@/pages/home';
 import { Projects } from '@/pages/projects';
 import { Experience } from '@/pages/experience';
-import { Coursework } from '@/pages/coursework';
+import { About } from '@/pages/about';
 
 const App: React.FC<Record<string, never>> = () => (
   <Router>
@@ -18,10 +17,9 @@ const App: React.FC<Record<string, never>> = () => (
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/education" element={<Education />} />
         <Route path="/experience" element={<Experience />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/coursework" element={<Coursework />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </main>
     <Footer />

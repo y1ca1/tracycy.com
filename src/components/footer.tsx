@@ -7,10 +7,9 @@ import EmailBlack from '@/assets/icons/email-black.svg';
 const Footer = (): JSX.Element => {
   const [navigation, setNavigation] = React.useState<Navigation[]>([
     { name: 'Blog', href: '/blog', current: false },
-    { name: 'Education', href: '/education', current: false },
     { name: 'Experience', href: '/experience', current: false },
     { name: 'Projects', href: '/projects', current: false },
-    { name: 'Coursework', href: '/coursework', current: false },
+    { name: 'About', href: '/about', current: false },
   ]);
 
   return (
@@ -60,7 +59,7 @@ const Footer = (): JSX.Element => {
               </span>
               <span>
                 <a
-                  href="https://www.linkedin.com/in/yicai27"
+                  href="https://linkedin.com/in/yicai27"
                   aria-label="Visit Linkedin profile"
                   title="Linkedin profile"
                   target="_blank"
