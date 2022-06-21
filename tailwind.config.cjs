@@ -1,5 +1,8 @@
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    './node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
+  ],
   darkMode: 'class',
   theme: {
     extend: {
@@ -23,8 +26,12 @@ module.exports = {
       fontSize: {
         '4xl': ['36px', '48px'],
       },
+      dropShadow: {
+        'xl-dark': '0 20px 13px rgba(237, 237, 237, 0.25)',
+      },
       animation: {
         'blob-spin': 'blobbing 25s linear infinite',
+        'spike-bounce': 'bounce 0.6s infinite',
       },
       keyframes: {
         blobbing: {
@@ -38,5 +45,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
 };
