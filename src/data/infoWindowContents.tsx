@@ -97,7 +97,7 @@ export const lankaContent = renderToString(
       <div className="flex flex-col items-center">
         <img className="h-24 w-40 rounded-xl " src={gapperLogoUrl} />
       </div>
-      <h5 className="text-xl font-bold  ">January 2017: Akurala, Sri Lanka</h5>
+      <h5 className="text-xl font-bold  ">Winter 2017: Akurala, Sri Lanka</h5>
       <p className="text-md font-semibold text-secondary">
         I spent some meaningful time with those disadvantaged kids and had some
         nice trips at the beautiful south coast of Sri Lanka.
@@ -188,8 +188,8 @@ export const cyphercorContent = renderToString(
       </div>
       <h5 className="text-xl font-bold  ">2021-2022: Ottawa, ON</h5>
       <p className="text-md font-semibold text-secondary">
-        Well, I work remotely from Waterloo due to the pandemic. This is my
-        first job as a software engineer 👨‍💻. I love what I do at work and the
+        This is my first job ever in my life! I work remotely from Waterloo as a
+        software engineer 👨‍💻 at Cyphercor Inc. I love what I do at work and the
         people I work with.
       </p>
     </Card>

@@ -7,7 +7,8 @@ import ChildrenIcon from '@/assets/icons/experience/children.svg';
 import AmusementParkIcon from '@/assets/icons/experience/amusement-park.svg';
 import NationalParkIcon from '@/assets/icons/experience/national-park.svg';
 import CanoeIcon from '@/assets/icons/experience/canoe.svg';
-import cyphercorIconUrl from '@/assets/icons/experience/cyphercor-logo.png';
+import WorkIcon from '@/assets/icons/experience/working.svg';
+import ResearchIcon from '@/assets/icons/experience/research.svg';
 
 const schoolIconString = encodeURIComponent(
   renderToStaticMarkup(<SchoolIcon />),
@@ -30,6 +31,12 @@ const amusementParkIconString = encodeURIComponent(
 const nationalParkIconString = encodeURIComponent(
   renderToStaticMarkup(<NationalParkIcon />),
 );
+
+const researchIconString = encodeURIComponent(
+  renderToStaticMarkup(<ResearchIcon />),
+);
+
+const workIconString = encodeURIComponent(renderToStaticMarkup(<WorkIcon />));
 
 const canoeIconString = encodeURIComponent(renderToStaticMarkup(<CanoeIcon />));
 
@@ -61,7 +68,11 @@ export const canoeIcon = (size = 40): google.maps.Icon => ({
   url: `data:image/svg+xml,${canoeIconString}`,
   scaledSize: new google.maps.Size(size, size),
 });
-export const cyphercorIcon = (size = 32): google.maps.Icon => ({
-  url: cyphercorIconUrl,
+export const researchIcon = (size = 40): google.maps.Icon => ({
+  url: `data:image/svg+xml,${researchIconString}`,
+  scaledSize: new google.maps.Size(size, size),
+});
+export const workIcon = (size = 40): google.maps.Icon => ({
+  url: `data:image/svg+xml,${workIconString}`,
   scaledSize: new google.maps.Size(size, size),
 });

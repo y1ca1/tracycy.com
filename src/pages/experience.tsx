@@ -10,10 +10,18 @@ export const Experience = (): JSX.Element => {
       <SpikeBounce />
       <section className="px-4 pt-12 pb-24 mx-auto max-w-7xl">
         <h1 className="mb-3 text-3xl font-bold leading-tight text-center md:text-4xl">
-          My life journey!
+          My Life Journey in Map
         </h1>
         <p className="mb-12 text-lg text-center ">
-          Trying to enjoy every moment of my life.
+          A kid born and raised up in{' '}
+          <a
+            href="https://en.wikipedia.org/wiki/Yueyang"
+            target="_blank"
+            className="underline"
+          >
+            Yueyang, Hunan, China
+          </a>
+          , trying to discover the world and enjoy every moment of life.
         </p>
         <div className="flex justify-center pb-12">
           <Tooltip
