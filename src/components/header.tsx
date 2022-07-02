@@ -90,12 +90,14 @@ const Header = (): JSX.Element => {
                       <NavLink
                         key={nav.name}
                         to={nav.href}
-                        className={classNames(
-                          nav.current
-                            ? 'bg-secondary text-primary'
-                            : 'text-secondary hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-primary',
-                          'px-3 py-2 rounded-md text-md font-medium',
-                        )}
+                        className={({ isActive }) =>
+                          classNames(
+                            isActive
+                              ? 'bg-secondary text-primary'
+                              : 'text-secondary hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-primary',
+                            'px-3 py-2 rounded-md text-md font-medium',
+                          )
+                        }
                         aria-current={nav.current ? 'page' : undefined}
                         onClick={() =>
                           setNavigation(

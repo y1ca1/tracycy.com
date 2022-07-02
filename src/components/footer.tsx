@@ -21,7 +21,9 @@ const Footer = (): JSX.Element => {
               <NavLink
                 key={nav.name}
                 to={nav.href}
-                className="hover:text-accent"
+                className={({ isActive }) =>
+                  isActive ? 'text-accent' : 'hover:text-accent'
+                }
               >
                 {nav.name}
               </NavLink>
