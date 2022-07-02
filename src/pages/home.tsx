@@ -1,6 +1,6 @@
 import React from 'react';
 import Fries from '@/assets/pics/fries.svg';
-import { SpikeAnimate } from '@/components/spike';
+import { ProjectGrid } from '@/components/projectGrid';
 
 const RoundedSquare = () => (
   <div aria-hidden="true">
@@ -17,18 +17,21 @@ const RoundedSquare = () => (
 );
 
 export const Home = (): JSX.Element => (
-  <div className="flex flex-col-reverse items-center mt-12 lg:flex-row lg:justify-between lg:space-x-6">
-    <p className="max-w-3xl mt-12 text-3xl font-semibold text-right lg:mt-0 sm:text-4xl sm:text-left md:text-center lg:text-left">
-      I'm Yi, a fervent software engineer, lifelong learner, and sometimes
-      <br /> a jerk.
-    </p>
-    <div className="relative ">
-      <RoundedSquare />
-      <div className="absolute top-0 flex items-center justify-center w-full h-full">
-        <div className="w-80 h-80 overflow-hidden rounded-lg md:h-96 md:w-96 lg:h-136 lg:w-136 ">
-          <Fries className="w-80 h-80 md:h-96 md:w-96 lg:w-136 lg:h-136" />
+  <>
+    <div className="flex flex-col-reverse items-center mt-12 mb-16 lg:flex-row lg:justify-between lg:space-x-6">
+      <p className="max-w-3xl mt-12 text-3xl font-semibold text-right lg:mt-0 sm:text-4xl sm:text-left md:text-center lg:text-left">
+        I'm Yi, a fervent software engineer, lifelong learner, and sometimes
+        <br /> a jerk.
+      </p>
+      <div className="relative ">
+        <RoundedSquare />
+        <div className="absolute top-0 flex items-center justify-center w-full h-full">
+          <div className="w-80 h-80 overflow-hidden rounded-lg md:h-96 md:w-96 lg:h-136 lg:w-136 ">
+            <Fries className="w-80 h-80 md:h-96 md:w-96 lg:w-136 lg:h-136" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    <ProjectGrid />
+  </>
 );
