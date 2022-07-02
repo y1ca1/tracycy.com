@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -36,6 +37,7 @@ esbuild
         }),
         svgrPlugin(),
       ],
+      define: { 'process.env.GMapAPIKey': `'${process.env.GMapAPIKey}'` },
     },
   )
   .then(server => {
