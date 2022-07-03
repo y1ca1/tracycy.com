@@ -29,6 +29,7 @@ export const ProjectGrid = () => (
             <Badge color="info">Typescript</Badge>
             <Badge color="info">MDX</Badge>
             <Badge color="info">TailwindCSS</Badge>
+            <Badge color="info">Headless UI</Badge>
             <Badge color="info">Flowbite</Badge>
             <Badge color="info">ESBuild</Badge>
           </div>
