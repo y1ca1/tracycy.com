@@ -7,6 +7,7 @@ export interface MarkerWithInfoBoxProps {
   markerRef: React.MutableRefObject<google.maps.Marker | undefined>;
   icon: (size?: number) => google.maps.Icon;
   position: google.maps.LatLngLiteral;
+  offset?: google.maps.Size;
   content: string;
 }
 
@@ -15,6 +16,7 @@ export const MarkerWithInfoBox = ({
   markerRef,
   icon,
   position,
+  offset = new google.maps.Size(0, 0),
   content,
 }: MarkerWithInfoBoxProps) => {
   const map = useGoogleMap();
@@ -27,6 +29,7 @@ export const MarkerWithInfoBox = ({
       onUnmount={() => (markerRef.current = undefined)}
       onMouseOver={() => {
         markerRef.current?.setIcon(icon(56));
+        infoBox.setOptions({ pixelOffset: offset });
         infoBox.setContent(content);
         if (map) infoBox.open(map, markerRef.current);
       }}

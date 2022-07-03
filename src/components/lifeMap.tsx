@@ -7,7 +7,7 @@ import { ThemeMode } from '@/types/theme';
 import { ButtonGroupControl } from '@/components/customMapControls';
 import * as Positions from '@/data/latlngs';
 import * as MarkerIcons from '@/data/mapMarkerIcons';
-import * as InfoWindowContents from '@/data/infoWindowContents';
+import * as InfoWindowContents from '@/data/infoBoxContents';
 import { DarkStyle, LightStyle } from '@/googleMapStyles';
 import { MarkerWithInfoBox } from '@/components/markerWithInfoBox';
 
@@ -15,7 +15,7 @@ export const LifeMap = (): JSX.Element => {
   const currentThemeMode = useThemeMode()[0];
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyBStHUG01KvuGC0DSk4tND9Mjiacb5eGR4', // ,
+    googleMapsApiKey: process.env.GMapAPIKey as string,
     // ...otherOptions
   });
 
@@ -106,12 +106,13 @@ export const LifeMap = (): JSX.Element => {
         markerRef={lankaMarker}
         icon={MarkerIcons.childrenIcon}
         position={Positions.LANKA}
+        offset={new google.maps.Size(0, -300)}
         content={InfoWindowContents.lankaContent}
       />
       <MarkerWithInfoBox
         infoBox={infoBox}
         markerRef={albertaMarker}
-        icon={MarkerIcons.universityIcon}
+        icon={MarkerIcons.researchIcon}
         position={Positions.ALBERTA}
         content={InfoWindowContents.ualbertaContent}
       />
@@ -148,6 +149,7 @@ export const LifeMap = (): JSX.Element => {
         markerRef={cmuMarker}
         icon={MarkerIcons.universityIcon}
         position={Positions.CMU}
+        offset={new google.maps.Size(30, -30)}
         content={InfoWindowContents.cmuContent}
       />
     </GoogleMap>

@@ -32,7 +32,7 @@ export const chaoyangContent = renderToString(
 );
 
 export const erzhongContent = renderToString(
-  <div className="w-2/3">
+  <div className="w-6/7">
     <Card>
       <div className="flex flex-col items-center">
         <img className="mb-3 h-14 w-52 rounded-xl " src={erzhongLogoUrl} />
@@ -53,8 +53,8 @@ export const yizhongContent = renderToString(
       </div>
       <h5 className="text-xl font-bold  ">2013-2016: Yueyang, Hunan</h5>
       <p className="text-md font-semibold text-secondary">
-        That's where I met two of my best friends till now at the First High
-        School of Yueyang.
+        The First High School of Yueyang &mdash; my Alma Mater. That's where I
+        met two of my best friends till now.
       </p>
     </Card>
   </div>,
@@ -84,8 +84,8 @@ export const uestcContent = renderToString(
       </div>
       <h5 className="text-xl font-bold  ">2016-2020: Chengdu, Sichuan</h5>
       <p className="text-md font-semibold text-secondary">
-        I spent 4 years in Chengdu and earned my Bachelor's degree at the
-        University of Electronic Science and Technology of China.
+        I spent 4 wonderfull years in Chengdu and earned my Bachelor's degree at
+        the University of Electronic Science and Technology of China.
       </p>
     </Card>
   </div>,
@@ -99,8 +99,8 @@ export const lankaContent = renderToString(
       </div>
       <h5 className="text-xl font-bold  ">Winter 2017: Akurala, Sri Lanka</h5>
       <p className="text-md font-semibold text-secondary">
-        I spent some meaningful time with those disadvantaged kids and had some
-        nice trips at the beautiful south coast of Sri Lanka.
+        I spent some meaningful time with those disadvantaged 🧒 and had some
+        nice trips at the beautiful south coast 🏖 of Sri Lanka.
       </p>
     </Card>
   </div>,

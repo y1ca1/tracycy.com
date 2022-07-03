@@ -53,5 +53,5 @@
     "@/": "${folder}/src/"
   },
   "path-autocomplete.extensionOnImport": true,
-  "svg.preview.background": "white"
+  "svg.preview.background": "transparent"
 }

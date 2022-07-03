@@ -3,6 +3,7 @@ import { Tooltip } from 'flowbite-react';
 import { LightBulbIcon } from '@heroicons/react/solid';
 import { SpikeBounce } from '@/components/spike';
 import { LifeMap } from '@/components/lifeMap';
+import { ExperienceList } from '@/components/experienceList';
 
 export const Experience = (): JSX.Element => {
   return (
@@ -35,6 +36,7 @@ export const Experience = (): JSX.Element => {
         <div className="flex justify-center container shadow-2xl shadow-stone-600 dark:shadow-gray-900">
           <LifeMap />
         </div>
+        <ExperienceList />
       </section>
     </div>
   );
