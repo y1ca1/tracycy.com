@@ -94,7 +94,7 @@ const Header = (): JSX.Element => {
                           classNames(
                             isActive
                               ? 'bg-secondary text-primary'
-                              : 'text-secondary hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-primary',
+                              : 'text-secondary hover:bg-gray-300 dark:hover:bg-pink-300/50 hover:text-primary',
                             'px-3 py-2 rounded-md text-md font-medium',
                           )
                         }
@@ -157,7 +157,7 @@ const Header = (): JSX.Element => {
                     className={classNames(
                       nav.current
                         ? 'bg-secondary text-primary'
-                        : 'text-secondary hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-primary',
+                        : 'text-secondary hover:bg-gray-300 dark:hover:bg-pink-300/50 hover:text-primary',
                       'block px-3 py-2 rounded-md text-base font-medium',
                     )}
                     aria-current={nav.current ? 'page' : undefined}

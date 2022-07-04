@@ -1,8 +1,26 @@
-export const DarkStyle: google.maps.MapTypeStyle[] = [
+export const DarkStyle1: google.maps.MapTypeStyle[] = [
+  {
+    featureType: 'all',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#202c3e',
+      },
+    ],
+  },
   {
     featureType: 'all',
     elementType: 'labels.text.fill',
     stylers: [
+      {
+        gamma: 0.01,
+      },
+      {
+        lightness: 20,
+      },
+      {
+        weight: '1.39',
+      },
       {
         color: '#ffffff',
       },
@@ -13,43 +31,40 @@ export const DarkStyle: google.maps.MapTypeStyle[] = [
     elementType: 'labels.text.stroke',
     stylers: [
       {
-        color: '#000000',
+        weight: '0.96',
       },
       {
-        lightness: 13,
+        saturation: '9',
       },
-    ],
-  },
-  {
-    featureType: 'administrative',
-    elementType: 'geometry.fill',
-    stylers: [
+      {
+        visibility: 'on',
+      },
       {
         color: '#000000',
       },
     ],
   },
   {
-    featureType: 'administrative',
-    elementType: 'geometry.stroke',
+    featureType: 'all',
+    elementType: 'labels.icon',
     stylers: [
       {
-        color: '#144b53',
-      },
-      {
-        lightness: 14,
-      },
-      {
-        weight: 1.4,
+        visibility: 'off',
       },
     ],
   },
   {
     featureType: 'landscape',
-    elementType: 'all',
+    elementType: 'geometry',
     stylers: [
       {
-        color: '#08304b',
+        lightness: 30,
+      },
+      {
+        saturation: '9',
+      },
+      {
+        color: '#29446b',
       },
     ],
   },
@@ -58,70 +73,55 @@ export const DarkStyle: google.maps.MapTypeStyle[] = [
     elementType: 'geometry',
     stylers: [
       {
-        color: '#0c4152',
-      },
-      {
-        lightness: 5,
+        saturation: 20,
       },
     ],
   },
   {
-    featureType: 'road.highway',
+    featureType: 'poi.park',
+    elementType: 'geometry',
+    stylers: [
+      {
+        lightness: 20,
+      },
+      {
+        saturation: -20,
+      },
+    ],
+  },
+  {
+    featureType: 'road',
+    elementType: 'geometry',
+    stylers: [
+      {
+        lightness: 10,
+      },
+      {
+        saturation: -30,
+      },
+    ],
+  },
+  {
+    featureType: 'road',
     elementType: 'geometry.fill',
     stylers: [
       {
-        color: '#000000',
+        color: '#193a55',
       },
     ],
   },
   {
-    featureType: 'road.highway',
+    featureType: 'road',
     elementType: 'geometry.stroke',
     stylers: [
       {
-        color: '#0b434f',
+        saturation: 25,
       },
       {
         lightness: 25,
       },
-    ],
-  },
-  {
-    featureType: 'road.arterial',
-    elementType: 'geometry.fill',
-    stylers: [
       {
-        color: '#000000',
-      },
-    ],
-  },
-  {
-    featureType: 'road.arterial',
-    elementType: 'geometry.stroke',
-    stylers: [
-      {
-        color: '#0b3d51',
-      },
-      {
-        lightness: 16,
-      },
-    ],
-  },
-  {
-    featureType: 'road.local',
-    elementType: 'geometry',
-    stylers: [
-      {
-        color: '#000000',
-      },
-    ],
-  },
-  {
-    featureType: 'transit',
-    elementType: 'all',
-    stylers: [
-      {
-        color: '#146474',
+        weight: '0.01',
       },
     ],
   },
@@ -130,12 +130,181 @@ export const DarkStyle: google.maps.MapTypeStyle[] = [
     elementType: 'all',
     stylers: [
       {
-        color: '#021019',
+        lightness: -20,
       },
     ],
   },
 ];
-
+export const DarkStyle: google.maps.MapTypeStyle[] = [
+  {
+    elementType: 'geometry',
+    stylers: [
+      {
+        hue: '#10416f',
+      },
+      {
+        saturation: 10,
+      },
+      {
+        lightness: -50,
+      },
+      {
+        gamma: 0.72,
+      },
+    ],
+  },
+  {
+    featureType: 'administrative.country',
+    elementType: 'geometry.stroke',
+    stylers: [
+      {
+        hue: '#dc8a8d',
+      },
+      {
+        saturation: 90,
+      },
+      {
+        lightness: 30,
+      },
+      {
+        gamma: 3,
+      },
+    ],
+  },
+  {
+    featureType: 'road',
+    elementType: 'geometry.stroke',
+    stylers: [
+      {
+        hue: '#dc8a8d',
+      },
+      {
+        gamma: 2,
+      },
+    ],
+  },
+  {
+    featureType: 'landscape.natural.terrain',
+    elementType: 'all',
+    stylers: [
+      {
+        hue: '#dc8a8d',
+      },
+      {
+        gamma: 2,
+      },
+    ],
+  },
+  {
+    featureType: 'landscape.man_made',
+    elementType: 'geometry',
+    stylers: [
+      {
+        hue: '#10416f',
+      },
+      {
+        gamma: 3.1,
+      },
+    ],
+  },
+  {
+    featureType: 'water',
+    stylers: [
+      {
+        hue: '#0c3d6b',
+      },
+      {
+        gamma: 0.64,
+      },
+    ],
+  },
+  {
+    featureType: 'poi.park',
+    stylers: [
+      {
+        hue: '#1f6f02',
+      },
+      {
+        saturation: -23,
+      },
+    ],
+  },
+  {
+    featureType: 'water',
+    elementType: 'labels.text.fill',
+    stylers: [
+      {
+        hue: '#fdece8',
+      },
+      {
+        gamma: 0.77,
+      },
+      {
+        saturation: 65,
+      },
+      {
+        lightness: 99,
+      },
+    ],
+  },
+  {
+    featureType: 'water',
+    elementType: 'labels.text.stroke',
+    stylers: [
+      {
+        gamma: 0.11,
+      },
+      {
+        weight: 5.6,
+      },
+      {
+        saturation: 99,
+      },
+      {
+        hue: '#fdece8',
+      },
+      {
+        lightness: 86,
+      },
+    ],
+  },
+  {
+    featureType: 'transit.line',
+    elementType: 'geometry',
+    stylers: [
+      {
+        lightness: 99,
+      },
+      {
+        hue: '#dc8a8d',
+      },
+      {
+        gamma: 1.2,
+      },
+      {
+        saturation: 80,
+      },
+    ],
+  },
+  {
+    featureType: 'transit',
+    elementType: 'labels.text.stroke',
+    stylers: [
+      {
+        hue: '#a06172',
+      },
+      {
+        lightness: 16,
+      },
+      {
+        gamma: 0.47,
+      },
+      {
+        weight: 2.7,
+      },
+    ],
+  },
+];
 export const LightStyle: google.maps.MapTypeStyle[] = [
   {
     elementType: 'geometry',

@@ -15,7 +15,7 @@ import cmuLogoUrl from '@/assets/icons/experience/cmu-logo.png';
 
 export const chaoyangContent = renderToString(
   <div className="w-2/3">
-    <Card>
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
       <div className="flex flex-col items-center">
         <img
           className="mb-3 h-16 w-48 rounded-xl dark:bg-slate-200 "
@@ -27,13 +27,13 @@ export const chaoyangContent = renderToString(
         I miss every morning my grandpa 👴 riding 🚲 me and my cousin to
         Chaoyang Primary School.
       </p>
-    </Card>
+    </div>
   </div>,
 );
 
 export const erzhongContent = renderToString(
   <div className="w-6/7">
-    <Card>
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
       <div className="flex flex-col items-center">
         <img className="mb-3 h-14 w-52 rounded-xl " src={erzhongLogoUrl} />
       </div>
@@ -41,13 +41,13 @@ export const erzhongContent = renderToString(
       <p className="text-md font-semibold text-secondary">
         We are CLASSIC Class 507 at Yueyang No.2 Middle School!
       </p>
-    </Card>
+    </div>
   </div>,
 );
 
 export const yizhongContent = renderToString(
   <div className="w-2/3">
-    <Card>
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
       <div className="flex flex-col items-center">
         <img className="mb-3 h-12 w-56 rounded-xl " src={yizhongLogoUrl} />
       </div>
@@ -56,26 +56,26 @@ export const yizhongContent = renderToString(
         The First High School of Yueyang &mdash; my Alma Mater. That's where I
         met two of my best friends till now.
       </p>
-    </Card>
+    </div>
   </div>,
 );
 
 export const beijingContent = renderToString(
   <div className="w-1/2">
-    <Card>
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
       <h5 className="text-xl font-bold tracking-tight ">
         Happy summer 2007 and 2012: Beijing
       </h5>
       <p className="text-md font-semibold text-secondary">
         I spent two of my wonderful summers in Beijing with my cousins.
       </p>
-    </Card>
+    </div>
   </div>,
 );
 
 export const uestcContent = renderToString(
   <div className="w-1/2">
-    <Card>
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
       <div className="flex flex-col items-center">
         <img
           className="h-28 w-28 rounded-full dark:bg-slate-200 "
@@ -87,13 +87,13 @@ export const uestcContent = renderToString(
         I spent 4 wonderfull years in Chengdu and earned my Bachelor's degree at
         the University of Electronic Science and Technology of China.
       </p>
-    </Card>
+    </div>
   </div>,
 );
 
 export const lankaContent = renderToString(
   <div className="w-1/2">
-    <Card>
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
       <div className="flex flex-col items-center">
         <img className="h-24 w-40 rounded-xl " src={gapperLogoUrl} />
       </div>
@@ -102,26 +102,26 @@ export const lankaContent = renderToString(
         I spent some meaningful time with those disadvantaged 🧒 and had some
         nice trips at the beautiful south coast 🏖 of Sri Lanka.
       </p>
-    </Card>
+    </div>
   </div>,
 );
 
 export const thaiContent = renderToString(
   <div className="w-2/3">
-    <Card>
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
       <h5 className="text-xl font-bold tracking-tight ">
         January 2017: Thailand
       </h5>
       <p className="text-md font-semibold text-secondary">
         I lost my first iPhone at the airport. Sad story...
       </p>
-    </Card>
+    </div>
   </div>,
 );
 
 export const ualbertaContent = renderToString(
   <div className="w-1/2">
-    <Card>
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
       <div className="flex flex-col items-center">
         <img className="h-28 w-28 rounded-xl " src={albertaLogoUrl} />
       </div>
@@ -130,13 +130,13 @@ export const ualbertaContent = renderToString(
         My first time as a student research intern. Met some incredible fellows
         and also realized that I'm not a research guy 😅.
       </p>
-    </Card>
+    </div>
   </div>,
 );
 
 export const banffContent = renderToString(
   <div className="w-3/4">
-    <Card>
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
       <div className="flex flex-col items-center">
         <img className="h-28 w-28 rounded-xl " src={banffLogoUrl} />
       </div>
@@ -144,13 +144,13 @@ export const banffContent = renderToString(
       <p className="text-md font-semibold text-secondary">
         The finest mountains ⛰ and lakes 🏞 I've ever seen. Gorgeous scenery!
       </p>
-    </Card>
+    </div>
   </div>,
 );
 
 export const uwaterlooContent = renderToString(
   <div className="w-1/3">
-    <Card>
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
       <div className="flex flex-col items-center">
         <img className="h-28 w-28 rounded-xl " src={waterlooLogoUrl} />
       </div>
@@ -160,13 +160,13 @@ export const uwaterlooContent = renderToString(
         pandemic and the fact that my US visa being checked "forever", there it
         goes, the top 1 nerdy? university in Canada.
       </p>
-    </Card>
+    </div>
   </div>,
 );
 
 export const algonquinContent = renderToString(
   <div className="w-2/5">
-    <Card>
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
       <div className="flex flex-col items-center">
         <img className="h-28 w-28 rounded-xl " src={algonquinLogoUrl} />
       </div>
@@ -176,13 +176,13 @@ export const algonquinContent = renderToString(
         out that I really enjoy hiking 🥾 and boating 🛶! The colorful views 🍁
         were also amazing.
       </p>
-    </Card>
+    </div>
   </div>,
 );
 
 export const cyphercorContent = renderToString(
   <div className="w-1/3">
-    <Card>
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
       <div className="flex flex-col items-center">
         <img className="h-28 w-28 rounded-xl " src={cyphercorLogoUrl} />
       </div>
@@ -192,13 +192,13 @@ export const cyphercorContent = renderToString(
         software engineer 👨‍💻 at Cyphercor Inc. I love what I do at work and the
         people I work with.
       </p>
-    </Card>
+    </div>
   </div>,
 );
 
 export const cmuContent = renderToString(
   <div className="w-1/3">
-    <Card>
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
       <div className="flex flex-col items-center">
         <img
           className="h-28 w-28 rounded-full dark:bg-slate-200"
@@ -213,6 +213,6 @@ export const cmuContent = renderToString(
         YES! The more I do, the more I find that I need to learn. Plus there are
         better opportunities and wider possibilities in the US, so why not?
       </p>
-    </Card>
+    </div>
   </div>,
 );

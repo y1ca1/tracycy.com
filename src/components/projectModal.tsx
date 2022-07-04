@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { Button } from 'flowbite-react';
 import GithubAlt from '@/assets/icons/github-alt.svg';
 import { ProjectInfo } from '@/data/projects';
 
@@ -64,18 +63,24 @@ export const ProjectModal = ({
                 </div>
 
                 <div className="flex items-center justify-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                  <Button color="gray">
-                    <GithubAlt />
-                    <a
-                      href={project.link}
-                      aria-label="Visit Project GitHub Repository"
-                      title="GitHub Repo"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      GitHub
-                    </a>
-                  </Button>
+                  <button
+                    className="bg-secondary border border-gray-300 hover:bg-stone-400 focus:ring-blue-300 disabled:hover:bg-white dark:border-gray-600 dark:hover:bg-pink-500/75 dark:hover:border-gray-700 dark:focus:ring-gray-700 focus:!ring-2 group flex h-min w-fit items-center justify-center p-0.5 text-center font-medium focus:z-10 rounded-lg"
+                    type="button"
+                    tabIndex={0}
+                  >
+                    <span className="flex items-center rounded-md text-sm px-4 py-2">
+                      <GithubAlt />
+                      <a
+                        href={project.link}
+                        aria-label="Visit Project GitHub Repository"
+                        title="GitHub Repo"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        GitHub
+                      </a>
+                    </span>
+                  </button>
                 </div>
               </Dialog.Description>
             </Dialog.Panel>
