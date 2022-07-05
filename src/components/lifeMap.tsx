@@ -79,6 +79,7 @@ export const LifeMap = (): JSX.Element => {
         icon={MarkerIcons.schoolIcon}
         position={Positions.YIZHONG}
         content={InfoWindowContents.yizhongContent}
+        href="yysyz"
       />
       {/* <MarkerWithInfoBox
         infoBox={infoBox}
@@ -93,6 +94,7 @@ export const LifeMap = (): JSX.Element => {
         icon={MarkerIcons.universityIcon}
         position={Positions.UESTC}
         content={InfoWindowContents.uestcContent}
+        href="uestc"
       />
       {/* <MarkerWithInfoBox
         infoBox={infoBox}
@@ -115,6 +117,7 @@ export const LifeMap = (): JSX.Element => {
         icon={MarkerIcons.researchIcon}
         position={Positions.ALBERTA}
         content={InfoWindowContents.ualbertaContent}
+        href="alberta"
       />
       {/* <MarkerWithInfoBox
         infoBox={infoBox}
@@ -129,6 +132,7 @@ export const LifeMap = (): JSX.Element => {
         icon={MarkerIcons.universityIcon}
         position={Positions.WATERLOO}
         content={InfoWindowContents.uwaterlooContent}
+        href="waterloo"
       />
       {/* <MarkerWithInfoBox
         infoBox={infoBox}
@@ -143,6 +147,7 @@ export const LifeMap = (): JSX.Element => {
         icon={MarkerIcons.workIcon}
         position={Positions.CYPHERCOR}
         content={InfoWindowContents.cyphercorContent}
+        href="cyphercor"
       />
       <MarkerWithInfoBox
         infoBox={infoBox}
@@ -151,6 +156,7 @@ export const LifeMap = (): JSX.Element => {
         position={Positions.CMU}
         offset={new google.maps.Size(30, -30)}
         content={InfoWindowContents.cmuContent}
+        href="cmu"
       />
     </GoogleMap>
   ));

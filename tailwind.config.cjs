@@ -31,7 +31,8 @@ module.exports = {
       },
       animation: {
         'blob-spin': 'blobbing 25s linear infinite',
-        'spike-bounce': 'bounce 0.6s infinite',
+        'spike-bounce': 'bounce 1.2s infinite',
+        'map-spin': 'wiggle 300ms linear infinite',
       },
       keyframes: {
         blobbing: {
@@ -41,6 +42,10 @@ module.exports = {
           to: {
             transform: 'rotate(360deg)',
           },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-6deg)' },
+          '50%': { transform: 'rotate(6deg)' },
         },
       },
     },

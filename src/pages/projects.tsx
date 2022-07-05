@@ -8,7 +8,7 @@ export const Projects = (): JSX.Element => {
   return (
     <>
       <SpikeBounce />
-      <section className="px-4 pt-12 pb-24 mx-auto max-w-7xl">
+      <section className="pt-12 pb-24 mx-auto max-w-7xl">
         <h1 className="mb-3 text-3xl font-bold leading-tight text-center md:text-4xl">
           My Personal Project Journey as a Map
         </h1>
@@ -17,7 +17,7 @@ export const Projects = (): JSX.Element => {
         </p>
         <div className="flex justify-center pb-12">
           <Tooltip
-            content="Click the icons to peak my thoughts on the projects!"
+            content="Click the icons to peek my thoughts on the projects."
             animation="duration-500"
             style="auto"
           >
