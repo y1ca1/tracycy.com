@@ -4,6 +4,10 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import esbuild from 'esbuild';
+import mdx from '@mdx-js/esbuild';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import rehypeHighlight from 'rehype-highlight';
 
 import stylePlugin from 'esbuild-style-plugin';
 import svgrPlugin from 'esbuild-plugin-svgr';
@@ -36,6 +40,11 @@ esbuild
           postcssConfigFile: path.resolve(dirName, 'postcss.config.js'),
         }),
         svgrPlugin(),
+        mdx({
+          development: true,
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex, rehypeHighlight],
+        }),
       ],
       define: { 'process.env.GMapAPIKey': `'${process.env.GMapAPIKey}'` },
     },

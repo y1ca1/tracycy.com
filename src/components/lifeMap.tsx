@@ -48,6 +48,7 @@ export const LifeMap = (): JSX.Element => {
       mapContainerStyle={{
         width: '100%',
         height: '618px',
+        borderRadius: '0.5rem',
       }}
       options={{
         streetViewControl: false,

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, Badge } from 'flowbite-react';
 import biquadrisUrl from '@/assets/pics/projects/biquadris.png';
 import mallocUrl from '@/assets/pics/projects/malloc.png';
@@ -15,25 +16,27 @@ export const ProjectGrid = () => (
     </h1>
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
       <div className="max-w-sm">
-        <Card imgSrc={cyUrl}>
-          <h5 className="text-2xl font-bold tracking-tight text-primary">
-            Personal Website
-          </h5>
-          <p className="font-normal text-secondary">
-            My lively, lovely, and fully responsive personal website that
-            features dark mode!
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <Badge color="info">React</Badge>
-            <Badge color="info">React Router</Badge>
-            <Badge color="info">Typescript</Badge>
-            <Badge color="info">MDX</Badge>
-            <Badge color="info">TailwindCSS</Badge>
-            <Badge color="info">Headless UI</Badge>
-            <Badge color="info">Flowbite</Badge>
-            <Badge color="info">ESBuild</Badge>
-          </div>
-        </Card>
+        <Link to="../projects/my-personal-website">
+          <Card imgSrc={cyUrl}>
+            <h5 className="text-2xl font-bold tracking-tight text-primary">
+              Personal Website
+            </h5>
+            <p className="font-normal text-secondary">
+              My lively, lovely, and fully responsive personal website that
+              features dark mode!
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Badge color="info">React</Badge>
+              <Badge color="info">React Router</Badge>
+              <Badge color="info">Typescript</Badge>
+              <Badge color="info">MDX</Badge>
+              <Badge color="info">TailwindCSS</Badge>
+              <Badge color="info">Headless UI</Badge>
+              <Badge color="info">Flowbite</Badge>
+              <Badge color="info">ESBuild</Badge>
+            </div>
+          </Card>
+        </Link>
       </div>
       <div className="max-w-sm">
         <Card imgSrc={eventsUrl}>
