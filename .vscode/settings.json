@@ -53,5 +53,8 @@
     "@/": "${folder}/src/"
   },
   "path-autocomplete.extensionOnImport": true,
-  "svg.preview.background": "transparent"
+  "svg.preview.background": "transparent",
+  "workbench.tree.indent": 4,
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2
 }

@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { polyfill } from 'seamless-scroll-polyfill';
 import App from './App';
 import './index.css';
+import './codeblock.css';
 import 'animate.css/animate.min.css';
 
 polyfill();

@@ -7,7 +7,11 @@ import esbuild from 'esbuild';
 import mdx from '@mdx-js/esbuild';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import rehypeHighlight from 'rehype-highlight';
+import rehypeSlug from 'rehype-slug';
+import rehypePrism from 'rehype-prism-plus';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 
 import stylePlugin from 'esbuild-style-plugin';
 import svgrPlugin from 'esbuild-plugin-svgr';
@@ -42,8 +46,16 @@ esbuild
         svgrPlugin(),
         mdx({
           development: true,
-          remarkPlugins: [remarkMath],
-          rehypePlugins: [rehypeKatex, rehypeHighlight],
+          remarkPlugins: [remarkMath, remarkFrontmatter, remarkMdxFrontmatter],
+          rehypePlugins: [
+            rehypeKatex,
+            rehypePrism,
+            rehypeSlug,
+            [
+              rehypeAutolinkHeadings,
+              { behavior: 'append', test: ['h2', 'h3', 'h4', 'h5', 'h6'] },
+            ],
+          ],
         }),
       ],
       define: { 'process.env.GMapAPIKey': `'${process.env.GMapAPIKey}'` },
