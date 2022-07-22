@@ -1,3 +1,55 @@
-export const Thing = () => <>World</>
+---
+title: Introducing My Personal Website
+publishedAt: '2022-08-01'
+---
 
-# Hello <Thing />
+# {title}
+
+## Heading 2
+
+Some emoji: 🎡 🧮 🛩 .
+
+### Heading 3
+
+Some other stuff.
+
+This is some **bold** texts.
+
+This is some *italicized text*
+
+> This is a blockquote
+
+Ordered List:	
+1. First item
+2. Second item
+3. Third item
+
+Unordered List:	
+- First item
+- Second item
+- Third item
+
+This is some [Link](https://tracycy.com).
+
+This is some latex equations: $\sum_{i=1}^{100} n^2$
+
+Inline code: `magic()`
+
+Code block
+```typescript {1,3-4} showLineNumbers
+  code: ({ children, showLineNumbers, fileName, id }) => {
+    return (
+      <React.Fragment>
+        {fileName && <div className="w-full code-filename">{fileName}</div>}
+        <code
+          className={classNames('', {
+            'line-numbers': showLineNumbers !== undefined,
+          })}
+          id={id}
+        >
+          {children}
+        </code>
+      </React.Fragment>
+    )
+  },
+```
