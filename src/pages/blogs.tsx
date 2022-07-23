@@ -1,9 +1,10 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import { RotatingSquare } from 'react-loader-spinner';
 import { SpikeBounce } from '@/components/spike';
 import { BlogTabs } from '@/components/blogTabs';
 import { NotFound } from '@/pages/404';
+import { TableOfContents } from '@/components/tableOfContents';
 import { components } from '@/components/mdxComponents';
 const MyPersonalWebsite = React.lazy(
   () => import('@/contents/blogs/my-personal-website.mdx'),
@@ -26,6 +27,17 @@ const Index = (): JSX.Element => (
   </>
 );
 
+const BlogLayout = (): JSX.Element => (
+  <div className="relative flex justify-between mt-12 mb-12 flex-row-reverse">
+    <aside className="sticky hidden h-screen max-w-xs mt-8 ml-6 top-16 xl:block">
+      <TableOfContents />
+    </aside>
+    <article className="max-w-3xl min-w-0 text-base lg:text-lg ">
+      <Outlet />
+    </article>
+  </div>
+);
+
 export const Blogs = (): JSX.Element => (
   <React.Suspense
     fallback={
@@ -40,15 +52,17 @@ export const Blogs = (): JSX.Element => (
     <Routes>
       <Route path="/">
         <Route index element={<Index />} />
-        <Route
-          path="my-personal-website"
-          element={React.useMemo(
-            () => (
-              <MyPersonalWebsite components={components} />
-            ),
-            [],
-          )}
-        />
+        <Route element={<BlogLayout />}>
+          <Route
+            path="my-personal-website"
+            element={React.useMemo(
+              () => (
+                <MyPersonalWebsite components={components} />
+              ),
+              [],
+            )}
+          />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

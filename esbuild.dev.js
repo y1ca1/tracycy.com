@@ -12,6 +12,7 @@ import rehypePrism from 'rehype-prism-plus';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
+// import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
 
 import stylePlugin from 'esbuild-style-plugin';
 import svgrPlugin from 'esbuild-plugin-svgr';

@@ -21,7 +21,7 @@ pre {
   padding-right: 16px;
   padding-left: 16px;
   border-left-color: var(--color-code-block); /* Set code block color */
-  border-left-width: 8px;
+  border-left-width: 4px;
 }
 
 .code-line.inserted {
@@ -58,4 +58,11 @@ pre {
   color: var(--color-code-line-number); /* Line number color */
   text-align: right;
   content: attr(line);
+}
+
+.code-filename {
+  margin-top: -0.75rem;
+  padding: 1em 2em;
+  font-size: 0.8rem;
+  background-color: var(--color-code-background-file);
 }

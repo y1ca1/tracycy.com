@@ -11,7 +11,7 @@
   --color-bg-secondary: #afaaa5;
   --color-text-primary: #4b433d;
   --color-text-secondary: #9a9180;
-  --color-text-subtle: #f6f6f4;
+  --color-text-subtle: #919173;
   --color-accent: #a46576;
 
   /* code block related */
@@ -21,6 +21,7 @@
   --color-code-line-highlight-bg: #f2e8de;
   --color-code-line-accent-border: #9d485f;
   --color-code-line-number: #6d5f55;
+  --color-code-background-file: #d9d9ce;
 }
 
 .dark {
@@ -38,6 +39,7 @@
   --color-code-line-highlight-bg: #4c2f43;
   --color-code-line-accent-border: #db666a;
   --color-code-line-number: #b9a2a3;
+  --color-code-background-file: #081544;
 }
 
 html {

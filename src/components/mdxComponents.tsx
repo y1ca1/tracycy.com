@@ -1,10 +1,7 @@
 import { MDXComponents } from 'mdx/types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
-}
+import classNames from 'classnames';
 
 /**
  * Styling for the MDX components
@@ -69,7 +66,8 @@ export const components: MDXComponents = {
     return (
       <h2
         {...props}
-        className="flex items-baseline mb-8 text-2xl font-bold leading-10 group mt-14 lg:text-3xl text-accent"
+        className="flex items-baseline mb-8 text-3xl font-bold leading-10 group mt-14 lg:text-3xl text-accent"
+        data-heading
       />
     );
   },
@@ -78,6 +76,7 @@ export const components: MDXComponents = {
       <h3
         {...props}
         className="flex items-baseline mb-4 text-2xl font-bold leading-tight group mt-14 text-accent"
+        data-heading
       />
     );
   },
@@ -94,16 +93,18 @@ export const components: MDXComponents = {
     return (
       <blockquote
         {...props}
-        className="px-5 py-2 my-6 text-base border-l-4 lg:-ml-6 bg-stone-400 dark:bg-gray-800 border-accent"
+        className="px-5 py-2 my-6 rounded-lg text-base border-l-4 lg:-ml-6 bg-stone-400 dark:bg-gray-800 border-accent"
       />
     );
   },
-  ul: (props: any) => (
+  ul: ({ ...props }) => (
     <ul className="mb-4 leading-relaxed list-disc list-inside" {...props} />
   ),
-  ol: (props: any) => (
+  ol: ({ ...props }) => (
     <ol className="pl-4 my-6 leading-7 list-decimal" {...props} />
   ),
-  li: (props: any) => <li className="mt-3" {...props} />,
-  // pre: ({ ...props }) => <pre {...props} className="rounded-lg" />,
+  li: ({ ...props }) => <li className="mt-3" {...props} />,
+  pre: ({ className, ...props }) => (
+    <pre className={classNames(className, 'rounded-lg')} {...props} />
+  ),
 };
