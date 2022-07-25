@@ -22,7 +22,7 @@
     "react-router-dom": "^6.3.0",
     "react-spring": "^9.4.5",
     "react-toggle-dark-mode": "^1.0.4",
-    "seamless-scroll-polyfill": "^2.2.0",
+    "scroll-behavior-polyfill": "^2.0.13",
     "use-local-storage-state": "^18.1.0"
   },
   "scripts": {
