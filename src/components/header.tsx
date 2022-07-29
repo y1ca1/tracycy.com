@@ -94,7 +94,7 @@ const Header = (): JSX.Element => {
                           classNames(
                             isActive
                               ? 'bg-secondary text-primary'
-                              : 'text-secondary hover:bg-gray-300 dark:hover:bg-pink-300/50 hover:text-primary',
+                              : 'text-secondary transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-pink-300/50 hover:text-primary',
                             'px-3 py-2 rounded-md text-md font-medium',
                           )
                         }
