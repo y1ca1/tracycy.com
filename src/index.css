@@ -50,3 +50,12 @@ body {
   color: var(--color-text-primary);
   background-color: var(--color-bg-primary);
 }
+
+/* mdx nested lists hack */
+li > ul {
+  margin-left: 20px;
+}
+
+li > ul > li {
+  list-style-type: circle;
+}

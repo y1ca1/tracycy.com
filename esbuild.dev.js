@@ -11,7 +11,9 @@ import rehypeSlug from 'rehype-slug';
 import rehypePrism from 'rehype-prism-plus';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkFrontmatter from 'remark-frontmatter';
+import remarkGfm from 'remark-gfm';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
+import remarkEmbedImages from 'remark-embed-images';
 // import { remarkMdxCodeMeta } from 'remark-mdx-code-meta';
 
 import stylePlugin from 'esbuild-style-plugin';
@@ -47,7 +49,13 @@ esbuild
         svgrPlugin(),
         mdx({
           development: true,
-          remarkPlugins: [remarkMath, remarkFrontmatter, remarkMdxFrontmatter],
+          remarkPlugins: [
+            remarkMath,
+            remarkGfm,
+            remarkFrontmatter,
+            remarkMdxFrontmatter,
+            remarkEmbedImages,
+          ],
           rehypePlugins: [
             rehypeKatex,
             rehypePrism,

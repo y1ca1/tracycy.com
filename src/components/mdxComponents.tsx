@@ -2,6 +2,7 @@ import { MDXComponents } from 'mdx/types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import { Image } from '@/components/image';
 
 /**
  * Styling for the MDX components
@@ -81,7 +82,7 @@ export const components: MDXComponents = {
     );
   },
   p: ({ ...props }) => {
-    return <p {...props} className="my-6 leading-7 lg:leading-8" />;
+    return <span {...props} className="my-6 leading-7 lg:leading-8" />;
   },
   em: ({ ...props }) => {
     return <em {...props} className="italic" />;
@@ -93,7 +94,7 @@ export const components: MDXComponents = {
     return (
       <blockquote
         {...props}
-        className="px-5 py-2 my-6 rounded-lg text-base border-l-4 lg:-ml-6 bg-stone-400 dark:bg-gray-800 border-accent"
+        className="px-5 py-2 my-6 rounded-lg text-base text-secondary border-l-4 lg:-ml-6 bg-stone-200 dark:bg-gray-800 border-accent"
       />
     );
   },
@@ -107,4 +108,41 @@ export const components: MDXComponents = {
   pre: ({ className, ...props }) => (
     <pre className={classNames(className, 'rounded-lg')} {...props} />
   ),
+  code: ({ className, ...props }) => (
+    <code className={classNames(className, 'text-secondary')} {...props} />
+  ),
+  img: ({ src, alt, title, ...props }) => {
+    // this is a hack to get the title from the alt attribute and get anything else
+    // (e.g. classNames) from the title attribute
+    return (
+      <>
+        {alt ? (
+          <figure>
+            <figcaption className="text-accent font-semibold">
+              {alt}:{' '}
+            </figcaption>
+            <Image
+              className={classNames(title?.split(' '))}
+              location={src as string}
+              {...props}
+            />
+          </figure>
+        ) : (
+          <Image
+            className={classNames(title?.split(' '))}
+            location={src as string}
+            {...props}
+          />
+        )}
+      </>
+    );
+  },
+  table: ({ ...props }) => (
+    <table
+      className="border-separate border-spacing-2 border border-accent"
+      {...props}
+    />
+  ),
+  td: ({ ...props }) => <td className="border border-accent" {...props} />,
+  th: ({ ...props }) => <th className="border border-accent" {...props} />,
 };
