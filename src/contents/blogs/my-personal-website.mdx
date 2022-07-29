@@ -5,6 +5,7 @@ readingTime: '10'
 ---
 
 # {title}
+
 *{publishedAt}* • *{readingTime} min read*
 ***
 
@@ -22,13 +23,16 @@ This is some *italicized text*
 
 > This is a blockquote
 
-Ordered List:	
+Ordered List:
+
 1. First item
 2. Second item
 3. Third item
 
-Unordered List:	
+Unordered List:
+
 - First item
+    - 2nd level item
 - Second item
 - Third item
 
@@ -39,7 +43,8 @@ This is some latex equations: $\sum_{i=1}^{100} n^2$
 Inline code: `magic()`
 
 Code block
-```typescript {1,3-4} showLineNumbers 
+
+```typescript {1,3-4} showLineNumbers
   code: ({ children, showLineNumbers, fileName, id }) => {
     return (
       <React.Fragment>
