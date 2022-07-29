@@ -34,7 +34,10 @@ const Footer = (): JSX.Element => {
               className="self-center text-sm tracking-wider md:self-end"
               aria-label="Copyright"
             >
-              © 2022 Yi Cai. All Rights Reserved.
+              {`© ${React.useMemo(
+                () => new Date().getFullYear(),
+                [],
+              )} Yi Cai. All Rights Reserved.`}
             </span>
             <div className="flex flex-row items-center justify-center space-x-6 md:justify-end">
               <span>
