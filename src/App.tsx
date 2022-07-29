@@ -35,9 +35,7 @@ const App: React.FC<Record<string, never>> = () => {
             <Route path="/" element={<Home />} />
             <Route path="/blog/*" element={<Blogs />} />
             <Route path="/experience" element={<Experience />} />
-            <Route path="/projects">
-              <Route index element={<Projects />} />
-            </Route>
+            <Route path="/projects/*" element={<Projects />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </main>

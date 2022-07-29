@@ -1,0 +1,105 @@
+---
+title: Malloc
+publishedAt: '2021-05-01'
+readingTime: '10'
+---
+
+# {title}
+
+*{publishedAt}* • *{readingTime} min read*
+***
+
+**\* Under CMU's [university policy on academic integrity](https://www.cmu.edu/policies/student-and-student-life/academic-integrity.html) and the course's [Academic Integrity Policy](https://www.cs.cmu.edu/~213/academicintegrity.html), if you want to see the source code of this project, please contact me.**
+
+**Malloc** is an efficient and fast dynamic memory allocator, which supports
+the `malloc`, `free`, `realloc`, and `calloc` operations.
+
+## Target
+
+It is obviously easy to write a fast allocator by just allocating blocks and never freeing them, or a high-utilization allocator that carefully packs blocks as tightly as possible but takes a lot of time doing so. This involves a trade-off. The hard part of the algorithms and data structures is to decently manage free blocks that achieve the right balance of space utilization and speed.
+
+## Features
+
+The memory allocator has following features.
+
+### Data structures and Algorithms
+
+* A hybrid data structure for blocks
+    * An implicit linked list
+    * A set of segregated free lists, with *mini-block* enabled
+* The block structure can be visualized as:
+    * Normal free block: `[ HEADER | PRED | SUCC | PAYLOAD | FOOTER ]`
+    * Mini free block: `[ HEADER | SUCC ]`
+    * Allocated block: `[ HEADER | PAYLOAD ]`
+
+> NOTE: This block structure is kind of a hack and is achieved by using a `union` data type representing either two pointers (free blocks) or the payload (allocated blocks).
+
+* Each of the segregated lists of normal free blocks is a *circular doubly linked list*, while for the mini free blocks there is a *circular singly linked list*.
+    * Free List Structure for normal blocks:
+    `[Free 1 <==> Free 2 <==> Free 3 <==> ... <==> Free N <==> Free 1]`
+    * Free List Structure for mini blocks: `[Free 1 ==> Free 2 ==> Free 3 ==> ... ==> Free N ==> Free 1]`
+* It uses *LIFO* for insertion the free list (slightly more efficient than the *FIFO* discipline)
+* It uses better fit (first fit + optimizations) to find the appropriate free blocks
+
+The implementation well demonstrates the trade-off between the space utilization and the throughput of the memory allocator. For instance, using *mini-block* can decrease the overall block size and hence increase the utilization by alleviateing the [internal fragmentation](https://en.wikipedia.org/wiki/Fragmentation_(computing)#Internal_fragmentation). However, it also slows down the allocator for a bit since it introduces more complicated data structures, and the overall # of searches just rises because of more dedicated blocks.
+
+### Heap Checker
+
+A heap consistency checker is added to check all of the invariants of the data structures, so kind of like a set of tests that run concurrently with the allocator. It runs silently until it detects some error in the heap. Below is a list of the invariants that the heap checker checks.
+
+* Checking the heap (implicit list, segregated list):
+    * Check for *epilogue* and *prologue* blocks.
+    * Check each block’s *address alignment*.
+    * Check blocks lie within *heap boundaries*.
+    * Check each block’s *header* and *footer*: size (minimum size), previous/next, allocate/free bit consistency, *header* and *footer* matching each other.
+    * Check *coalescing*: no consecutive free blocks in the heap.
+* Checking the free list (segregated list):
+    * All next/previous pointers are consistent (if $A$’s next pointer points to $B$, $B$’s previous pointer should point to $A$).
+    * All free list pointers are between `mem_heap_lo()` and `mem_heap_high()`.
+    * Count free blocks by iterating through every block and traversing free list by pointers
+    and see if they match.
+    * All blocks in each list bucket fall within bucket size range (segregated list).
+
+## Performance
+
+This dynamic memory allocator achieved a throughput of around 8300 kilo-operations per second or KOPS and a utilzation of around 73.5% on a set of trace files each containing a sequence of commands that instruct the driver to call `malloc`, `realloc`, and `free` routines in some sequence.
+
+```vim {36,37}
+Calibration: CPU type Intel(R)Xeon(R)Gold6132CPU@2.60GHz, benchmark regular, throughput 9261
+Running ./mdriver -s 180 
+Found benchmark throughput 9261 for cpu type Intel(R)Xeon(R)Gold6132CPU@2.60GHz, benchmark regular
+Throughput targets: min=4630, max=8335, benchmark=9261
+..........................
+Results for mm malloc:
+  valid    util     ops   msecs  Kops/s  trace
+   yes    78.4%      20     0.011   1855 ./traces/syn-array-short.rep
+   yes    13.4%      20     0.004   5302 ./traces/syn-struct-short.rep
+   yes    15.2%      20     0.004   5277 ./traces/syn-string-short.rep
+   yes    73.1%      20     0.006   3608 ./traces/syn-mix-short.rep
+   yes    16.0%      36     0.004   8840 ./traces/ngram-fox1.rep
+   yes    69.1%     757     0.381   1986 ./traces/syn-mix-realloc.rep
+ * yes    75.4%    5748     0.187  30665 ./traces/bdd-aa4.rep
+ * yes    71.3%   87830     5.450  16115 ./traces/bdd-aa32.rep
+ * yes    71.6%   41080     1.496  27461 ./traces/bdd-ma4.rep
+ * yes    71.8%  115380     5.104  22606 ./traces/bdd-nq7.rep
+ * yes    75.4%   20547     0.910  22568 ./traces/cbit-abs.rep
+ * yes    78.6%   95276    10.655   8942 ./traces/cbit-parity.rep
+ * yes    77.1%   89623     7.334  12220 ./traces/cbit-satadd.rep
+ * yes    70.9%   50583     2.834  17847 ./traces/cbit-xyz.rep
+ * yes    61.7%   32540     1.102  29522 ./traces/ngram-gulliver1.rep
+ * yes    57.8%  127912     3.245  39419 ./traces/ngram-gulliver2.rep
+ * yes    59.4%   67012     2.739  24466 ./traces/ngram-moby1.rep
+ * yes    59.6%   94828     4.644  20420 ./traces/ngram-shake1.rep
+ * yes    88.3%   80000    14.952   5350 ./traces/syn-array.rep
+ * yes    88.0%   80000    11.399   7018 ./traces/syn-mix.rep
+ * yes    83.8%   80000    11.430   6999 ./traces/syn-string.rep
+ * yes    85.8%   80000    10.404   7690 ./traces/syn-struct.rep
+ p yes       --   80000    26.386   3032 ./traces/syn-array-scaled.rep
+ p yes       --   80000    25.737   3108 ./traces/syn-string-scaled.rep
+ p yes       --   80000    24.655   3245 ./traces/syn-struct-scaled.rep
+ p yes       --   80000    19.124   4183 ./traces/syn-mix-scaled.rep
+16 20     73.5% 1468359   189.788
+
+Average utilization = 73.5%.
+Average throughput (Kops/sec) = 8266.
+```

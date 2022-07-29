@@ -1,0 +1,124 @@
+---
+title: A Hindley Milner based type inference system
+publishedAt: '2021-08-31'
+readingTime: '8'
+---
+
+# {title}
+
+*{publishedAt}* • *{readingTime} min read*
+***
+
+This project implements a Hindley Milner based type inference system with equi-recursive types.
+
+## The Language
+
+The language that is dealt with in this project is a simple typed λ -calculus with constants. This can be interpreted as a generalization of Simply typed lambda calculus ([STLC](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)), with an addition of `let` expressions.
+
+### Syntax
+
+$$e::=x\mid \lambda x.e\mid e\  e\,\mid \text{let }x = e\  \text{in } e\mid c$$
+
+## The Type Environment
+
+The initial type environment contains the following primitives &mdash; `booleans`, `integers`, `pairs`, `fst`, `snd`, `inr`, `inl`, `match`, `unit`, `unitCase`, `fix point combinator`, `conditionals`, `zero`, `pred`, and `times`. The following are their corresponding types.
+
+| Primitives     | Type |
+| :------------: | :--: |
+| `true, false`  |bool|
+| `1, 2, 3, ...` |int|
+| `pair`         |∀αβ.α → β → α × β|
+| `fst`          |∀αβ.α × β → α|
+| `snd`          |∀αβ.α × β → β|
+| `inr`          |∀αβ.β → α + β|
+| `inl`          |∀αβ.α → α + β|
+| `match`        |∀αβγ.(α + β) → (α → γ) → (β → γ)→γ|
+| `unit`         |unit|
+| `unitCase`     |∀α.1 → α|
+| `fix`          |∀αβ.((α → β) → α → β) → α → β|
+| `cond`         |∀α.bool → α → α → α|
+| `pred`         |int → int|
+| `zero`         |int → bool|
+| `times`        |int→ int → int|
+
+* Among the above primitives, `true, false`, `1, 2, 3, ...` and `unit` are basic types.
+
+* `pair`, `fst` and `snd` are provided for constructing and decomposing [Product Type](https://en.wikipedia.org/wiki/Product_type).
+
+* `inl`, `inr` and `match` are provided for constructing and decomposing [Sum Type](https://en.wikipedia.org/wiki/Tagged_union).
+
+* `unit`, and `unitCase` are provided for constructing and decomposing [Unit Type](https://en.wikipedia.org/wiki/Unit_type).
+
+* With sum type, product type and unit type, we can construct [equirecursive types](https://en.wikipedia.org/wiki/Recursive_data_type#Equirecursive_types) such as `list`: $\text{list}\ \alpha = \mu \tau . 1 +\alpha \times \tau$, and `binary tree`: $\text{tree} = \mu \tau . 1+ \text{int} \times \tau \times \tau$.
+
+* The [fix point combinator](https://en.wikipedia.org/wiki/Fixed-point_combinator) `fix` is provided for constructing recursive expressions.
+
+* Additional primitives can be introduced for the purpose of constructing more complex expressions. For example, `pred`, `zero`, and `times` are introduced for constructing a factorial let binding.
+
+## The Inference System
+
+Below are the inference rules for the type system.
+
+|  Name          | Rule  |
+| :------------: | :---: |
+| Identifier     | A.x: τ ⊢ x: τ|
+| Abstraction    | A.x: σ ⊢ e: τ <br/> ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ <br/> A ⊢ (fun(x) e): σ → τ |
+| Application    | A ⊢ e: σ → τ &emsp; A ⊢ e': σ <br/> ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ <br/> A ⊢ e(e'): τ|
+| Let Binding    | A ⊢ e': σ &emsp; A.x: σ ⊢ e: τ <br/> ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ <br/> A ⊢ (let x=e' in e): τ |
+| Generalization | A ⊢ e: τ <br/> ⎯⎯⎯⎯⎯⎯ <br/> A ⊢ e: ∀α. τ |
+| Specialization | A ⊢ e: ∀α. τ <br/> ⎯⎯⎯⎯⎯⎯⎯ <br/> A ⊢ e: τ[σ/α] |
+
+## The Unification Algorithm
+
+[Unification](https://en.wikipedia.org/wiki/Unification_(computer_science)) in the process of inference is to merge two different types or to instantiate a type variable. This is the core of the type inference. This project implements the unification algorithm by treating every type as a node in a forest and employing a [union-find](https://en.wikipedia.org/wiki/Disjoint-set_data_structure) data structure, which is highly efficient.<br/>
+
+Pseudo code for `unification`:
+
+```c
+boolean unify ( Node m, Node n ) {
+    s = find ( m );
+    t = find ( n );
+    if ( s = t ) 
+        return true;
+    else if ( nodes s and t represent the same basic type ) 
+        return true ;
+    else if ( s and t are the same op-node ) {
+        union ( s, t );
+        return unify ( s.left, t.left ) and unify ( s.right and t.right );
+    }
+    else if ( s or t represents a variable) {
+        union ( s, t );
+        return true ;
+    }
+    else 
+        return false ;
+}
+```
+
+Note that the pseudo code does not consider the direction of the union. However, the direction is important when implementing the union.
+
+Specifically, we have two cases where the direction is enforced.
+
+1. If one of the [representative members](https://en.wikipedia.org/wiki/Disjoint-set_data_structure#Representation) for the equivalence classes of `s` and `t` is a non-variable node (e.g. op-node and basic types), union makes that nonvariable node be the representative for the merged equivalence class.
+2. In unifying a [non-generic variable](https://en.wikipedia.org/wiki/Parametric_polymorphism) to a term, all the variables contained in that term should become non-generic.
+
+Other than that, union assumes to merge the node provided in the first argument to the node provided in the second argument.
+
+## Demo
+
+The following are examples of the successfully type inference and some internal failures (due to the nature of Hindley-Milner type system).
+
+```vim
+(let factorial = (fix (fn self => (fn n => (((cond (zero n)) 1) ((times n) (self (pred n))))))) in (factorial 5)) :  int
+(let f = (fn x => x) in ((pair (f 4)) (f true))) :  (int * bool)
+(let g = (fn f => 5) in (g g)) :  int
+(fn g => (let f = (fn x => g) in ((pair (f 3)) (f true)))) :  (j -> (j * j))
+(fn f => (fn g => (fn arg => (g (f arg))))) :  ((n -> o) -> ((o -> p) -> (n -> p)))
+(fn x => ((pair (x 3)) (x true))) :  Type mismatch: bool != int
+((pair (f 4)) (f true)) :  Undefined symbol f
+(inl unit) :  (unit + u)
+```
+
+## Acknowledgement
+
+This project is based on the [Python code by Robert Smallshire](https://github.com/rob-smallshire/hindley-milner-python), the [C++ code by Jared Hoberock](https://github.com/jaredhoberock/hindley_milner), and [the paper "Basic Polymorphic Typechecking" by Cardelli](http://lucacardelli.name/Papers/BasicTypechecking.pdf).
