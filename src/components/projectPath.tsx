@@ -1140,8 +1140,7 @@ const ProjectMap = (props: any) => {
           />
         </g>
         <g
-          transform="translate(109.096 21.695) scale(.5786)"
-          className="hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
+          className="translate-x-[109px] translate-y-[22px] scale-[0.5786] transition duration-300 ease-in-out hover:rotate-3 hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
           onClick={() => {
             setProjectInfo(projects[0]);
             setShow(true);
@@ -1218,8 +1217,7 @@ const ProjectMap = (props: any) => {
           </g>
         </g>
         <g
-          transform="matrix(1.0612 0 0 1.0612 -8.545 -33.213)"
-          className="hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
+          className="scale-125 -translate-x-20 -translate-y-14 transition duration-300 ease-in-out hover:-translate-y-16 hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
           onClick={() => {
             setProjectInfo(projects[2]);
             setShow(true);
@@ -1241,7 +1239,7 @@ const ProjectMap = (props: any) => {
           </g>
         </g>
         <g
-          className="hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
+          className="transition duration-300 ease-in-out hover:-translate-y-2 hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
           onClick={() => {
             setProjectInfo(projects[3]);
             setShow(true);
@@ -2059,8 +2057,7 @@ const ProjectMap = (props: any) => {
           </g>
         </g>
         <g
-          transform="matrix(.67378 0 0 .67314 161.44 107.865)"
-          className="hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
+          className="scale-[.67378] translate-x-[161px] translate-y-[108px] transition duration-300 ease-in-out hover:translate-y-[100px] hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
           onClick={() => {
             setProjectInfo(projects[4]);
             setShow(true);
@@ -2448,8 +2445,7 @@ const ProjectMap = (props: any) => {
           </g>
         </g>
         <g
-          transform="translate(-133.851 105.165) scale(.67506)"
-          className="hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
+          className="scale-[.67506] -translate-x-[134px] translate-y-[105px] transition duration-300 ease-in-out hover:translate-y-[98px] hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
           onClick={() => {
             setProjectInfo(projects[7]);
             setShow(true);
@@ -2549,7 +2545,7 @@ const ProjectMap = (props: any) => {
         </g>
         <g
           transform="translate(5.482 7.863)"
-          className="hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
+          className="transition duration-300 ease-in-out hover:translate-y-4 hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
           onClick={() => {
             setProjectInfo(projects[5]);
             setShow(true);
@@ -2600,14 +2596,13 @@ const ProjectMap = (props: any) => {
           </g>
         </g>
         <g
-          transform="matrix(.86408 0 0 .86408 11.143 -28.519)"
-          className="hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
+          className="scale-[.86408] translate-x-[11px] -translate-y-[28px] transition duration-300 ease-in-out hover:rotate-1 hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
           onClick={() => {
             setProjectInfo(projects[8]);
             setShow(true);
           }}
         >
-          <title>{"CY's Personal Website"}</title>
+          <title>{'My Personal Website'}</title>
           <path
             d="M58.967 489.486a25 25 0 0 1-25 25 25 25 0 0 1-25-25 25 25 0 0 1 25-25 25 25 0 0 1 25 25Z"
             style={{
@@ -2628,8 +2623,7 @@ const ProjectMap = (props: any) => {
           </g>
         </g>
         <g
-          transform="matrix(.64437 0 0 .6426 227.247 252.82)"
-          className="hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
+          className="scale-[.64437] translate-x-[227px] translate-y-[250px] transition duration-300 ease-in-out hover:translate-y-[242px] hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
           onClick={() => {
             setProjectInfo(projects[6]);
             setShow(true);
@@ -2769,8 +2763,7 @@ const ProjectMap = (props: any) => {
           />
         </g>
         <g
-          transform="translate(25.828 -16.026)"
-          className="hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
+          className="translate-x-[26px] -translate-y-[16px] transition duration-300 ease-in-out hover:rotate-1 hover:cursor-pointer hover:drop-shadow-xl dark:hover:drop-shadow-xl-dark"
           onClick={() => {
             setProjectInfo(projects[1]);
             setShow(true);
