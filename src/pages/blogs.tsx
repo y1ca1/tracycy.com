@@ -29,7 +29,7 @@ const Index = (): JSX.Element => (
 
 const BlogLayout = (): JSX.Element => (
   <div className="relative flex justify-between mt-12 mb-12 flex-row-reverse">
-    <aside className="sticky hidden h-screen max-w-xs mt-8 ml-6 top-16 xl:block">
+    <aside className="sticky hidden h-screen max-w-xs mt-8 ml-6 top-16 lg:block">
       <TableOfContents />
     </aside>
     <article className="max-w-3xl min-w-0 text-base lg:text-lg ">
