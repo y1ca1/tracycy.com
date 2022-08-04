@@ -32,7 +32,7 @@ const BlogLayout = (): JSX.Element => (
     <aside className="sticky hidden h-screen max-w-xs mt-8 ml-6 top-16 lg:block">
       <TableOfContents />
     </aside>
-    <article className="max-w-3xl min-w-0 text-base lg:text-lg ">
+    <article className="max-w-2xl xl:max-w-3xl min-w-0 text-base lg:text-lg ">
       <Outlet />
     </article>
   </div>
