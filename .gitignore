@@ -131,10 +131,6 @@ web_modules/
 .next
 out
 
-# Nuxt.js build / generate output
-.nuxt
-dist
-
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js
@@ -238,3 +234,11 @@ $RECYCLE.BIN/
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,linux,visualstudiocode,react,node,yarn
+
+# esbuild production build
+dist/*.js
+dist/*.css
+dist/*.map
+!.dist/_redirects
+!.dist/index.html
+!.dist/*.png

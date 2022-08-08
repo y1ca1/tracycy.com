@@ -35,7 +35,7 @@ esbuild
       bundle: true,
       sourcemap: true,
       color: true,
-      outfile: path.resolve(dirName, 'public/dist/out.js'),
+      outfile: path.resolve(dirName, 'public/out.js'),
       loader: {
         '.png': 'dataurl',
         '.jpg': 'dataurl',
