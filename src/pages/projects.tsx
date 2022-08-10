@@ -49,7 +49,7 @@ const ProjectLayout = (): JSX.Element => (
   </div>
 );
 
-export const Projects = (): JSX.Element => (
+const Projects = (): JSX.Element => (
   <React.Suspense
     fallback={
       <RotatingSquare
@@ -97,3 +97,5 @@ export const Projects = (): JSX.Element => (
     </Routes>
   </React.Suspense>
 );
+
+export default Projects;

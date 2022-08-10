@@ -1,3 +1,5 @@
 import React from 'react';
 
-export const About = (): JSX.Element => <></>;
+const About = (): JSX.Element => <></>;
+
+export default About;

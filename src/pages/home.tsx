@@ -16,7 +16,7 @@ const RoundedSquare = () => (
   </div>
 );
 
-export const Home = (): JSX.Element => (
+const Home = (): JSX.Element => (
   <>
     <div className="flex flex-col-reverse items-center mt-12 mb-16 lg:flex-row lg:justify-between lg:space-x-6">
       <p className="max-w-3xl mt-12 text-3xl font-semibold text-right lg:mt-0 sm:text-4xl sm:text-left md:text-center lg:text-left">
@@ -35,3 +35,5 @@ export const Home = (): JSX.Element => (
     <ProjectGrid />
   </>
 );
+
+export default Home;

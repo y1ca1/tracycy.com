@@ -38,7 +38,7 @@ const BlogLayout = (): JSX.Element => (
   </div>
 );
 
-export const Blogs = (): JSX.Element => (
+const Blogs = (): JSX.Element => (
   <React.Suspense
     fallback={
       <RotatingSquare
@@ -68,3 +68,5 @@ export const Blogs = (): JSX.Element => (
     </Routes>
   </React.Suspense>
 );
+
+export default Blogs;

@@ -236,6 +236,7 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/macos,windows,linux,visualstudiocode,react,node,yarn
 
 # esbuild production build
+dist/static
 dist/*.js
 dist/*.css
 dist/*.map

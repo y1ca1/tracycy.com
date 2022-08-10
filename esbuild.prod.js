@@ -23,10 +23,13 @@ const dirName = dirname(fileURLToPath(import.meta.url));
 esbuild
   .build({
     entryPoints: [path.resolve(dirName, 'src/index.tsx')],
+    target: ['es6'],
+    format: 'esm',
     bundle: true,
-    sourcemap: true,
-    outfile: path.resolve(dirName, 'dist/out.js'),
-    publicPath: 'https://www.tracycy.com',
+    minify: true,
+    splitting: true,
+    outdir: path.resolve(dirName, 'dist/static'),
+    // outfile: path.resolve(dirName, 'dist/out.js'),
     loader: {
       '.png': 'dataurl',
       '.jpg': 'dataurl',

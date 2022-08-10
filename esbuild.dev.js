@@ -26,16 +26,20 @@ esbuild
   .serve(
     {
       host: 'localhost',
-      servedir: 'public',
+      // servedir: 'public',
       port: 4000,
     },
     {
       logLevel: 'info',
       entryPoints: [path.resolve(dirName, 'src/index.tsx')],
+      format: 'esm',
+      target: ['es6'],
       bundle: true,
       sourcemap: true,
       color: true,
-      outfile: path.resolve(dirName, 'public/out.js'),
+      // splitting: true,
+      // outdir: path.resolve(dirName, 'public'),
+      outfile: path.resolve(dirName, 'public/index.js'),
       loader: {
         '.png': 'dataurl',
         '.jpg': 'dataurl',

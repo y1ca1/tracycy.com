@@ -7,7 +7,7 @@ import { LifeMap } from '@/components/lifeMap';
 import { ExperienceList } from '@/components/experienceList';
 import { ScrollToMap } from '@/components/scrollToMap';
 
-export const Experience = (): JSX.Element => {
+const Experience = (): JSX.Element => {
   const mapRef = React.useRef<HTMLDivElement>(null);
 
   return (
@@ -59,3 +59,5 @@ export const Experience = (): JSX.Element => {
     </div>
   );
 };
+
+export default Experience;
