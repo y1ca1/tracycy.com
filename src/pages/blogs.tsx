@@ -1,9 +1,8 @@
 import React from 'react';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { RotatingSquare } from 'react-loader-spinner';
 import { SpikeBounce } from '@/components/spike';
 import { BlogTabs } from '@/components/blogTabs';
-import { NotFound } from '@/pages/404';
 import { TableOfContents } from '@/components/tableOfContents';
 import { components } from '@/components/mdxComponents';
 const MyPersonalWebsite = React.lazy(
@@ -27,16 +26,29 @@ const Index = (): JSX.Element => (
   </>
 );
 
-const BlogLayout = (): JSX.Element => (
-  <div className="relative flex justify-between mt-12 mb-12 flex-row-reverse">
-    <aside className="sticky hidden h-screen max-w-xs mt-8 ml-6 top-16 lg:block">
-      <TableOfContents />
-    </aside>
-    <article className="max-w-2xl xl:max-w-3xl min-w-0 text-base lg:text-lg ">
-      <Outlet />
-    </article>
-  </div>
-);
+const BlogLayout = (): JSX.Element => {
+  const { blogName } = useParams();
+
+  const ContentSwitch = ({ name }: { name?: string }) => {
+    switch (name) {
+      case 'my-personal-website':
+        return <MyPersonalWebsite components={components} />;
+      default:
+        return <Navigate to="/blog" replace={true} />;
+    }
+  };
+
+  return (
+    <div className="relative flex justify-between mt-12 mb-12 flex-row-reverse">
+      <aside className="sticky hidden h-screen max-w-xs mt-8 ml-6 top-16 lg:block">
+        <TableOfContents />
+      </aside>
+      <article className="max-w-2xl xl:max-w-3xl min-w-0 text-base lg:text-lg ">
+        <ContentSwitch name={blogName} />
+      </article>
+    </div>
+  );
+};
 
 const Blogs = (): JSX.Element => (
   <React.Suspense
@@ -52,18 +64,7 @@ const Blogs = (): JSX.Element => (
     <Routes>
       <Route path="/">
         <Route index element={<Index />} />
-        <Route element={<BlogLayout />}>
-          <Route
-            path="my-personal-website"
-            element={React.useMemo(
-              () => (
-                <MyPersonalWebsite components={components} />
-              ),
-              [],
-            )}
-          />
-        </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route path=":blogName" element={<BlogLayout />} />
       </Route>
     </Routes>
   </React.Suspense>

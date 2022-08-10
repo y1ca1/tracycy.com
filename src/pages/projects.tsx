@@ -1,12 +1,12 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { Tooltip } from 'flowbite-react';
 import { LightBulbIcon } from '@heroicons/react/solid';
 import { RotatingSquare } from 'react-loader-spinner';
 import { SpikeBounce } from '@/components/spike';
 import { ProjectPathV1 } from '@/components/projectPath';
 import { TableOfContents } from '@/components/tableOfContents';
-import { NotFound } from '@/pages/404';
 import { components } from '@/components/mdxComponents';
 const Malloc = React.lazy(() => import('@/contents/projects/malloc.mdx'));
 const Biquadris = React.lazy(() => import('@/contents/projects/biquadris.mdx'));
@@ -38,16 +38,33 @@ const Index = (): JSX.Element => {
   );
 };
 
-const ProjectLayout = (): JSX.Element => (
-  <div className="relative flex justify-between mt-12 mb-12 flex-row-reverse">
-    <aside className="sticky hidden h-screen max-w-xs mt-8 ml-6 top-16 lg:block">
-      <TableOfContents />
-    </aside>
-    <article className="max-w-2xl xl:max-w-3xl min-w-0 text-base lg:text-lg ">
-      <Outlet />
-    </article>
-  </div>
-);
+const ProjectLayout = (): JSX.Element => {
+  const { projectName } = useParams();
+
+  const ContentSwitch = ({ name }: { name?: string }) => {
+    switch (name) {
+      case 'malloc':
+        return <Malloc components={components} />;
+      case 'biquadris':
+        return <Biquadris components={components} />;
+      case 'hindley-milner-inference':
+        return <HM components={components} />;
+      default:
+        return <Navigate to="/projects" replace={true} />;
+    }
+  };
+
+  return (
+    <div className="relative flex justify-between mt-12 mb-12 flex-row-reverse">
+      <aside className="sticky hidden h-screen max-w-xs mt-8 ml-6 top-16 lg:block">
+        <TableOfContents />
+      </aside>
+      <article className="max-w-2xl xl:max-w-3xl min-w-0 text-base lg:text-lg ">
+        <ContentSwitch name={projectName} />
+      </article>
+    </div>
+  );
+};
 
 const Projects = (): JSX.Element => (
   <React.Suspense
@@ -63,36 +80,7 @@ const Projects = (): JSX.Element => (
     <Routes>
       <Route path="/">
         <Route index element={<Index />} />
-        <Route element={<ProjectLayout />}>
-          <Route
-            path="malloc"
-            element={React.useMemo(
-              () => (
-                <Malloc components={components} />
-              ),
-              [],
-            )}
-          />
-          <Route
-            path="biquadris"
-            element={React.useMemo(
-              () => (
-                <Biquadris components={components} />
-              ),
-              [],
-            )}
-          />
-          <Route
-            path="hindley-milner-inference"
-            element={React.useMemo(
-              () => (
-                <HM components={components} />
-              ),
-              [],
-            )}
-          />
-        </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route path=":projectName" element={<ProjectLayout />} />
       </Route>
     </Routes>
   </React.Suspense>
