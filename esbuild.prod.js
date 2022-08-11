@@ -61,7 +61,10 @@ esbuild
         ],
       }),
     ],
-    define: { 'process.env.GMapAPIKey': `'${process.env.GMapAPIKey}'` },
+    define: {
+      'process.env.GMapAPIKey': `'${process.env.GMapAPIKey}'`,
+      'process.env.GATagID': `'${process.env.GATagID}'`,
+    },
   })
   .then(() => {
     console.log(`😽 Build success! The dist folder is production ready!`);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ReactGA from 'react-ga';
 import { RotatingSquare } from 'react-loader-spinner';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { ThemeMode } from '@/types/theme';
@@ -12,8 +13,14 @@ const Projects = React.lazy(() => import('@/pages/projects'));
 const Experience = React.lazy(() => import('@/pages/experience'));
 const About = React.lazy(() => import('@/pages/about'));
 
+ReactGA.initialize(process.env.GATagID as string);
+
 const App: React.FC<Record<string, never>> = () => {
   const currentThemeMode = useThemeMode()[0];
+
+  React.useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
 
   return (
     <div className=" selection:bg-secondary selection:text-subtle">

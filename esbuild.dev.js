@@ -37,6 +37,7 @@ esbuild
       bundle: true,
       sourcemap: true,
       color: true,
+      // minify: true,
       // splitting: true,
       // outdir: path.resolve(dirName, 'public'),
       outfile: path.resolve(dirName, 'public/index.js'),
@@ -71,7 +72,10 @@ esbuild
           ],
         }),
       ],
-      define: { 'process.env.GMapAPIKey': `'${process.env.GMapAPIKey}'` },
+      define: {
+        'process.env.GMapAPIKey': `'${process.env.GMapAPIKey}'`,
+        'process.env.GATagID': `'${process.env.GATagID}'`,
+      },
     },
   )
   .then(server => {
