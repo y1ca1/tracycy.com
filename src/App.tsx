@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import { RotatingSquare } from 'react-loader-spinner';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { ThemeMode } from '@/types/theme';
@@ -19,7 +19,10 @@ const App: React.FC<Record<string, never>> = () => {
   const currentThemeMode = useThemeMode()[0];
 
   React.useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    ReactGA.send({
+      hitType: 'pageview',
+      page: window.location.pathname + window.location.search,
+    });
   }, []);
 
   return (
