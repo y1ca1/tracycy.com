@@ -205,9 +205,7 @@ export const cmuContent = renderToString(
           src={cmuLogoUrl}
         />
       </div>
-      <h5 className="text-xl font-bold  ">
-        Starting Fall 2022: Pittsburgh, PA
-      </h5>
+      <h5 className="text-xl font-bold  ">2021-2023: Pittsburgh, PA</h5>
       <p className="text-md font-semibold text-secondary">
         Finally got accepted for the visa. Do I still want to go back to campus?
         YES! The more I do, the more I find that I need to learn. Plus there are

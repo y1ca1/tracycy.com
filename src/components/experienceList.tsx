@@ -30,7 +30,7 @@ export const ExperienceList = () => {
           <div className="flex flex-col justify-center items-center">
             <div className="flex flex-col space-y-0.5 items-center">
               <h5 className="text-sm font-semibold italic ">
-                Starting Sept. 2022: Pittsburgh, PA
+                Jan. 2021 - Now: Pittsburgh, PA
               </h5>
             </div>
             <h5 className="text-lg lg:text-xl text-center font-bold ">
@@ -42,12 +42,8 @@ export const ExperienceList = () => {
               <div className="w-full pt-3 rounded-lg shadow-lg ">
                 <ul className="divide-y-2 divide-accent">
                   <li className="p-3 hover:bg-primary ">
-                    <a
-                      href="https://www.diderot.one/courses/121"
-                      target="_blank"
-                    >
-                      15-210: Parallel and Sequential Data Structures and
-                      Algorithms (Planned)
+                    <a href="http://www.cs.cmu.edu/~15150/" target="_blank">
+                      15-150: Principles of Functional Programming (Planned)
                     </a>
                   </li>
                   <li className="p-3 hover:bg-primary ">
