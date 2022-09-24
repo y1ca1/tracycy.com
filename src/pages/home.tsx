@@ -20,8 +20,8 @@ const Home = (): JSX.Element => (
   <>
     <div className="flex flex-col-reverse items-center mt-12 mb-16 lg:flex-row lg:justify-between lg:space-x-6">
       <p className="max-w-3xl mt-12 text-3xl font-semibold text-right lg:mt-0 sm:text-4xl sm:text-left md:text-center lg:text-left">
-        I'm Yi, a fervent software engineer, lifelong learner, and sometimes
-        <br /> a jerk.
+        I'm Yi, a fervent software engineer, lifelong learner, and sometimes a
+        bad boy.
       </p>
       <div className="relative ">
         <RoundedSquare />

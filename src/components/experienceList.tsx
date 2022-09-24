@@ -42,8 +42,12 @@ export const ExperienceList = () => {
               <div className="w-full pt-3 rounded-lg shadow-lg ">
                 <ul className="divide-y-2 divide-accent">
                   <li className="p-3 hover:bg-primary ">
-                    <a href="http://www.cs.cmu.edu/~15150/" target="_blank">
-                      15-150: Principles of Functional Programming (Planned)
+                    <a
+                      href="https://www.diderot.one/courses/121"
+                      target="_blank"
+                    >
+                      15-210: Parallel and Sequential Data Structures and
+                      Algorithms
                     </a>
                   </li>
                   <li className="p-3 hover:bg-primary ">
@@ -51,15 +55,23 @@ export const ExperienceList = () => {
                       href="https://web2.qatar.cmu.edu/cs/15312/"
                       target="_blank"
                     >
-                      15-652: Foundations of Programming Languages (Planned)
+                      15-652: Foundations of Programming Languages
                     </a>
                   </li>
                   <li className="p-3 hover:bg-primary ">
                     <a
-                      href="https://www.synergylabs.org/courses/15-440/"
+                      href="https://www.composablesystems.org/15-440/fa2022/"
                       target="_blank"
                     >
-                      15-640: Distributed Systems (Planned)
+                      15-640: Distributed Systems
+                    </a>
+                  </li>
+                  <li className="p-3 hover:bg-primary ">
+                    <a
+                      href="https://www.cylab.cmu.edu/education/course-list/crytocurrencies-blockchains-applications.html"
+                      target="_blank"
+                    >
+                      17-303: Cryptocurrencies, Blockchains, and Applications
                     </a>
                   </li>
                   <li className="p-3 hover:bg-primary ">
@@ -132,7 +144,7 @@ export const ExperienceList = () => {
                 </ul>
                 <h5 className="text-md font-bold py-2">
                   <a
-                    href="https://www.logintc.com/blog/introducing-our-new-on-premise-solution-logintc-managed"
+                    href="https://www.logintc.com/on-premises-multi-factor-authentication/"
                     target="_blank"
                     className="underline"
                   >
