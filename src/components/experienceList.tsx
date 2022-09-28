@@ -43,27 +43,36 @@ export const ExperienceList = () => {
                 <ul className="divide-y-2 divide-accent">
                   <li className="p-3 hover:bg-primary ">
                     <a
+                      href="https://web2.qatar.cmu.edu/cs/15312/"
+                      target="_blank"
+                    >
+                      15-652: Foundations of Programming Languages (My favorite
+                      course)
+                    </a>
+                  </li>
+                  <li className="p-3 hover:bg-primary ">
+                    <a
+                      href="https://mse.isri.cmu.edu/0_documents/syllabi/fa2021/17614-formal-methods.pdf"
+                      target="_blank"
+                    >
+                      17-614: Formal Methods
+                    </a>
+                  </li>
+                  <li className="p-3 hover:bg-primary ">
+                    <a
+                      href="https://mse.isri.cmu.edu/0_documents/syllabi/fa2021/17624-advanced-formal-methods1.pdf"
+                      target="_blank"
+                    >
+                      17-624: Advanced Formal Methods
+                    </a>
+                  </li>
+                  <li className="p-3 hover:bg-primary ">
+                    <a
                       href="https://www.diderot.one/courses/121"
                       target="_blank"
                     >
                       15-210: Parallel and Sequential Data Structures and
                       Algorithms
-                    </a>
-                  </li>
-                  <li className="p-3 hover:bg-primary ">
-                    <a
-                      href="https://web2.qatar.cmu.edu/cs/15312/"
-                      target="_blank"
-                    >
-                      15-652: Foundations of Programming Languages
-                    </a>
-                  </li>
-                  <li className="p-3 hover:bg-primary ">
-                    <a
-                      href="https://www.composablesystems.org/15-440/fa2022/"
-                      target="_blank"
-                    >
-                      15-640: Distributed Systems
                     </a>
                   </li>
                   <li className="p-3 hover:bg-primary ">
@@ -76,7 +85,15 @@ export const ExperienceList = () => {
                   </li>
                   <li className="p-3 hover:bg-primary ">
                     <a href="https://www.cs.cmu.edu/~213/" target="_blank">
-                      15-213/18-613: Introduction to Computer Systems (ICS)
+                      15-513/18-613: Introduction to Computer Systems
+                    </a>
+                  </li>
+                  <li className="p-3 hover:bg-primary ">
+                    <a
+                      href="https://www.composablesystems.org/15-440/fa2022/"
+                      target="_blank"
+                    >
+                      15-440: Distributed Systems (Dropped after p1)
                     </a>
                   </li>
                 </ul>
