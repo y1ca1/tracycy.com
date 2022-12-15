@@ -1,0 +1,1353 @@
+---
+title: Recaps of 15-312 (Principles of Programming Languages)
+publishedAt: '2022-12-10'
+readingTime: '20'
+---
+
+# {title}
+
+_{publishedAt}_ • _{readingTime} min read_
+
+---
+
+## λ-calculus
+
+### Syntax
+
+$$M ::= x \mid \lambda x.M \mid M_1\  M_2$$
+
+> VARIABLE -- placeholder that can be "plugged in" by substitution (Core)
+
+- Everything is a function
+- Functions are applied to other λ-terms
+- Variables range over λ-terms
+- `M` is **inductively defined**
+
+Judgement `M term` (assuming infinitely many `x var`) is defined by the following rules:
+
+```sml
+ x var    x var  M term    M1 term  M2 term
+-------- ---------------  -------------------
+ x term    λx.M term          M1 M2 term
+```
+
+Meaning `_ term` is the _strongest_ (least) judgement that is _closed under_ (obeys) the rules.
+
+### α-equivalence
+
+Two λ-terms are α-equivalent (`M ≡α M'`) if they are the same up to renaming of bound variables.
+
+```sml
+equivalence relation:
+--------(REFLEXIVITY)
+ M ≡α M
+
+ M ≡α M'
+---------(SYMMETRY)
+ M'≡α M
+
+ M ≡α M'  M' ≡α M''
+-------------------(TRANSITIVITY)
+      M ≡α M''
+
+congruence (compatibility):
+ M1 ≡α M1'  M2 ≡α M2'
+---------------------(APPLICATION)
+   M1 M2 ≡α M1' M2'
+
+     M ≡α M'
+-----------------(ABSTRACTION)
+  λx.M ≡α λx.M'
+
+renaming:
+ [x'/x]M = M'  x ∉ FV(M)
+--------------------------(RENAME)
+      λx.M ≡α λx'.M'
+```
+
+- Substitution is well-defined up to α-equivalence
+- λ-terms are identified up to α-equivalence
+
+### β-equivalence (computation)
+
+```sml
+substitution:
+
+------------------(SUBSTITUTION)
+ λx.N M ≡β [M/x]N
+```
+
+### Church's Law
+
+> Every computable function on the **natural numbers** is λ-definable.
+
+So λ-calculus is a universal model of computation on "finitary objects" (encodable as numbers).
+
+- Y-combinator:
+`Y ≜ λproto. (λx. proto (x x)) (λx. proto (x x))`
+- Also booleans, pairs, Barendregt's numerals, etc.
+
+## Defining a language
+
+Components of a language defined:
+
+- abstract syntax (with binding and scope specified)
+- static semantics (specifies well-formed pieces of syntax)
+- dynamic semantics (specified how to execute programs)
+- type safety (a proof that the statics and dynamics cohere)
+
+### Typing Judgments
+
+$$\underbrace{x_1: \tau_1 \dots x_n: \tau_n}_{\text{assumptions, written }\Gamma} \vdash \underbrace{e: \tau}_\text{conclusion}$$
+
+, where $\vdash$ (turnstile) pronounced "entails".
+
+```sml
+  Γ ⊢ e1: τ1  Γ, x: τ1 ⊢ e2: τ2
+--------------------------------(LET)
+    Γ ⊢ let(e1; x.e2): τ2
+
+(implicit: x ∉ dom(Γ))
+```
+
+**Lemma**:
+
+1. `Γ, x: τ ⊢ x: τ`
+2. If `Γ ⊢ e': τ'`, then `Γ, x: τ ⊢ e': τ'` (weakening)
+3. If `Γ ⊢ e: τ` and `Γ, x: τ ⊢ e': τ'`, then `Γ ⊢ [e/x]e': τ'` (substitution)
+
+Proof of substitution lemma: rule induction on typing/statics.
+
+### Dynamics
+
+Want to specify precisely how expressions are evaluated.
+
+1. What are the values (when are we done)?
+2. What do variables range over (computation (by-name) or values (by-value))?
+3. In what order do we evaluate (left-to-right)?
+
+**Transition systems, abstractly**:
+
+1. A set of states, $S$
+2. A subset of $I \subseteq S$ of initial states
+3. A subset of $F \subseteq S$ of final states
+4. A relation $\mapsto \subseteq S \times S$ of transitions
+
+**Structural Operational Semantics (SOS)**: define a transition system by transition and value rules.
+
+- state are _closed_ expressions
+- _values_ are final
+- _all_ are initial
+
+**Lemma**:
+
+1. (Determinacy) For all closed $e$, there is _at most_ one $e'$ such that $e \mapsto e'$.
+   1. (Corollary) If $e \mapsto^*v \text{ val}$ and $e \mapsto^* v' \text{ val}$, then $v = v'$.
+
+### Type Safety
+
+The type of an expression _predicts_ the "shape" of its value.
+
+- $e: \text{num}$ means $e$ evaluates to numerals
+- $e: \text{str}$ means $e$ evaluates to strings
+
+Types specify behavior when evaluated.
+
+**Values Lemma (Canonical Forms Lemma)**:
+
+Supose $v \text{ val}$ and $v: \tau$.
+
+1. If $\tau = \text{num}$, then $v = \text{num}[n]$ for some $n$.
+2. If $\tau = \text{str}$, then $v = \text{str}[s]$ for some $s$.
+
+**Preservation**:
+
+If $e \mapsto e'$ and $e: \tau$, then $e': \tau$. (Proof by induction on transition.)
+
+**Progress**:
+
+If $e: \tau$ then either $e$ val or $e \mapsto e'$ ($\exists e'$). (Proof by induction on typing.)
+
+### Error Handling
+
+Either weaken the dynamics or strengthen the statics.
+
+- Add new judgment $e$ err (e is erroneous)
+- Build a stronger type system, e.g. add a type of positive numbers
+
+## Basic Type Structures
+
+> A programming language is the sum of it types.
+
+### System T
+
+```sml
+(* Types *)
+τ ::= 1 ∣ τ1 × τ2 ∣ 0 ∣ τ1 + τ2 ∣ τ1 -> τ2
+
+(* Expressions *)
+e ::= <>                           (1-intro)
+    | <e1, e2>                     (×-intro)
+    | e·i (i=1,2)                  (×-elim)
+    | 0_case{ρ}(e)                 (0-elim)
+    | +_case{τ1,τ2}(e; x.e1; x.e2) (+-elim)
+    | i·e (i=1,2)                  (+-intro)
+    | λx:τ1. e                     (->-intro)
+    | e1 e2                        (->-elim)
+
+(* Statics: *)
+---------------(VAR)
+ Γ, x: τ ⊢ x: τ
+
+-----------(1-INTRO)    (no 1-ELIM)
+ Γ ⊢ <>: 1
+
+ Γ ⊢ e1: τ1  Γ ⊢ e2: τ2
+------------------------(×-INTRO)
+ Γ ⊢ <e1, e2>: τ1 × τ2
+
+ Γ ⊢ e: τ1 × τ2
+----------------(×-ELIM)(i=1,2)
+   Γ ⊢ e·i: τi
+
+      Γ ⊢ e: 0
+---------------------(0-ELIM)    (no 0-INTRO)
+ Γ ⊢ 0_case{ρ}(e): ρ
+  
+  Γ ⊢ e: τ1 + τ2  Γ, x: τ1 ⊢ e1: ρ  Γ, x: τ2 ⊢ e2: ρ
+----------------------------------------------------(+ELIM)
+  Γ ⊢ +_case{τ1,τ2}(e; x.e1; x.e2): ρ
+
+   Γ ⊢ x: τ1  Γ ⊢ e2: τ2
+--------------------------(->INTRO)
+  Γ ⊢ λx:τ1. e2: τ1 -> τ2
+  
+  Γ ⊢ e1: τ1 -> τ2  Γ ⊢ e2: τ1
+-------------------------------(->ELIM)
+          Γ ⊢ e1 e2: τ2
+
+(* Dynamics: e val, e |-> e'*)
+---------
+ <> val
+
+ [e1 val  e2 val] eager
+------------------------
+      <e1, e2> val
+
+   e |-> e'
+--------------
+ e·i |-> e'·i
+
+--------------------(i=1,2)
+ <e1, e2>·i |-> ei
+
+  [e val] eager
+----------------
+     i·e val
+
+   e |-> e'
+--------------
+ i·e |-> i·e'
+
+                           e |-> e'
+--------------------------------------------------------------
++_case{τ1,τ2}(e; x.e1; x.e2) |-> +_case{τ1,τ2}(e'; x.e1; x.e2)
+
+                i·e val (i=1,2)
+---------------------------------------------
+  +_case{τ1,τ2}(i·e; x.e1; x.e2) |-> [e/x]ei
+
+-----------------(TM)
+  λx:τ1. e2 val
+
+   e1 |-> e1'
+-----------------
+e1 e2 |-> e1' e2
+
+  e1 val  e2 |->e2'
+--------------------
+  e1 e2 |-> e1 e2'
+
+      [e1 val] by-value
+------------------------------
+(λx:τ1. e2) (e1) |-> [e1/x]e2
+
+```
+
+Also can be extended to _n-ary_ products and sums and _labeled_ products and sums.
+
+### Progress and Preservation
+
+**Progress**:
+
+- Induction on typing
+- Canonical Form Lemma
+
+**Preservation**:
+
+- Induction on transition
+- Inversion Lemma
+- Substitution Lemma
+
+### Polarity
+
+Informally,
+
+1. A _negative_ type is characterized by its _behavior_:
+   - a _function_ is anything that can be _applied_
+   - a _pair_ is anything that can be _projected_
+2. A _positive_ type is characterized by its _structure_:
+   - an _injection_ of a value
+   - anything that can be case-analyzed (zero or one case or _positive product_ `τ1 ⊗ τ2`)
+
+## System T++
+
+### Inductive Types
+
+> Sums are a special case of the more general concept of _inductive_ types, whose elements are _generated_ by a _finite_ number of value constructors.
+
+e.g.
+
+- `bool ≜ true ↪ 1 + false ↪ 1`
+- `τ opt ≜ nothing ↪ 1 + just ↪ τ`
+
+Cf. exhaustiveness checking in ML.
+
+> A sum type is the _least_ type given by the injections, as witnessed by the case analysis.
+
+> Inductive types generalize sums to admit (a limited form of) _self-reference_.
+
+**Primitive Nat and List (of Nat)**:
+
+```sml
+(* Nat *)
+
+(* Statics *)
+
+------------(nat-I1)
+ Γ ⊢ z: nat
+
+  Γ ⊢ e: nat
+---------------(nat-I2)
+ Γ ⊢ s(e): nat
+
+  Γ ⊢ e : nat  Γ ⊢ e0: ρ  Γ, x: ρ ⊢ e1: ρ
+----------------------------------------------(nat-E)
+        Γ ⊢ natrec{ρ}(e; e0; x.e1 ): ρ
+
+(* Dynamics (some omitted) *)
+
+-----------------------------
+natrec{ρ}(z; e0; x.e1) |-> e0
+
+                        e val
+-----------------------------------------------------------
+natrec{ρ}(s(e); e0; x.e1) |-> [natrec{ρ}(e; e0; x.e1)/x]e1
+
+(* List *)
+
+(* Statics *)
+
+----------------(list-I1)
+ Γ ⊢ nil: list
+
+  Γ ⊢ n: nat  Γ ⊢ e: list
+-----------------------------(list-I2)
+  Γ ⊢ cons(n; e): list
+  
+    Γ ⊢ e: list  Γ ⊢ e0: ρ  Γ, x: nat, y: ρ ⊢ e1: ρ
+-----------------------------------------------------(list-E)
+        Γ ⊢ listrec{ρ}(e; e0; x.y.e1 ): ρ
+
+(* Dynamics (some omitted) *)
+
+-----------------------------------
+listrec{ρ}(nil; e0; x.y.e1) |-> e0
+
+                                    e val
+------------------------------------------------------------------------------
+listrec{ρ}(cons(eh; et); e0; x.y.e1) |-> [eh,listrec{ρ}(et; e0; x.y.e1)/x,y]e1
+
+```
+
+Now if we consider `natrec[ρ]` as a function of type `(ρ × (ρ -> ρ)) -> nat -> ρ`, the type of `natrec[ρ]` is isomorphic to `((1 + ρ) -> ρ) -> nat -> ρ`. Hence, we can re-organize `Nat` and `List` so that
+
+> Nat is the least type closed under _fold_ as witnessed by _natrec_.
+
+> List is a type closed under _fold_ as witnessed by _listrec_.
+
+**Consolidated Nat and List**:
+
+```sml
+(* Nat *)
+
+(* Statics *)
+
+  Γ ⊢ e: 1 + nat
+------------------(I)
+ Γ ⊢ fold(e): nat
+
+  Γ ⊢ e: nat  Γ, x: 1 + ρ ⊢ e1: ρ
+------------------------------------(E)
+  Γ ⊢ natrec{ρ}(e; x.e1): ρ
+  
+(* Dynamics (some omitted) *)
+
+--------------------------------------
+natrec{ρ}(fold(e); x.e1) 
+|-> case e {
+  1·<> => [1·<>/x]e1
+| 2·e' => [2·natrec{ρ}(e'; x.e1)/x]e1
+}
+
+(* List *)
+
+(* Statics *)
+
+ Γ ⊢ e: 1 + (nat × list)
+-------------------------(I)
+    Γ ⊢ fold(e): list
+  
+  Γ ⊢ e: list  Γ, x: 1 + (nat × ρ) ⊢ e1: ρ
+--------------------------------------------(E)
+        Γ ⊢ listrec{ρ}(e; x.e1): ρ
+
+(* Dynamics (some omitted) *)
+
+--------------------------------------
+listrec{ρ}(fold(e); x.e1)
+|-> case e {
+  1·<> => [1·<>/x]e1
+| 2·(n, l) => [2·<n, listrec{ρ}(l; x.e1)>/x]e1
+}
+
+```
+
+Now notice
+
+- `natrec{ρ}(x.e1)` (given a function mapping `1 + ρ` into `ρ`) can be considered as a function that maps `nat` into `ρ`
+- `listrec{ρ}(x.e1)` (given a function mapping `1 + (nat × ρ)` into `ρ`) can be considered as a function that maps `list` into `ρ`.
+
+**Programming with Nat and List**:
+
+```sml
+val ZERO = Nat.FOLD N.Zero
+val SUCC = Nat.FOLD o N.Succ
+
+val NIL = List.FOLD L.Nil
+val CONS = List.FOLD o L.Cons
+
+(* 'rho = nat *)
+val double : nat -> nat =
+  Nat.REC
+    (fn N.Zero   => ZERO
+      | N.Succ n => SUCC (SUCC n))
+
+(* 'rho = nat *)
+val exp2 : nat -> nat =
+  Nat.REC
+    (fn N.Zero   => SUCC ZERO
+      | N.Succ n => double n)
+
+(* 'rho = (nat * nat) *)
+val halve : nat -> nat =
+  fn (n) =>
+    #1 (Nat.REC
+      (fn N.Zero               => (ZERO, ZERO)
+        | N.Succ (floor, ceil) => (ceil, SUCC floor))
+        n)
+
+(* 'rho = nat *)
+val add : nat * nat -> nat =
+  fn (m, n) =>
+    Nat.REC
+      (fn N.Zero   => n
+        | N.Succ r => SUCC r)
+      m
+
+(* 'rho = (nat * nat) *)
+val fib : nat -> nat =
+  fn (n) =>
+    #1 (Nat.REC
+        (fn N.Zero              => (ZERO, SUCC ZERO)
+          | N.Succ (curr, next) => (next, add (curr, next)))
+        n)
+
+(* 'rho = nat *)
+val length : list -> nat =
+  List.REC
+    (fn L.Nil => ZERO
+      | L.Cons (_, n) => SUCC n)
+
+(* 'rho = nat *)
+val sum : list -> nat =
+  List.REC
+    (fn L.Nil => ZERO
+      | L.Cons (x, n) => NatUtil.add (x, n))
+
+(* 'rho = list *)
+val map =
+  fn f =>
+    List.REC
+      (fn L.Nil          => NIL
+        | L.Cons (x, xs) => CONS (f x, xs))
+
+(* 'rho = list *)
+val filter : (element -> bool) -> list -> list =
+  fn p =>
+    List.REC
+      (fn L.Nil          => NIL
+        | L.Cons (x, xs) => if p x then CONS (x, xs) else xs)
+
+(* reverse list using CPS (O(n)) *)
+val reverse': list * list -> list =
+  fn (xs, ys) =>
+    (List.REC
+      (fn L.Nil          => (fn acc => acc)
+        | L.Cons (x, f)  => (fn acc => f (CONS (x, acc))))
+      xs)
+      (ys)
+
+val reverse : list -> list =
+  fn (xs) => reverse' (xs, NIL)
+
+val UNFOLD : list -> unit + (nat * list) =
+  List.REC
+    (fn L.Nil          => L.Nil
+      | L.Cons (x, xs) => L.Cons (x, (List.FOLD xs)) )
+```
+
+### Co-inductive Types
+
+`nat` is fully determined by its introductory forms. Dually, `conat` is defined not by what it is but how it _behaves_.
+
+```sml
+(* Co-Nat *)
+
+(* Statics *)
+
+        Γ ⊢ e: conat
+---------------------------(E)
+  Γ ⊢ unfold(e): 1 + conat
+  
+   Γ ⊢ e0: σ  Γ, x: σ ⊢ e1: 1 + σ
+------------------------------------(I)
+    Γ ⊢ gen(e0; x.e1): conat
+
+(* Dynamics *)
+
+      e val
+-----------------
+ gen(e; x.e') val
+
+        e |-> e'
+------------------------
+unfold(e) |-> unfold(e')
+  
+-----------------------------------------
+unfold(gen(e0; x.e1)) |-> case [e0/x]e1 {
+  1·<> => 1·<>
+| 2·e0' => 2·gen(e0'; x.e1)
+}
+
+(* co-list (stream) *)
+
+(* Statics *)
+
+        Γ ⊢ e: stream
+--------------------------------(E)
+Γ ⊢ unfold(e): 1 + nat × stream
+  
+ Γ ⊢ e0: σ  Γ, x: σ ⊢ e1: 1 + nat × σ
+--------------------------------------(I)
+      Γ ⊢ gen(e0; x.e1): stream
+
+(* Dynamics *)
+
+-----------------------------------------
+unfold(gen(e0; x.e1)) |-> case [e0/x]e1 {
+  1·<> => 1·<>
+| 2·<n, e'> => 2·<n, gen(e'; x.e1)>
+}
+
+```
+
+**Programming with conat and stream**:
+
+```sml
+cozero ≜ gen(<>; x.1·x)
+      or gen(<>; _.1·<>)
+      or gen(λx: nat. x; _.1·<>)
+      ...
+
+conat opt ≜ NONE ↪ unit + SOME ↪ conat
+(* σ = conat opt *)
+cosucc(n) ≜ λn: conat.gen(NONE·<>; x.
+  case x {
+    NONE·<> => 2·(SOME·n)
+  | SOME·n' => case unfold(n') {
+      1·<> => 1·(NONE·<>)
+    | 2·n'' => 2·(SOME·n'')
+    }
+  }
+)
+
+coone = cosucc(cozero)
+cotwo = cosucc(coone)
+...
+
+unfold(cozero) |->* 1·<>
+unfold(cosucc(n)) |->* 2·gen(SOME·n; ...)
+
+unfold(gen(SOME·cozero; ...)) |->* 1·<>
+unfold(gen(SOME·cosucc(n); ...)) |->* 2·gen(SOME·n; ...)
+
+ω ≜ gen(<>; _.2·<>)
+unfold(ω) |->* 2·gen(<>; _.2·<>) = 2·ω
+
+nats ≜ gen(z; x.2·<x, s(x)>)
+evens ≜ gen(z; x.2·<x, s(s(x))>)
+odds ≜ gen(s(z); x.2·<x, s(s(x))>)
+
+unfold(nats) |->* 2·<z, gen(s(z); x.2·<x, s(x)>)>
+nats+ = gen(s(z); x.2·<x, s(x)>)
+unfold(nats+) |->* 2·<s(z), gen(s(s(z)); x.2·<x, s(x)>)>
+
+map = λf: nat -> nat.λs: stream.
+  gen(s; x.
+    case unfold(x) {
+      1·<> => 1·<>
+    | 2·<n, s'> => 2·<f(n), s'>
+    }
+  )
+
+filter = λp: nat -> bool.λs: stream.
+  gen(s; x.
+    case unfold(x) {
+      1·<> => 1·<>
+    | 2·<n, s'> => if p(n) then 2·<n, s'> else unfold(s') ...(**impossible**)
+    }
+  )
+
+(* turn nat into conat *)
+fromNat = λn: nat.
+  gen(n; x.
+    case unfold(x) of
+      1·<> => 1·<>
+    | 2·x' => 2·x'
+  )
+
+(* turn list into stream *)
+fromList = λl: list.
+  gen(l; x.
+    case unfold(x) of
+      1·<> => 1·<>
+    | 2·<n, l'> => 2·<n, l'>
+  )
+
+```
+
+### Generic Programming
+
+Idea: introduce a programming primitive that allows for "code-generation" centered around a certain type.
+
+> _Generic Programming_ is a language mechanism that properly addresses type-directed execution, by supplying the "shape" of the data structure, generic programming directs execution according to its shape.
+
+```sml
+(* Generic Programming *)
+
+(* A *monomial* type constructor t.τ is inductively defined for τ as ff   *)
+(* t is type variable *)
+τ ::= t | 1 | 0 | τ1 × τ2 | τ1 + τ2
+
+(* the actor of t.τ *)
+map[t.τ]: (ρ -> p') -> [ρ/t]τ -> [p'/t]τ
+
+(* statics *)
+
+  Γ, x: ρ ⊢ e': ρ'  Γ ⊢ e: [ρ/t]τ
+-----------------------------------
+  Γ ⊢ map[t.τ](x.e')(e): [ρ'/t]τ
+
+(* dynamics *)
+
+-------------------------(1-map)
+ map[t.1](x.e')(e) |-> e
+
+-------------------------------(0-map)
+ map[t.0](x.e')(e) |-> abort(e)
+
+-------------------------------------------------------------------------(×-map)
+map[t.τ1 × τ2](x.e')(e) |-> <map[t.τ1](x.e')(e·1), map[t.τ2](x.e')(e·2)>
+
+------------------------------------(+-map)
+map[t.τ1 + τ2](x.e')(e) |-> case e {
+  1·x => 1·map[t.τ1](x.e')(x)
+| 2·y => 2·map[t.τ2](x.e')(y)
+}
+```
+
+### Uniting inductive and co-inductive types with Generic Programming
+
+```sml
+(* Inductive types *)
+
+(* Statics *)
+
+  Γ ⊢ e: [μ(t.τ)/t]τ
+----------------------(μ-I)
+  Γ ⊢ fold(e): μ(t.τ)
+
+  Γ ⊢ e: μ(t.τ)  Γ, x: [ρ/t]τ ⊢ e': ρ
+--------------------------------------(μ-E)
+        Γ ⊢ rec{t.τ}(e; x.e'): ρ
+
+(* Dynamics *)
+
+------------------------------------------------------------------
+rec{t.τ}(fold(e); x.e') |-> [map[t.τ](y.rec{t.τ}(y; x.e'))(e)/x]e' 
+
+(* recall: *)
+
+--------------------------------------
+natrec{ρ}(fold(e); x.e1) 
+|-> case e {
+  1·<> => [1·<>/x]e1
+| 2·e' => [2·natrec{ρ}(e'; x.e1)/x]e1
+}
+
+--------------------------------------
+listrec{ρ}(fold(e); x.e1)
+|-> case e {
+  1·<> => [1·<>/x]e1
+| 2·(n, l) => [2·<n, listrec{ρ}(l; x.e1)>/x]e1
+}
+
+(* now some magic! *)
+(* List.foldr is isomorphic to listrec (when uncurried)!! *)
+List.foldr: (nat × ρ) -> ρ -> natlist -> ρ
+
+listrec{ρ}: ((1 + nat × ρ) -> ρ) -> natlist -> ρ
+
+fun foldr f z [] = z
+  | foldr f z x::xs = f (x, foldr f z xs)
+
+rec{t.τ_natlist}(e; f) ≜ List.foldr (f o r) (f l·<>) e
+
+(* Co-inductive types *)
+
+(* Statics *)
+  
+          Γ ⊢ e: ν(t.τ)
+-----------------------------------(ν-E)
+  Γ ⊢ unfold{t.τ}(e): [ν(t.τ)/t]τ
+
+  Γ ⊢ e: σ Γ, x: σ ⊢ e': [σ/t]τ
+---------------------------------(ν-I)
+  Γ ⊢ gen{t.τ}(e; x.e'): ν(t.τ)
+
+(* Dynamics *)
+
+----------------------------------------------------------------------
+unfold(gen{t.τ}(e0; x.e')) |-> map[t.τ](y.gen{t.τ}(y; x.e'))([e0/x]e')
+
+(* recall: *)
+-----------------------------------------
+unfold(gen(e0; x.e1)) |-> case [e0/x]e1 {
+  1·<> => 1·<>
+| 2·e0' => 2·gen(e0'; x.e1)
+}
+
+-----------------------------------------
+unfold(gen(e0; x.e1)) |-> case [e0/x]e1 {
+  1·<> => 1·<>
+| 2·<n, e'> => 2·<n, gen(e'; x.e1)>
+}
+
+```
+
+## Recursion
+
+In system T++ (even in λ-calculus), there is no notion of a function calling itself recursively. The possibility of repetition is handled by inductive/co-inductive types.
+
+- `rec` for "loops"
+- `gen` for state machines possibly with cycles
+
+However, the fact that system T++ (total) ensures termination also limits its expressive power and programming efficiency (try to program `greatestCommonDivisor` in system T++).
+
+### PCF-by-name
+
+Inspiration: **Y-combinator**, which can implement a fixed-point and hence enable general recursion.
+
+```sml
+(* PCF-by-name *)
+
+(* Types *)
+τ ::= lnat ∣ τ1 ⇀ τ2
+
+(* Expressions *)
+e ::= x
+    | λx:τ. e                      
+    | e1 e2
+    | z
+    | s(e)
+    | ifz{ρ}(e; e0; x.e1)
+    | fix{τ}(x.e)
+
+(* Statics *)
+
+   Γ, x: τ ⊢ e: τ
+--------------------(fix-I)
+ Γ ⊢ fix{τ}(x.e): τ
+
+
+  Γ ⊢ e: lnat  Γ ⊢ e0: ρ  Γ, x: lnat ⊢ e1: ρ
+---------------------------------------------(ifz-I)
+          Γ ⊢ ifz{ρ}(e; e0; x.e1): ρ
+
+(* Dynamics *)
+
+---------------------------------
+fix{τ}(x.e) |-> [fix{τ}(x.e)/x]e
+
+---------------------------
+ifz{ρ}(z; e0; x.e1) |-> e0
+
+-----------------------------------
+ifz{ρ}(s(e); e0; x.e1) |-> [e/x]e1
+
+(* divergence (cf Y I) *)
+Ωτ ≜ fix{τ}(x.x)
+
+Ωτ |-> [Ωτ/x]x |-> Ωτ |-> ...
+
+(* stream "for free", just like in Haskell *)
+
+(* assuming we have primitive "lazy list" *)
+(* define map using fix *)
+(* map ≜ fix m: (lnat ⇀ lnat) ⇀ list ⇀ list is 
+        λf. λl. case l {
+          nil => nil
+        | cons(h,t) => cons(f h, m f t)
+        } *)
+map = λf.λl. case l {
+  nil => nil
+| cons(h,t) => cons(f h, map f t)
+}
+
+(* nats ≜ fix n: list is cons(0, map s n) *)
+nats = cons(0, map s nats)
+
+hd nats |->* 0
+tl nats |->* cons(s(0), map s nats)
+hd (tl nats) |->* 1
+tl (tl nats) |->* cons(s(s(0)), map s (tl nats))
+hd (tl (tl nats)) |->* 2
+
+(* even filter on stream is definable! *)
+filter = λp.λl. case l {
+  nil => nil
+| cons(h,t) => if p h then cons(h, filter p t) else filter p t
+}
+
+evens = filter isEven nats
+
+(* BUT! *)
+(* infinite natural number! *)
+(* fix[lnat](x.s(x)): lnat |->* s(fix[lnat](x.s(x))) *)
+infSucc = s(infSucc)
+
+fun fact z = s z
+  | fact (s n) = (s n) * fact n
+
+fact infSucc (* would diverge *)
+
+diverge ≜ fix[lnat](x.x)
+       or fix[bool](x.x)
+(λ_:lnat. true) (diverge) |->* true
+
+(* moreover *)
+cons(diverge, nil): list
+(* fix[list](x.cons(divege, x)) *)
+infList ≜ cons(diverge, infList)
+
+(* simply loose types of finite list, natural numbers, and even booleans (a degenerated inductive type)!  *)
+```
+
+### PCF-by-value
+
+Variable now range over values, not computations, so general recursion is not allowed (does not make sense). Limit to only allow _recursive functions_.
+
+```sml
+(* PCF-by-value *)
+
+(* Types *)
+τ ::= nat ∣ τ1 ⇀ τ2
+
+(* Expressions *)
+e ::= x
+    | fun{τ1,τ2}(f.x.e)
+    | e1 e2
+    | z
+    | s(e)
+    | ifz{ρ}(e; e0; x.e1)
+
+(* Statics *)
+  Γ, f: τ1 ⇀ τ2, x: τ1 ⊢ e: τ2
+-----------------------------------(fun-I)
+  Γ ⊢ fun{τ1,τ2}(f.x.e): τ1 ⇀ τ2
+
+Γ ⊢ e1: τ1 ⇀ τ2  Γ ⊢ e2: τ1
+----------------------------(fun-E)
+        Γ ⊢ e1 e2: τ2
+
+(* dynamics *)
+                     e2 val
+------------------------------------------------------
+fun{τ1;τ2}(f.x.e)(e2) |-> [fun{τ1;τ2}(f.x.e),e2/f,x]e
+```
+
+### FPC
+
+PCF provides self-references purely at the expression level (through "ad hoc" language constructs like `fun` or `fix`). How about enabling self-references from the type systems?
+
+```sml
+(* FPC *)
+
+(* types *)
+τ ::= t | τ1 ⇀ τ2 | rec(t.τ)
+
+(* expressions *)
+e ::= x | λx: τ.e | e1 e2 | fold(e) | unfold(e)
+
+(* statics *)
+Γ ⊢ e: [rec(t.τ)/t]τ
+----------------------(rec-I)
+Γ ⊢ fold(e): rec(t.τ)
+
+       Γ ⊢ e: rec(t.τ)
+----------------------------(rec-E)
+Γ ⊢ unfold(e): [rec(t.τ)/t]τ
+
+(* dynamics *)
+      e val
+----------------------
+unfold(fold(e)) |-> e
+
+(* reify general recursion *)
+(* recall how Y combinator implements recursion by self-application *)
+(* introduce τ self *)
+
+τ self ≜ rec(t.t -> τ)
+e: τ self
+unroll(e) ≜ unfold(e)(e) : τ (* self-application! *)
+self{τ}(x.e) ≜ fold(λx: τ self.e) : τ self
+
+
+(* statics *)
+  Γ, x: τ self ⊢ e: τ
+------------------------
+Γ ⊢ self{τ}(x.e): τ self
+
+     Γ ⊢ e: τ self
+-------------------------
+Γ ⊢ unroll(self(x.e)): τ
+
+(* dynamics *)
+
+----------------
+self{τ}(x.e) val
+
+------------------------------------------
+unroll(self{τ}(x.e)) |-> [self{τ}(x.e)/x]e
+
+(* define fun using self *)
+τ1 ⇀ τ2 ≜ (τ1 -> τ2) self
+
+fun{τ1,τ2}(f.x.e) ≜ unroll( self{τ1 -> τ2}( f'.λx: τ1.(λf: τ1 ⇀ τ2.e) (unroll(f')) ) )
+               or ≜ unroll( self{τ1 -> τ2}( f'.λx: τ1.[unroll(f')/f]e ) )
+
+(* define fix using self *)
+fix{τ}(x.e) ≜ unroll( self{τ}( this.λx: τ.e) (unroll(this)) )
+         or ≜ unroll( self{τ}( this.[unroll(this)/x]e) )
+
+(* recovering inductive types in by-value setting *)
+
+(* natural numbers *)
+nat ≜ rec(t.1 + t)
+Z ≜ fold(1·<>)
+S(e) ≜ fold(2·e)
+natrec{ρ}(e; x.e1) ≜ unroll(R)(e)
+R ≜ self{nat -> ρ}(f'.λn: nat. case unfold(n) {
+  1·<> => [1·<>/x]e1
+| 2·n' => [2·unroll(f')(n')/x]e1
+})
+
+(* recall: *)
+natrec{ρ}(fold(e); x.e1) 
+|-> case e {
+  1·<> => [1·<>/x]e1
+| 2·e' => [2·natrec{ρ}(e'; x.e1)/x]e1
+}
+
+(* or using map *)
+R ≜ self{nat -> ρ}(f'.λn: nat. [map[t.1 + t](unroll(f'))(unfold(n))/x]e1)
+
+(* or using fun and map *)
+natrec{ρ}(e; x.e1) ≜ R(e)
+R ≜ fun{nat;ρ}(r.n. [map[t.1 + t](r)(unfold(n))/x]e1)
+
+(* cf: *)
+rec{t.τ}(fold(e); x.e') |-> [map[t.τ](y.rec{t.τ}(y; x.e'))(e)/x]e' 
+
+(* lazy types in by-name setting *)
+(* not identical to co-inductive types! *)
+
+(* lazy list *)
+llist ≜ rec(t.nil ↪ 1 + cons ↪ nat × t)
+Nil ≜ fold(nil·<>)
+Cons <h, t> ≜ fold(cons·<h, t>)
+
+(* llist >> stream *)
+(* e.g. *)
+fix{llist}(x.x) : llist
+(* or *)
+Cons <Z, fix{llist}(x.x)> : llist
+
+(* lazy nat *)
+lnat ≜ rec(t.z ↪ 1 + s ↪ t)
+gen{σ}(e0; x.e1) ≜ unroll(G)(e0)
+
+G ≜ self{σ -> lnat}(f'.λx': σ. case [x'/x]e1 {
+  z·<> => fold( z·<> )
+| s·n => fold( s·(unroll(f')(n)) )
+})
+
+(* recall: *)
+unfold(gen(e0; x.e1)) |-> case [e0/x]e1 {
+  1·<> => 1·<>
+| 2·e0' => 2·gen(e0'; x.e1)
+}
+
+(* or using map *)
+G ≜ self{σ -> lnat}(f'.λx': σ. fold( map[t.1 + t](unroll(f'))([x'/x]e1) ) )
+
+(* or using fix and map *)
+gen{σ}(e0; x.e1) ≜ G(e0)
+G ≜ fix{σ -> lnat}(f'.λx': σ. fold( map[t.1 + t](f')( [x'/x]e1 ) ) )
+
+(* cf: *)
+unfold(gen{t.τ}(e0; x.e')) |-> map[t.τ](y.gen{t.τ}(y; x.e'))([e0/x]e')
+
+```
+
+### "Unityped" λ-calculus
+
+```sml
+(* "unityped" λ-calculus *)
+
+(* the only type D *)
+D ≜ rec(t.t -> t)
+
+(* define a translation function ⌈−⌉ that translates a λ-term M to an FPC term *)
+⌈x⌉ = x
+⌈λx.M⌉ = fold(λx: D.⌈M⌉)
+⌈M1 M2⌉ = unfold(⌈M1⌉)⌈M2⌉
+```
+
+## Dynamic languages
+
+## Dynamic dispatch
+
+## Polymorphism and abstraction
+
+## Control effects
+
+Partiality is an example of a _control effect_. It is an "impurity" induced by the possibility of infinite loops. Such effects disrupt the language in important ways.
+
+- range of significance of variables - by value/ by name
+- eager/ lazy intro rules
+
+Most languages permits partiality w/o restriction.
+
+- cannot _detect_ divergence
+- too restrictive to preclude it
+
+### Exceptions
+
+The same holds true for _exceptions_ -- another form of control effect.
+
+- allow _upward_ transfer of control (only)
+- are _encapsulatable_ using handlers
+- associate _data_ with control transfers
+
+For now, fix a type `exn` of exception values (more when discussing dynamic classification).
+
+```sml
+(* exceptions *)
+
+(* expressions *)
+e ::= ... | raise[τ](e) | try(e1; x.e2)
+
+(* statics *)
+   Γ ⊢ e: exn
+------------------
+Γ ⊢ raise[τ](e): τ
+
+ Γ ⊢ e1: ρ  Γ, x: exn ⊢ e2: ρ
+-----------------------------
+     Γ ⊢ try(e1; x.e2): ρ
+
+(* informally, raise(e) passes the value of e to the nearest enclosing handler *)
+
+(* dynamics *)
+(* 1. direct method using e val  e |-> e'  e raises e' *)
+(* must propagate exceptions through all constructs! except for handlers *)
+
+          e |-> e'
+----------------------------(princ' arg)
+raise[τ](e) |-> raise[τ](e')
+
+     e raises e'
+---------------------(propagate)
+raise[τ](e) raises e'
+
+        e val
+--------------------(initiate)
+raise[τ](e) raises e
+
+           e1 |-> e1'
+--------------------------------(princ' arg)
+try(e1; x.e2) |-> try(e1'; x.e2)
+
+       e1 val
+-------------------(exit)
+try(e1; x.e2) |-> e1
+
+        e1 raises e1'
+---------------------------(catch)
+try(e1; x.e2) |-> [e1'/x]e2
+
+(* 2. stack method *)
+(* idea: make the control stack explicit in the state *)
+
+k ▷ e: evaluate e on k
+k ◁ v: return v to k
+k ◀ v: raise v to k
+
+(* Initial: *)
+ε ▷ e (* ε empty *)
+(* Final: *)
+ε ◁ v (* normal return *)
+ε ◀ v (* uncaught exception *)
+
+(* stacks *)
+k ::= ε | ε;f
+
+(* frames *)
+f ::= succ(-) | ap(-;e2) | ap(v1;-) | ...
+
+(* dynamics *)
+
+-----------------------
+ k ▷ zero |-> k ◁ zero
+
+------------------------------
+ k ▷ succ(e) |-> k;succ(-) ▷ e
+
+-----------------------------
+ k;succ(-) ◁ n |-> k ◁ n + 1 
+
+-------------------------
+ k;succ(-) ◀ v |-> k ◀ v
+
+-------------------------------------------------
+ k ▷ ifz(e; e0; x.e1) |-> k;ifz(-; e0; x.e1) ▷ e
+
+--------------------------------------
+ k;ifz(-; e0; x.e1) ◁ zero |-> k ▷ e0
+
+--------------------------------------------
+ k;ifz(-; e0; x.e1) ◁ n + 1 |-> k ▷ [n/x]e1
+
+----------------------------------
+ k;ifz(-; e0; x.e1) ◀ v |-> k ◀ v
+
+---------------------------------------
+ k ▷ raise[τ](e) |-> k;raise[τ](-) ▷ e
+
+-----------------------------
+ k;raise[τ](-) ◁ v |-> k ◀ v
+
+-----------------------------
+ k;raise[τ](-) ◀ v |-> k ◀ v
+
+-------------------------------------------
+ k ▷ try(e1; x.e2) |-> k;try(-; x.e2) ▷ e1
+
+------------------------------
+ k;try(-; x.e2) ◁ v |-> k ◁ v
+
+------------------------------------
+ k;try(-; x.e2) ◀ v |-> k ▷ [v/x]e2
+
+(* exceptions "walk" up the stack and get intercepted by handlers *)
+
+(* aside *)
+----------------------------------------------------
+ k;ap(fun(f.x.e),-) ◁ v |-> k ▷ [fun(f.x.e),v/f,x]e
+
+(* no stack space required to apply a recursive function *)
+(* the stack is used only to evaluate nested princ' args!!! *)
+
+(* stack typing *)
+(* omitted *)
+```
+
+The dynamics of PCF/FPC, etc. imposes a sequential evaluation order in that there is a clear "next" step in the evaluation. This is achieved by
+
+1. Evaluating the principal argument of elimination forms left-to-right
+2. Evaluating the components of introduction forms left-to-right
+
+Doing so enables static cost analysis. And exceptions rely on a definite evaluation order, otherwise they arise
+_unpredictably_.
+
+```sml
+(* exception bomb *)
+
+-----------
+succ(e) val
+
+succ(raise[τ](e)) val
+
+(* so whether/when the exception is raised depends on whether the predecessor is even evaluated *)
+
+(* Hence, data structures contain exception bombs that explode unpredictably! *)
+```
+
+### Kontinuations
+
+Exceptions allow _upward_ transfer of control by "walking" the exception up the stack (`k ◀ v`). It would be nice if it could just jump to the nearest enclosing handler.
+
+- fast _handle_, slow _raise_ (what we have now)
+- slow(er) handle, fast _raise_ (how?)
+
+> This is a fundamental tradeoff in the design of programming languages.
+
+One could maintain two _stacks_
+
+- one _normal_ stack
+- one _exception_ stack
+
+with the invariant that the latter is a prefix of the former. But a more general idea is that since we have made the execution of programs explicit by introducing stack machines, why not let the programmers gain access to the stac**k** (**k**ontinuation)?
+
+> Key idea: _reify_ implementation tools
+
+> Key idea: first-class _kontinuations_ (or _kontinuations_ as values).
+
+- a stack can be _checkpointed_/_captured_ by encapsulating it as a value
+- at any time a captured stack can be _restored_/_reinstated_ as the _current continuation_
+
+**Important**: stacks must be _persistent_, not _ephemeral_.
+
+```sml
+(* continuations *)
+
+(* types *)
+
+τ ::= ... | τ cont
+
+(* expressions *)
+v ::= ... | cont(k)
+
+e ::= letcc{τ}(x.e) | throw[ρ](v1; v2)
+
+(* statics *)
+ Γ, x: τ cont ⊢ e: τ
+----------------------
+ Γ ⊢ letcc{τ}(x.e): τ
+
+ 
+Γ ⊢ v1: τ cont  Γ ⊢ v2: τ
+-------------------------
+ Γ ⊢ throw[ρ](v1; v2): ρ
+
+     k ÷ τ (* k accepts τ *)
+-------------------
+Γ ⊢ cont(k): τ cont
+
+(* one never write cont(k) directly!
+   instead, they should call letcc *)
+
+(* dynamics *)
+
+----------------------------------------
+ k ▷ letcc{τ}(x.e) |-> k ▷ [cont(k)/x]e
+
+------------------------------------------
+ k ▷ throw[ρ](cont(k'); v2) |-> k' ▷ v2
+
+(* throw is a "goto" with a value! *)
+
+(* stack typing omitted *)
+```
+
+### Exceptions from continuations
+
+> Idea: supplement each computation with an additional argument, the _exception continuation_!
+
+Then we can translate each expression `Γ ⊢ e: τ` into `Γ ⊢ |e|: exn cont -> ||τ||`, and raising an exception means throwing to that continuation, which is arranged to be that of the nearest enclosing handler!
+
+```sml
+(* exceptions from continuations *)
+
+(* type translation *)
+
+```
+
+### Parallelism
+
+Parallelism is a means of improving execution time by using multiple processing elements.
+
+> _Parallelism_ is all about the cost, rather than the correctness.
+
+For parallelism
+
+- anything that can be done in parallel should be done in parallel
+- the workload is _scheduled_ onto available physical processors
+
+> NB: to have any chance of using parallelism, _effect-free_ computation is essential.
+
+- `e1 + e2` can be evaluated in parallel
+- `let x be e1 in e2` cannot be evaluated in parallel
+
+_CBV_ is of the essence! Because it is clear on the face of if which expressions must be evaluated at any moment.
+
+- _CBN_ is anti-parallel b/c you cannot tell what is to be evaluated until you get there
+- _CBV_ is pro-parallel b/c you can tell what is to be evaluated at any moment
+
+```sml
+(* parallel PCF *)
+```
+
+**Exceptions in parallelism**: ensure that behavior is the same as would arise from a sequential dynamics.
+
+1. The leftmost exception is to be propagated.
+   - `raise x1 & raise x2` should raise `x1` not `x2`
+2. Must fully evaluate both expressions to completion (values or exceptions) so that the cost model is clear
+   - `100! & raise x` should evaluate the factorial!
+   - `raise x & diverge` should diverge!
+
+```sml
+(* parallel PCF with exceptions *)
+```
+
+### Cost Dynamics
+
+## Imperative programming
+
+## Concurrency
+
+## Call-by-need
+
+## Dynamic classification
