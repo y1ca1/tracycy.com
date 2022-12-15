@@ -8,6 +8,7 @@ import { components } from '@/components/mdxComponents';
 const MyPersonalWebsite = React.lazy(
   () => import('@/contents/blogs/my-personal-website.mdx'),
 );
+const FPL = React.lazy(() => import('@/contents/blogs/fpl.mdx'));
 
 const Index = (): JSX.Element => (
   <>
@@ -33,6 +34,8 @@ const BlogLayout = (): JSX.Element => {
     switch (name) {
       case 'my-personal-website':
         return <MyPersonalWebsite components={components} />;
+      case 'fpl':
+        return <FPL components={components} />;
       default:
         return <Navigate to="/blog" replace={true} />;
     }
@@ -40,7 +43,7 @@ const BlogLayout = (): JSX.Element => {
 
   return (
     <div className="relative flex justify-between mt-12 mb-12 flex-row-reverse">
-      <aside className="sticky hidden h-screen max-w-xs mt-8 ml-6 top-16 lg:block">
+      <aside className="sticky hidden overflow-auto h-128 max-w-xs mt-8 ml-6 top-16 lg:block">
         <TableOfContents />
       </aside>
       <article className="max-w-2xl xl:max-w-3xl min-w-0 text-base lg:text-lg ">
