@@ -11,6 +11,14 @@ export const BlogTabs = () => {
     Recent: [
       {
         id: 1,
+        url: 'fpl',
+        title: 'Recaps of 15-312 (Principles of Programming Languages)',
+        date: 'Dec 2022',
+        commentCount: 0,
+        likeCount: 0,
+      },
+      {
+        id: 2,
         url: 'my-personal-website',
         title: 'Introducing my personal website!',
         date: 'July 2022',

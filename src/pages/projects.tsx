@@ -56,7 +56,7 @@ const ProjectLayout = (): JSX.Element => {
 
   return (
     <div className="relative flex justify-between mt-12 mb-12 flex-row-reverse">
-      <aside className="sticky hidden h-screen max-w-xs mt-8 ml-6 top-16 lg:block">
+      <aside className="sticky hidden overflow-auto h-128 max-w-xs mt-8 ml-6 top-16 lg:block">
         <TableOfContents />
       </aside>
       <article className="max-w-2xl xl:max-w-3xl min-w-0 text-base lg:text-lg ">
