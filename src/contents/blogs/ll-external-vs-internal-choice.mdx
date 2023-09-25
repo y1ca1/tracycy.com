@@ -1,0 +1,83 @@
+---
+title: Linear Logic -- External Choice (&) vs Internal Choice (⊕)
+publishedAt: '2023-09-24'
+readingTime: '5'
+---
+
+# {title}
+
+_{publishedAt}_ • _{readingTime} min read_
+
+---
+
+> This is inspired by [an ancient page](https://wiki.cmukgb.org/index.php/Internal_and_External_Choice) from [CMU KGB](https://www.cmukgb.org/).
+
+## Informally
+
+- External choice: you (the _proof term_, or the _program_) are not "part of the choice", instead, you _make_ the choice
+  - e.g. "I have $50 birthday gift card and I need to decide between buying a keyboard or a mouse, either way I will be happy!"
+- Internal choice: you (the _proof term_, or the _program_) now are "part of the choice", you don’t make the decision, instead, you need to _prepare for_ the decision
+  - E.g. "My parents will buy me a gift worth $50, which could be a keyboard or a mouse and I have no control over their decision, but I will be happy regardless!"
+
+## Formally
+
+### Propositions
+
+```sml
+H ::= "I am happy"
+K ::= "Keyboard"
+M ::= "Mouse"
+```
+
+### Internal Choice (⊕), left rule
+
+1. To be happy to get `K ⊕ M`, I must be happy to get either one of them.
+2. If I were happy to get either one of them, I must be happy to get `K ⊕ M`.
+
+```sml
+ Δ, K ⊢ H        Δ, M ⊢ H
+--------------------------
+      Δ, K ⊕ M ⊢ H
+```
+
+> This rule is invertible!
+
+### External Choice (&), left rule
+
+1. If I were happy to get `M`, I must be happy to be able to decide between `K & M`
+2. If I were happy to get `K`, I must be happy to be able to decide between `K & M`
+
+```sml
+   Δ, M ⊢ H         Δ, K ⊢ H
+--------------   --------------
+ Δ, K & M ⊢ H     Δ, K & M ⊢ H
+```
+
+> These two rules are not invertible!
+
+### Internal Choice (⊕), right rule
+
+1. My parents bought me a `K`, but they can claim they have prepared me with `K ⊕ M`
+2. My parents bought me a `M`, but they can claim they have prepared me with `K ⊕ M`
+
+```sml
+
+  Δ ⊢ K        Δ ⊢ M
+---------    ----------
+Δ ⊢ K ⊕ M    Δ ⊢ K ⊕ M
+```
+
+> These two rules are not invertible!
+
+### External Choice (&), right rule
+
+1. To have the ability to decide between a `K & M`, I must have enough money to buy either one of them
+2. If I had enough money to buy either one of them, I have the ability to decide between `K & M`
+
+```sml
+ Δ ⊢ H   Δ ⊢ K
+----------------
+   Δ ⊢ K & M
+```
+
+> This rule is invertible!

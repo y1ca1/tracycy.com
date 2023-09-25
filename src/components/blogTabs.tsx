@@ -11,6 +11,14 @@ export const BlogTabs = () => {
     Recent: [
       {
         id: 1,
+        url: 'll-external-vs-internal-choice',
+        title: 'Linear Logic: External Choice (&) vs Internal Choice (⊕)',
+        date: 'Sept 2023',
+        commentCount: 0,
+        likeCount: 0,
+      },
+      {
+        id: 2,
         url: 'fpl',
         title: 'Recaps of 15-312 (Principles of Programming Languages)',
         date: 'Dec 2022',
@@ -18,7 +26,7 @@ export const BlogTabs = () => {
         likeCount: 0,
       },
       {
-        id: 2,
+        id: 3,
         url: 'my-personal-website',
         title: 'Introducing my personal website!',
         date: 'July 2022',

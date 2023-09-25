@@ -9,6 +9,9 @@ const MyPersonalWebsite = React.lazy(
   () => import('@/contents/blogs/my-personal-website.mdx'),
 );
 const FPL = React.lazy(() => import('@/contents/blogs/fpl.mdx'));
+const LLExternalVsInternalChoice = React.lazy(
+  () => import('@/contents/blogs/ll-external-vs-internal-choice.mdx'),
+);
 
 const Index = (): JSX.Element => (
   <>
@@ -36,6 +39,8 @@ const BlogLayout = (): JSX.Element => {
         return <MyPersonalWebsite components={components} />;
       case 'fpl':
         return <FPL components={components} />;
+      case 'll-external-vs-internal-choice':
+        return <LLExternalVsInternalChoice components={components} />;
       default:
         return <Navigate to="/blog" replace={true} />;
     }
