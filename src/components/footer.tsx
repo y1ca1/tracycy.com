@@ -8,8 +8,9 @@ const Footer = (): JSX.Element => {
   const [navigation, setNavigation] = React.useState<Navigation[]>([
     { name: 'Blog', href: '/blog', current: false },
     { name: 'Experience', href: '/experience', current: false },
-    { name: 'Projects', href: '/projects', current: false },
-    { name: 'About', href: '/about', current: false },
+    { name: 'CV', href: '/cv', current: false },
+    // { name: 'Projects', href: '/projects', current: false },
+    // { name: 'About', href: '/about', current: false },
   ]);
 
   return (

@@ -11,6 +11,7 @@ const Home = React.lazy(() => import('@/pages/home'));
 const Projects = React.lazy(() => import('@/pages/projects'));
 const Experience = React.lazy(() => import('@/pages/experience'));
 const About = React.lazy(() => import('@/pages/about'));
+const CV = React.lazy(() => import('@/pages/cv'));
 
 const App: React.FC<Record<string, never>> = () => {
   const currentThemeMode = useThemeMode()[0];
@@ -48,6 +49,7 @@ const App: React.FC<Record<string, never>> = () => {
               <Route path="/experience" element={<Experience />} />
               <Route path="/projects/*" element={<Projects />} />
               <Route path="/about" element={<About />} />
+              <Route path="/cv" element={<CV />} />
             </Routes>
           </React.Suspense>
         </main>

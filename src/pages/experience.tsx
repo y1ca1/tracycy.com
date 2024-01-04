@@ -12,7 +12,7 @@ const Experience = (): JSX.Element => {
 
   return (
     <div>
-      <SpikeBounce />
+      {/* <SpikeBounce /> */}
       <div className="flex flex-row justify-between">
         {/* Dummy flex item */}
         <div className="flex w-1/12"></div>

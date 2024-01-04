@@ -96,10 +96,10 @@ export const BlogTabs = () => {
 
                     <div className="mt-1 flex space-x-1 text-sm font-normal leading-4">
                       <li>{post.date}</li>
-                      <li>&middot;</li>
-                      <li>{post.commentCount} comments</li>
-                      <li>&middot;</li>
-                      <li>{post.likeCount} likes</li>
+                      {/* <li>&middot;</li> */}
+                      {/* <li>{post.commentCount} comments</li> */}
+                      {/* <li>&middot;</li> */}
+                      {/* <li>{post.likeCount} likes</li> */}
                     </div>
 
                     <Link

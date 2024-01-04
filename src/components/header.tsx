@@ -23,8 +23,9 @@ const Header = (): JSX.Element => {
   const [navigation, setNavigation] = React.useState<Navigation[]>([
     { name: 'Blog', href: '/blog', current: false },
     { name: 'Experience', href: '/experience', current: false },
-    { name: 'Projects', href: '/projects', current: false },
-    { name: 'About', href: '/about', current: false },
+    { name: 'CV', href: '/cv', current: false },
+    // { name: 'Projects', href: '/projects', current: false },
+    // { name: 'About', href: '/about', current: false },
   ]);
 
   const [currentThemeMode, setThemeMode] = useThemeMode();
@@ -67,18 +68,18 @@ const Header = (): JSX.Element => {
                   >
                     {currentThemeMode === ThemeMode.Dark ? (
                       <>
+                        <YLight className="block h-8 w-auto" />
+                        <ILight className="block h-8 w-auto" />
                         <CLight className="block h-8 w-auto" />
                         <ALight className="block h-8 w-auto" />
-                        <ILight className="block h-8 w-auto" />
-                        <YLight className="block h-8 w-auto" />
                         <ILight className="block h-8 w-auto" />
                       </>
                     ) : (
                       <>
+                        <YDark className="block h-8 w-auto" />
+                        <IDark className="block h-8 w-auto" />
                         <CDark className="block h-8 w-auto" />
                         <ADark className="block h-8 w-auto" />
-                        <IDark className="block h-8 w-auto" />
-                        <YDark className="block h-8 w-auto" />
                         <IDark className="block h-8 w-auto" />
                       </>
                     )}
@@ -135,6 +136,20 @@ const Header = (): JSX.Element => {
                       />
                     </Menu.Button>
                   </div>
+                  <Menu.Items className="absolute right-0 mt-2 w-32 rounded-2xl shadow-lg dark:bg-gray-700 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div className="py-1 ">
+                      <Menu.Item>
+                        {({}) => (
+                          <p className="dark:text-white text-gray-900 block px-4 py-2 text-sm">
+                            My Chinese name is 蔡羿 (Cai Yi).
+                            <br />
+                            People like to call me Yi (like the letter "E"),
+                            Tracy, or C.Y. ("see why").
+                          </p>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  </Menu.Items>
                 </Menu>
               </div>
             </div>

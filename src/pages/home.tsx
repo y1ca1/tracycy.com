@@ -18,19 +18,54 @@ const RoundedSquare = () => (
 
 const Home = (): JSX.Element => (
   <>
-    <div className="flex flex-col-reverse items-center mt-12 mb-16 lg:flex-row lg:justify-between lg:space-x-6">
-      <p className="max-w-3xl mt-12 text-3xl font-semibold text-right lg:mt-0 sm:text-4xl sm:text-left md:text-center lg:text-left">
-        I'm Yi, a fervent software engineer, lifelong learner, and sometimes a
-        bad boy.
+    <div className="flex flex-col items-start mt-12 mb-16  lg:justify-between ">
+      <p className="mt-12 text-3xl font-semibold  sm:text-4xl text-left">
+        I'm a master's student at{' '}
+        <a
+          href="https://www.cmu.edu/"
+          className="text-secondary hover:text-primary underline"
+        >
+          {' '}
+          Carnegie Mellon University
+        </a>{' '}
+        studying programming languages, security, and verification. I'm
+        currently working at{' '}
+        <a
+          href="https://www.cylab.cmu.edu/"
+          className="text-secondary hover:text-primary underline"
+        >
+          {' '}
+          CyLab
+        </a>{' '}
+        with Prof.{' '}
+        <a
+          href="https://www.andrew.cmu.edu/user/bparno/"
+          className="text-secondary hover:text-primary underline"
+        >
+          Bryan Parno
+        </a>{' '}
+        and Prof.{' '}
+        <a
+          href="https://www.andrew.cmu.edu/user/liminjia/"
+          className="text-secondary hover:text-primary underline"
+        >
+          Limin Jia
+        </a>
+        .
       </p>
-      <div className="relative ">
-        <RoundedSquare />
-        <div className="absolute top-0 flex items-center justify-center w-full h-full">
-          <div className="w-80 h-80 overflow-hidden rounded-lg md:h-96 md:w-96 lg:h-136 lg:w-136 ">
-            <Fries className="w-80 h-80 md:h-96 md:w-96 lg:w-136 lg:h-136" />
-          </div>
-        </div>
-      </div>
+      <p className="mt-12 text-xl font-semibold  sm:text-2xl text-left">
+        🎓 I'm graduating in Dec. 2023 and currently applying for PhD programs
+        in programming languages and security for Fall 2024.
+      </p>
+
+      {/* <div className='relative '> */}
+      {/*   <RoundedSquare /> */}
+      {/*   <div className='absolute top-0 flex items-center justify-center w-full h-full'> */}
+      {/*     <div className='w-80 h-80 overflow-hidden rounded-lg md:h-96 md:w-96 lg:h-136 lg:w-136 '> */}
+      {/*       <Fries className='w-80 h-80 md:h-96 md:w-96 lg:w-136 lg:h-136' /> */}
+      {/*     </div> */}
+      {/*   </div> */}
+      {/* </div> */}
     </div>
     <ProjectGrid />
   </>

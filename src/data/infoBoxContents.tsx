@@ -128,7 +128,7 @@ export const ualbertaContent = renderToString(
       <h5 className="text-xl font-bold  ">Summer 2019: Edmonton, AB</h5>
       <p className="text-md font-semibold text-secondary">
         My first time as a student research intern. Met some incredible fellows
-        and also realized that I'm not a research guy 😅.
+        and also realized that I'm not a machine learning (ML) guy 😅.
       </p>
     </div>
   </div>,
@@ -156,9 +156,11 @@ export const uwaterlooContent = renderToString(
       </div>
       <h5 className="text-xl font-bold  ">2020-2021: Waterloo, ON</h5>
       <p className="text-md font-semibold text-secondary">
-        I got admitted by Waterloo and CMU at the same time, but with the
-        pandemic and the fact that my US visa being checked "forever", there it
-        goes, the top 1 nerdy? university in Canada.
+        I pivoted to software and started my Master's degree at the University
+        of Waterloo, where I for the first time in my life realized what
+        programming languages (PL) <em>really</em> are and how I actually care
+        more about the code <em>itself</em> rather than the rapid iterations of
+        software development.
       </p>
     </div>
   </div>,
@@ -189,8 +191,9 @@ export const cyphercorContent = renderToString(
       <h5 className="text-xl font-bold  ">2021-2022: Ottawa, ON</h5>
       <p className="text-md font-semibold text-secondary">
         This is my first job ever in my life! I work remotely from Waterloo as a
-        software engineer 👨‍💻 at Cyphercor Inc. I love what I do at work and the
-        people I work with.
+        software engineer 👨‍💻 at Cyphercor Inc. We develop security services
+        (primarily multi-factor authentication) for Canada Revenue Agency (CRA)
+        and other enterprises.
       </p>
     </div>
   </div>,
@@ -207,9 +210,12 @@ export const cmuContent = renderToString(
       </div>
       <h5 className="text-xl font-bold  ">2021-2023: Pittsburgh, PA</h5>
       <p className="text-md font-semibold text-secondary">
-        Finally got accepted for the visa. Do I still want to go back to campus?
-        YES! The more I do, the more I find that I need to learn. Plus there are
-        better opportunities and wider possibilities in the US, so why not?
+        I became increasingly curious about the theoretical foundations
+        underlying new programming language features. This desire to understand
+        the intricacies and write code that is not only elegant but also
+        reliable, secure, and efficient, drove me to delve deeper into this
+        field. I studied PL and security substantially at Carnegie Mellon
+        University by taking relevant courses and doing research.
       </p>
     </div>
   </div>,
