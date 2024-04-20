@@ -43,7 +43,7 @@ const Footer = (): JSX.Element => {
             <div className="flex flex-row items-center justify-center space-x-6 md:justify-end">
               <span>
                 <a
-                  href="https://github.com/Tracyee"
+                  href="https://github.com/y1ca1"
                   aria-label="Visit GitHub profile"
                   title="GitHub profile"
                   target="_blank"
