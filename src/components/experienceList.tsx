@@ -413,22 +413,12 @@ export const ExperienceList = () => {
             className="h-auto w-2/5 md:w-1/3 lg:w-1/4 "
             src={currentThemeMode === ThemeMode.Dark ? uestcWhiteUrl : uestcUrl}
           />
-          <PlusSign className="h-auto w-4 md:w-8 dark:fill-gray-200" />
-          <img
-            className="h-auto w-1/3 md:w-1/4 lg:w-1/5  "
-            src={
-              currentThemeMode === ThemeMode.Dark
-                ? uglasgowWhiteUrl
-                : uglasgowUrl
-            }
-          />
         </div>
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-col space-y-0.5 items-center">
             <h5 className="text-sm font-semibold italic ">
               Sept. 2016 - June 2020: Chengdu, China
             </h5>
-            <h5 className="text-sm font-semibold">Joint Program</h5>
           </div>
           <h5 className="text-lg lg:text-xl text-center font-bold ">
             B.Eng. in Electronic Information Engineering

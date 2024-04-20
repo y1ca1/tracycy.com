@@ -20,7 +20,7 @@ const Home = (): JSX.Element => (
   <>
     <div className="flex flex-col items-start mt-12 mb-16  lg:justify-between ">
       <p className="mt-12 text-3xl font-semibold  sm:text-4xl text-left">
-        I'm a master's student at{' '}
+        I study programming languages, systems, and security at
         <a
           href="https://www.cmu.edu/"
           className="text-secondary hover:text-primary underline"
@@ -28,8 +28,7 @@ const Home = (): JSX.Element => (
           {' '}
           Carnegie Mellon University
         </a>{' '}
-        studying programming languages, security, and verification. I'm
-        currently working at{' '}
+        . I'm currently working at{' '}
         <a
           href="https://www.cylab.cmu.edu/"
           className="text-secondary hover:text-primary underline"
@@ -54,8 +53,15 @@ const Home = (): JSX.Element => (
         .
       </p>
       <p className="mt-12 text-xl font-semibold  sm:text-2xl text-left">
-        🎓 I'm graduating in Dec. 2023 and currently applying for PhD programs
-        in programming languages and security for Fall 2024.
+        I will be joining{' '}
+        <a
+          href="https://plum-umd.github.io/"
+          className="text-secondary hover:text-primary underline"
+        >
+          {' '}
+          PLUM@UMD
+        </a>
+        , University of Maryland, College Park as a CS PhD student in Fall 2024.
       </p>
 
       {/* <div className='relative '> */}
