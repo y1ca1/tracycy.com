@@ -17,12 +17,31 @@ import uwaterlooUrl from '@/assets/icons/experience/uwaterloo.png';
 import cyphercorUrl from '@/assets/icons/experience/cyphercor.png';
 import cmuUrl from '@/assets/icons/experience/cmu.png';
 import cylabUrl from '@/assets/icons/experience/cylab.png';
+import umdcsUrl from '@/assets/icons/experience/umdcs.png';
 
 export const ExperienceList = () => {
   const currentThemeMode = useThemeMode()[0];
 
   return (
     <div className="flex flex-col space-y-10 justify-center mt-24 w-full ">
+      <Card id="umd">
+        <div className="flex flex-row space-x-4 justify-center items-center">
+          <img
+            className="scale-125 h-auto w-1/2 md:w-1/3 lg:w-1/4 "
+            src={umdcsUrl}
+          />
+        </div>
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col space-y-0.5 items-center">
+            <h5 className="text-sm font-semibold italic ">
+              Aug. 2024 - Now: College Park, MD, USA
+            </h5>
+          </div>
+          <h5 className="text-lg lg:text-xl text-center font-bold ">
+            Ph.D. Student
+          </h5>
+        </div>
+      </Card>
       <Card id="cmu">
         <div className="flex flex-row space-x-4 justify-center items-center">
           <img className="h-auto w-1/2 md:w-1/3 lg:w-1/4 " src={cylabUrl} />
@@ -30,7 +49,7 @@ export const ExperienceList = () => {
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-col space-y-0.5 items-center">
             <h5 className="text-sm font-semibold italic ">
-              May 2023 - Now: Pittsburgh, PA, USA
+              May 2023 - Jun. 2024: Pittsburgh, PA, USA
             </h5>
           </div>
           <h5 className="text-lg lg:text-xl text-center font-bold ">
@@ -47,7 +66,7 @@ export const ExperienceList = () => {
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-col space-y-0.5 items-center">
             <h5 className="text-sm font-semibold italic ">
-              Jan. 2021 - Now: Pittsburgh, PA, USA
+              Aug. 2022 - Dec. 2023: Pittsburgh, PA, USA
             </h5>
           </div>
           <h5 className="text-lg lg:text-xl text-center font-bold ">
@@ -532,7 +551,7 @@ export const ExperienceList = () => {
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-col space-y-0.5 items-center">
             <h5 className="text-sm font-semibold italic ">
-              Sept. 2013 - June 2016: Yueyang, China
+              Sept. 2013 - Jun. 2016: Yueyang, China
             </h5>
           </div>
           <h5 className="text-lg lg:text-xl text-center font-bold ">

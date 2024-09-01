@@ -1,6 +1,6 @@
 import React from 'react';
 import Fries from '@/assets/pics/fries.svg';
-import { ProjectGrid } from '@/components/projectGrid';
+import { RecentProjectGrid, PastProjectGrid } from '@/components/projectGrid';
 
 const RoundedSquare = () => (
   <div aria-hidden="true">
@@ -19,8 +19,36 @@ const RoundedSquare = () => (
 const Home = (): JSX.Element => (
   <>
     <div className="flex flex-col items-start mt-12 mb-16  lg:justify-between ">
-      <p className="mt-12 text-3xl font-semibold  sm:text-4xl text-left">
-        I study programming languages, systems, and security at
+      <p className="mt-12 text-xl font-medium  sm:text-xl text-left">
+        Hi! I'm Yi, a first-year Ph.D. student in Computer Science at the{' '}
+        <a
+          href="https://umd.edu/"
+          className="text-secondary hover:text-primary underline"
+        >
+          {' '}
+          University of Maryland, College Park
+        </a>{' '}
+        . I am a member of{' '}
+        <a
+          href="https://plum-umd.github.io/"
+          className="text-secondary hover:text-primary underline"
+        >
+          {' '}
+          PLUM@UMD
+        </a>{' '}
+        and currently advised by Prof.{' '}
+        <a
+          href="https://msurbatovich.github.io/"
+          className="text-secondary hover:text-primary underline"
+        >
+          {' '}
+          Milijana Surbatovich
+        </a>{' '}
+        . I am broadly interested in the theory and practice of programming
+        languages, especially type theory and type systems, constructive logics,
+        formal methods, and their application in various computing systems.
+        Previously, I received my M.S. in Electrical and Computer Engineering
+        from{' '}
         <a
           href="https://www.cmu.edu/"
           className="text-secondary hover:text-primary underline"
@@ -28,7 +56,7 @@ const Home = (): JSX.Element => (
           {' '}
           Carnegie Mellon University
         </a>{' '}
-        . I'm currently working at{' '}
+        , where I worked at{' '}
         <a
           href="https://www.cylab.cmu.edu/"
           className="text-secondary hover:text-primary underline"
@@ -49,19 +77,8 @@ const Home = (): JSX.Element => (
           className="text-secondary hover:text-primary underline"
         >
           Limin Jia
-        </a>
-        .
-      </p>
-      <p className="mt-12 text-xl font-semibold  sm:text-2xl text-left">
-        I will be joining{' '}
-        <a
-          href="https://plum-umd.github.io/"
-          className="text-secondary hover:text-primary underline"
-        >
-          {' '}
-          PLUM@UMD
-        </a>
-        , University of Maryland, College Park as a CS PhD student in Fall 2024.
+        </a>{' '}
+        on Rust and formal verification.
       </p>
 
       {/* <div className='relative '> */}
@@ -73,7 +90,8 @@ const Home = (): JSX.Element => (
       {/*   </div> */}
       {/* </div> */}
     </div>
-    <ProjectGrid />
+    <RecentProjectGrid />
+    <PastProjectGrid />
   </>
 );
 

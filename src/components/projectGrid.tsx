@@ -8,8 +8,42 @@ import sentimentUrl from '@/assets/pics/projects/sentiment.png';
 import hmUrl from '@/assets/pics/projects/hm.png';
 import eventsUrl from '@/assets/pics/projects/events.png';
 import cyUrl from '@/assets/pics/projects/cy.png';
+import vestUrl from '@/assets/pics/projects/vest.png';
 
-export const ProjectGrid = () => (
+export const RecentProjectGrid = () => (
+  <>
+    <h1 className="py-12 mb-3 text-3xl font-bold leading-tight text-center md:text-4xl">
+      Recent Projects
+    </h1>
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+      <div className="max-w-sm">
+        <Link to="../projects/vest">
+          <div className="flex rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col transition duration-300 ease-in-out hover:ring-4 hover:ring-opacity-60 hover:ring-offset-2 hover:ring-pink-400/75">
+            <img src={vestUrl} alt="vest" className="rounded-t-lg" />
+            <div className="flex h-full flex-col justify-center gap-4 p-6">
+              <h5 className="text-2xl font-bold tracking-tight text-primary ">
+                Vest
+              </h5>
+              <p className="font-normal text-secondary">
+                High-assurance and performant parsing and serialization of
+                binary data formats verified in Verus
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Badge color="info">Rust</Badge>
+                <Badge color="info">Verus</Badge>
+                <Badge color="info">Formal Verification</Badge>
+                <Badge color="info">Parsing</Badge>
+                <Badge color="info">Serialization</Badge>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
+    </div>
+  </>
+);
+
+export const PastProjectGrid = () => (
   <>
     <h1 className="py-12 mb-3 text-3xl font-bold leading-tight text-center md:text-4xl">
       Past Projects
@@ -45,37 +79,37 @@ export const ProjectGrid = () => (
           </div>
         </Link>
       </div>
-      <div className="max-w-sm">
-        <Link to="../projects/event-booking-web-app">
-          <div className="flex rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col transition duration-300 ease-in-out hover:ring-4 hover:ring-opacity-60 hover:ring-offset-2 hover:ring-pink-400/75">
-            <img
-              src={eventsUrl}
-              alt="my-personal-website"
-              className="rounded-t-lg"
-            />
-            <div className="flex h-full flex-col justify-center gap-4 p-6">
-              <h5 className="text-2xl font-bold tracking-tight text-primary">
-                Event Booking Web App
-              </h5>
-              <p className="font-normal text-secondary">
-                A complete event booking App that features user authentication,
-                creating events, booking events, and cancelling events.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Badge color="info">React</Badge>
-                <Badge color="info">React Router</Badge>
-                <Badge color="info">Typescript</Badge>
-                <Badge color="info">ChakraUI</Badge>
-                <Badge color="info">Node.js</Badge>
-                <Badge color="info">GraphQL</Badge>
-                <Badge color="info">MongoDB</Badge>
-                <Badge color="info">Mongoose</Badge>
-                <Badge color="info">Webpack</Badge>
-              </div>
-            </div>
-          </div>
-        </Link>
-      </div>
+      {/* <div className="max-w-sm"> */}
+      {/*   <Link to="../projects/event-booking-web-app"> */}
+      {/*     <div className="flex rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col transition duration-300 ease-in-out hover:ring-4 hover:ring-opacity-60 hover:ring-offset-2 hover:ring-pink-400/75"> */}
+      {/*       <img */}
+      {/*         src={eventsUrl} */}
+      {/*         alt="my-personal-website" */}
+      {/*         className="rounded-t-lg" */}
+      {/*       /> */}
+      {/*       <div className="flex h-full flex-col justify-center gap-4 p-6"> */}
+      {/*         <h5 className="text-2xl font-bold tracking-tight text-primary"> */}
+      {/*           Event Booking Web App */}
+      {/*         </h5> */}
+      {/*         <p className="font-normal text-secondary"> */}
+      {/*           A complete event booking App that features user authentication, */}
+      {/*           creating events, booking events, and cancelling events. */}
+      {/*         </p> */}
+      {/*         <div className="flex flex-wrap gap-2"> */}
+      {/*           <Badge color="info">React</Badge> */}
+      {/*           <Badge color="info">React Router</Badge> */}
+      {/*           <Badge color="info">Typescript</Badge> */}
+      {/*           <Badge color="info">ChakraUI</Badge> */}
+      {/*           <Badge color="info">Node.js</Badge> */}
+      {/*           <Badge color="info">GraphQL</Badge> */}
+      {/*           <Badge color="info">MongoDB</Badge> */}
+      {/*           <Badge color="info">Mongoose</Badge> */}
+      {/*           <Badge color="info">Webpack</Badge> */}
+      {/*         </div> */}
+      {/*       </div> */}
+      {/*     </div> */}
+      {/*   </Link> */}
+      {/* </div> */}
       <div className="max-w-sm">
         <Link to="../projects/hindley-milner-inference">
           <div className="flex rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col transition duration-300 ease-in-out hover:ring-4 hover:ring-opacity-60 hover:ring-offset-2 hover:ring-pink-400/75">

@@ -67,3 +67,8 @@ export const CMU: google.maps.LatLngLiteral = {
   lat: 40.443,
   lng: -79.942,
 };
+
+export const UMD: google.maps.LatLngLiteral = {
+  lat: 38.989,
+  lng: -76.936,
+};

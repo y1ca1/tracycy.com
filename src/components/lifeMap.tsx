@@ -42,6 +42,7 @@ export const LifeMap = (): JSX.Element => {
   const algonquinMarker = React.useRef<google.maps.Marker>();
   const cyphercorMarker = React.useRef<google.maps.Marker>();
   const cmuMarker = React.useRef<google.maps.Marker>();
+  const umdCSMarker = React.useRef<google.maps.Marker>();
 
   const MapComponent = React.memo(() => (
     <GoogleMap
@@ -56,24 +57,24 @@ export const LifeMap = (): JSX.Element => {
         mapTypeControl: false,
         styles: currentThemeMode === ThemeMode.Dark ? DarkStyle : LightStyle,
       }}
-      center={Positions.YUEYANG}
-      zoom={4}
+      center={Positions.UMD}
+      zoom={5}
     >
       <ButtonGroupControl />
-      <MarkerWithInfoBox
-        infoBox={infoBox}
-        markerRef={chaoyangMarker}
-        icon={MarkerIcons.schoolIcon}
-        position={Positions.CHAOYANG}
-        content={InfoWindowContents.chaoyangContent}
-      />
-      <MarkerWithInfoBox
-        infoBox={infoBox}
-        markerRef={erzhongMarker}
-        icon={MarkerIcons.schoolIcon}
-        position={Positions.ERZHONG}
-        content={InfoWindowContents.erzhongContent}
-      />
+      {/* <MarkerWithInfoBox */}
+      {/*   infoBox={infoBox} */}
+      {/*   markerRef={chaoyangMarker} */}
+      {/*   icon={MarkerIcons.schoolIcon} */}
+      {/*   position={Positions.CHAOYANG} */}
+      {/*   content={InfoWindowContents.chaoyangContent} */}
+      {/* /> */}
+      {/* <MarkerWithInfoBox */}
+      {/*   infoBox={infoBox} */}
+      {/*   markerRef={erzhongMarker} */}
+      {/*   icon={MarkerIcons.schoolIcon} */}
+      {/*   position={Positions.ERZHONG} */}
+      {/*   content={InfoWindowContents.erzhongContent} */}
+      {/* /> */}
       <MarkerWithInfoBox
         infoBox={infoBox}
         markerRef={yizhongMarker}
@@ -158,6 +159,15 @@ export const LifeMap = (): JSX.Element => {
         offset={new google.maps.Size(30, -30)}
         content={InfoWindowContents.cmuContent}
         href="cmu"
+      />
+      <MarkerWithInfoBox
+        infoBox={infoBox}
+        markerRef={umdCSMarker}
+        icon={MarkerIcons.universityIcon}
+        position={Positions.UMD}
+        offset={new google.maps.Size(30, -30)}
+        content={InfoWindowContents.umdContent}
+        href="umd"
       />
     </GoogleMap>
   ));

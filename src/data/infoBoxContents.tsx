@@ -12,6 +12,7 @@ import algonquinLogoUrl from '@/assets/icons/experience/algonquin.png';
 import waterlooLogoUrl from '@/assets/icons/experience/uwaterloo-logo.png';
 import cyphercorLogoUrl from '@/assets/icons/experience/cyphercor-logo.png';
 import cmuLogoUrl from '@/assets/icons/experience/cmu-logo.png';
+import umdLogoUrl from '@/assets/icons/experience/umd-logo.png';
 
 export const chaoyangContent = renderToString(
   <div className="w-2/3">
@@ -208,7 +209,7 @@ export const cmuContent = renderToString(
           src={cmuLogoUrl}
         />
       </div>
-      <h5 className="text-xl font-bold  ">2021-2023: Pittsburgh, PA</h5>
+      <h5 className="text-xl font-bold  ">2022-2024: Pittsburgh, PA</h5>
       <p className="text-md font-semibold text-secondary">
         I became increasingly curious about the theoretical foundations
         underlying new programming language features. This desire to understand
@@ -216,6 +217,28 @@ export const cmuContent = renderToString(
         reliable, secure, and efficient, drove me to delve deeper into this
         field. I studied PL and security substantially at Carnegie Mellon
         University by taking relevant courses and doing research.
+      </p>
+    </div>
+  </div>,
+);
+
+export const umdContent = renderToString(
+  <div className="w-1/3">
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
+      <div className="flex flex-col items-center">
+        <img
+          className="h-28 w-28 rounded-full dark:bg-slate-200"
+          src={umdLogoUrl}
+        />
+      </div>
+      <h5 className="text-xl font-bold  ">2024-Now: College Park, MD</h5>
+      <p className="text-md font-semibold text-secondary">
+        Having built a solid foundation in PL, systems, and security, I am
+        excited to continue my journey at the University of Maryland, College
+        Park as a CS PhD student. I plan to further explore the intersection of
+        programming languages, systems, and security, with a focus on developing
+        practical tools and techniques that can help application and system
+        developers write more secure and reliable code.
       </p>
     </div>
   </div>,

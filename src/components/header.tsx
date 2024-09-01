@@ -22,7 +22,7 @@ function classNames(...classes: string[]) {
 const Header = (): JSX.Element => {
   const [navigation, setNavigation] = React.useState<Navigation[]>([
     { name: 'Blog', href: '/blog', current: false },
-    { name: 'Experience', href: '/experience', current: false },
+    { name: 'Map', href: '/map', current: false },
     { name: 'CV', href: '/cv', current: false },
     // { name: 'Projects', href: '/projects', current: false },
     // { name: 'About', href: '/about', current: false },
@@ -141,10 +141,9 @@ const Header = (): JSX.Element => {
                       <Menu.Item>
                         {({}) => (
                           <p className="dark:text-white text-gray-900 block px-4 py-2 text-sm">
-                            My Chinese name is 蔡羿 (Cai Yi).
+                            My Chinese name is 蔡羿 (Ts'eye Yee).
                             <br />
-                            People like to call me Yi (like the letter "E"),
-                            Tracy, or C.Y. ("see why").
+                            People like to call me Yi (like the letter "E").
                           </p>
                         )}
                       </Menu.Item>

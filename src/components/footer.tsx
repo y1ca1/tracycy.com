@@ -7,7 +7,7 @@ import EmailBlack from '@/assets/icons/email-black.svg';
 const Footer = (): JSX.Element => {
   const [navigation, setNavigation] = React.useState<Navigation[]>([
     { name: 'Blog', href: '/blog', current: false },
-    { name: 'Experience', href: '/experience', current: false },
+    { name: 'Map', href: '/map', current: false },
     { name: 'CV', href: '/cv', current: false },
     // { name: 'Projects', href: '/projects', current: false },
     // { name: 'About', href: '/about', current: false },
@@ -55,8 +55,8 @@ const Footer = (): JSX.Element => {
               </span>
               <span>
                 <a
-                  href="mailto:yicai@andrew.cmu.com"
-                  aria-label="Email yicai@andrew.cmu.com"
+                  href="mailto:yicai@cs.umd.edu"
+                  aria-label="Email yicai@cs.umd.edu"
                   title="Email"
                   className="focus-visible:outline-accent focus:text-accent"
                 >

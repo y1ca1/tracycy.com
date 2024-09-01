@@ -11,6 +11,7 @@ import { components } from '@/components/mdxComponents';
 const Malloc = React.lazy(() => import('@/contents/projects/malloc.mdx'));
 const Biquadris = React.lazy(() => import('@/contents/projects/biquadris.mdx'));
 const HM = React.lazy(() => import('@/contents/projects/hm.mdx'));
+const Vest = React.lazy(() => import('@/contents/projects/vest.mdx'));
 
 const Index = (): JSX.Element => {
   return (
@@ -49,6 +50,8 @@ const ProjectLayout = (): JSX.Element => {
         return <Biquadris components={components} />;
       case 'hindley-milner-inference':
         return <HM components={components} />;
+      case 'vest':
+        return <Vest components={components} />;
       default:
         return <Navigate to="/projects" replace={true} />;
     }

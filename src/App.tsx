@@ -9,7 +9,7 @@ import { NotFound } from '@/pages/404';
 const Blogs = React.lazy(() => import('@/pages/blogs'));
 const Home = React.lazy(() => import('@/pages/home'));
 const Projects = React.lazy(() => import('@/pages/projects'));
-const Experience = React.lazy(() => import('@/pages/experience'));
+const Map = React.lazy(() => import('@/pages/map'));
 const About = React.lazy(() => import('@/pages/about'));
 const CV = React.lazy(() => import('@/pages/cv'));
 
@@ -21,7 +21,7 @@ const App: React.FC<Record<string, never>> = () => {
       {currentThemeMode === ThemeMode.Dark ? (
         <link
           rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-synthwave84.min.css"
+          href="//cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-shades-of-purple.min.css"
         />
       ) : (
         <link
@@ -46,7 +46,7 @@ const App: React.FC<Record<string, never>> = () => {
               <Route path="*" element={<NotFound />} />
               <Route path="/" element={<Home />} />
               <Route path="/blog/*" element={<Blogs />} />
-              <Route path="/experience" element={<Experience />} />
+              <Route path="/map" element={<Map />} />
               <Route path="/projects/*" element={<Projects />} />
               <Route path="/about" element={<About />} />
               <Route path="/cv" element={<CV />} />
