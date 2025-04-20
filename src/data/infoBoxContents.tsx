@@ -157,11 +157,10 @@ export const uwaterlooContent = renderToString(
       </div>
       <h5 className="text-xl font-bold  ">2020-2021: Waterloo, ON</h5>
       <p className="text-md font-semibold text-secondary">
-        I pivoted to software and started my Master's degree at the University
-        of Waterloo, where I for the first time in my life realized what
-        programming languages (PL) <em>really</em> are and how I actually care
-        more about the code <em>itself</em> rather than the rapid iterations of
-        software development.
+        I pivoted to software and started my prefessional Master's at the
+        University of Waterloo, where I for the first time in my life realized
+        what programming languages (PL) <em>really</em> are and how much I care
+        about them.
       </p>
     </div>
   </div>,
@@ -191,10 +190,9 @@ export const cyphercorContent = renderToString(
       </div>
       <h5 className="text-xl font-bold  ">2021-2022: Ottawa, ON</h5>
       <p className="text-md font-semibold text-secondary">
-        This is my first job ever in my life! I work remotely from Waterloo as a
-        software engineer 👨‍💻 at Cyphercor Inc. We develop security services
-        (primarily multi-factor authentication) for Canada Revenue Agency (CRA)
-        and other enterprises.
+        My first job ever in my life! I worked as a software engineer 👨‍💻 at
+        Cyphercor Inc, where I developed multi-factor authentication services
+        for Canada Revenue Agency (CRA) and other enterprises.
       </p>
     </div>
   </div>,
@@ -212,11 +210,8 @@ export const cmuContent = renderToString(
       <h5 className="text-xl font-bold  ">2022-2024: Pittsburgh, PA</h5>
       <p className="text-md font-semibold text-secondary">
         I became increasingly curious about the theoretical foundations
-        underlying new programming language features. This desire to understand
-        the intricacies and write code that is not only elegant but also
-        reliable, secure, and efficient, drove me to delve deeper into this
-        field. I studied PL and security substantially at Carnegie Mellon
-        University by taking relevant courses and doing research.
+        underlying new programming language features. This drove me back to
+        school and I studied PL, systems, and security substantially at CMU.
       </p>
     </div>
   </div>,
@@ -233,12 +228,10 @@ export const umdContent = renderToString(
       </div>
       <h5 className="text-xl font-bold  ">2024-Now: College Park, MD</h5>
       <p className="text-md font-semibold text-secondary">
-        Having built a solid foundation in PL, systems, and security, I am
-        excited to continue my journey at the University of Maryland, College
-        Park as a CS PhD student. I plan to further explore the intersection of
-        programming languages, systems, and security, with a focus on developing
-        practical tools and techniques that can help application and system
-        developers write more secure and reliable code.
+        I am excited to continue my journey at the University of Maryland as a
+        PhD student in Computer Science. I plan to further explore the
+        intersection of programming languages, systems, and architectures, with
+        a focus on developing practical tools and techniques.
       </p>
     </div>
   </div>,

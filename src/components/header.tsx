@@ -23,7 +23,7 @@ const Header = (): JSX.Element => {
   const [navigation, setNavigation] = React.useState<Navigation[]>([
     { name: 'Blog', href: '/blog', current: false },
     { name: 'Map', href: '/map', current: false },
-    { name: 'CV', href: '/cv', current: false },
+    // { name: 'CV', href: '/cv', current: false },
     // { name: 'Projects', href: '/projects', current: false },
     // { name: 'About', href: '/about', current: false },
   ]);

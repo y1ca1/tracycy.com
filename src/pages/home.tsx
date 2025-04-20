@@ -45,10 +45,9 @@ const Home = (): JSX.Element => (
           Milijana Surbatovich
         </a>{' '}
         . I am broadly interested in the theory and practice of programming
-        languages, especially type theory and type systems, constructive logics,
-        formal methods, and their application in various computing systems.
-        Previously, I received my M.S. in Electrical and Computer Engineering
-        from{' '}
+        languages, especially type systems, logics, formal methods, and their
+        application in various computing systems and architectures. Previously,
+        I received my M.S. in Electrical and Computer Engineering from{' '}
         <a
           href="https://www.cmu.edu/"
           className="text-secondary hover:text-primary underline"
