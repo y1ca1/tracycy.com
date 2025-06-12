@@ -1,6 +1,10 @@
 import React from 'react';
 import Fries from '@/assets/pics/fries.svg';
-import { RecentProjectGrid, PastProjectGrid } from '@/components/projectGrid';
+import {
+  RecentPubs,
+  RecentProjectGrid,
+  PastProjectGrid,
+} from '@/components/projectGrid';
 
 const RoundedSquare = () => (
   <div aria-hidden="true">
@@ -89,6 +93,7 @@ const Home = (): JSX.Element => (
       {/*   </div> */}
       {/* </div> */}
     </div>
+    <RecentPubs />
     <RecentProjectGrid />
     <PastProjectGrid />
   </>

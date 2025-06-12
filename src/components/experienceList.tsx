@@ -18,6 +18,7 @@ import cyphercorUrl from '@/assets/icons/experience/cyphercor.png';
 import cmuUrl from '@/assets/icons/experience/cmu.png';
 import cylabUrl from '@/assets/icons/experience/cylab.png';
 import umdcsUrl from '@/assets/icons/experience/umdcs.png';
+import msrUrl from '@/assets/icons/experience/microsoft-logo.png';
 
 export const ExperienceList = () => {
   const currentThemeMode = useThemeMode()[0];
@@ -39,6 +40,24 @@ export const ExperienceList = () => {
           </div>
           <h5 className="text-lg lg:text-xl text-center font-bold ">
             Ph.D. Student
+          </h5>
+        </div>
+      </Card>
+      <Card id="msr">
+        <div className="flex flex-row space-x-4 justify-center items-center">
+          <img
+            className="scale-125 h-auto w-1/2 md:w-1/3 lg:w-1/4 "
+            src={msrUrl}
+          />
+        </div>
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col space-y-0.5 items-center">
+            <h5 className="text-sm font-semibold italic ">
+              June 2025 - Now: Redmond, WA, USA
+            </h5>
+          </div>
+          <h5 className="text-lg lg:text-xl text-center font-bold ">
+            Research Intern
           </h5>
         </div>
       </Card>

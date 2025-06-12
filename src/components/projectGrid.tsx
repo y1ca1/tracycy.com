@@ -9,6 +9,84 @@ import hmUrl from '@/assets/pics/projects/hm.png';
 import eventsUrl from '@/assets/pics/projects/events.png';
 import cyUrl from '@/assets/pics/projects/cy.png';
 import vestUrl from '@/assets/pics/projects/vest.png';
+import GithubCat from '@/assets/icons/github-cat.svg';
+import BibTeXAlt from '@/assets/icons/BibTeX.svg';
+import PDFAlt from '@/assets/icons/pdf-icon.svg';
+
+export const RecentPubs = () => (
+  <>
+    <h1 className="py-12 mb-3 text-3xl font-bold leading-tight text-center md:text-4xl">
+      Recent Publications
+    </h1>
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+      <div className="max-w-sm">
+        <div className="flex rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col transition duration-300 ease-in-out hover:ring-4 hover:ring-opacity-60 hover:ring-offset-2 hover:ring-pink-400/75">
+          <div className="flex h-full flex-col justify-center gap-4 p-6">
+            <h5 className="text-2xl font-bold tracking-tight text-primary">
+              Vest: Verified, Secure, High-Performance Parsing and Serialization
+              for Rust
+            </h5>
+            <p className="font-normal text-secondary">
+              <strong>Yi Cai</strong>, Pratap Singh, Zhengyao Lin, Jay Bosamiya,
+              Joshua Gancher, Milijana Surbatovich, Bryan Parno
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Badge color="purple">USENIX Security 2025</Badge>
+              <div className="w-full"></div>
+              <Badge color="info">Formal Verification</Badge>
+              <Badge color="info">Rust</Badge>
+              <Badge color="info">Binary Format</Badge>
+              <Badge color="info">Parser</Badge>
+              <Badge color="info">Serializer</Badge>
+            </div>
+            <div className="flex mt-4 gap-3">
+              <a
+                href="#"
+                className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
+                onClick={e => {
+                  e.preventDefault();
+                  const bibtex = document.getElementById('bibtex');
+                  if (bibtex) bibtex.classList.toggle('hidden');
+                }}
+              >
+                <BibTeXAlt className="transition-transform ease-in-out hover:-translate-y-1 hover:text-accent fill-accent" />
+              </a>
+              <a
+                href="/papers/vest-usenix-security25.pdf"
+                target="_blank"
+                className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
+              >
+                <PDFAlt className="transition-transform ease-in-out hover:-translate-y-1 hover:text-accent fill-accent" />
+              </a>
+              <a
+                href="https://github.com/secure-foundations/vest"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
+              >
+                <GithubCat className="transition-transform ease-in-out hover:-translate-y-1 hover:text-accent fill-accent " />
+              </a>
+            </div>
+            <div
+              id="bibtex"
+              className="hidden mt-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-md overflow-auto text-xs font-mono"
+            >
+              <pre className="whitespace-pre overflow-x-auto">
+                {`@inproceedings{vest,
+    title     = {Vest: Verified, Secure, High-Performance Parsing and Serialization for Rust},
+    author    = {Cai, Yi and Singh, Pratap and Lin, Zhengyao and Bosamiya, Jay and Gancher, Joshua and Surbatovich, Milijana and Parno, Bryan},
+    booktitle = {Proceedings of the USENIX Security Symposium},
+    month     = {August},
+    year      = {2025}
+}`}
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </>
+);
 
 export const RecentProjectGrid = () => (
   <>

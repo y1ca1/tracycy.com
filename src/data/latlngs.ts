@@ -72,3 +72,13 @@ export const UMD: google.maps.LatLngLiteral = {
   lat: 38.989,
   lng: -76.936,
 };
+
+export const MSR: google.maps.LatLngLiteral = {
+  lat: 47.642,
+  lng: -122.142,
+};
+
+export const CHICAGO: google.maps.LatLngLiteral = {
+  lat: 41.878,
+  lng: -87.629,
+};

@@ -13,6 +13,7 @@ import waterlooLogoUrl from '@/assets/icons/experience/uwaterloo-logo.png';
 import cyphercorLogoUrl from '@/assets/icons/experience/cyphercor-logo.png';
 import cmuLogoUrl from '@/assets/icons/experience/cmu-logo.png';
 import umdLogoUrl from '@/assets/icons/experience/umd-logo.png';
+import msrLogoUrl from '@/assets/icons/experience/microsoft-logo-bare.png';
 
 export const chaoyangContent = renderToString(
   <div className="w-2/3">
@@ -232,6 +233,26 @@ export const umdContent = renderToString(
         PhD student in Computer Science. I plan to further explore the
         intersection of programming languages, systems, and architectures, with
         a focus on developing practical tools and techniques.
+      </p>
+    </div>
+  </div>,
+);
+
+export const msrContent = renderToString(
+  <div className="w-1/3">
+    <div className="flex flex-col p-5 space-y-2 rounded-lg border border-gray-200 bg-primary shadow-md dark:border-gray-700">
+      <div className="flex flex-col items-center">
+        <img
+          className="h-28 w-28 rounded-full dark:bg-slate-200"
+          src={msrLogoUrl}
+        />
+      </div>
+      <h5 className="text-xl font-bold  ">2025: Redmond, WA</h5>
+      <p className="text-md font-semibold text-secondary">
+        I am very fortunate to have the opportunity to work at Microsoft
+        Research as a research intern in the summer of 2025. I am part of the
+        RiSE group, where I work on verified parsers and serializers in F*, a
+        proof-oriented, dependently typed programming language.
       </p>
     </div>
   </div>,

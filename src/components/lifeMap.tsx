@@ -43,6 +43,7 @@ export const LifeMap = (): JSX.Element => {
   const cyphercorMarker = React.useRef<google.maps.Marker>();
   const cmuMarker = React.useRef<google.maps.Marker>();
   const umdCSMarker = React.useRef<google.maps.Marker>();
+  const msrMarker = React.useRef<google.maps.Marker>();
 
   const MapComponent = React.memo(() => (
     <GoogleMap
@@ -57,8 +58,8 @@ export const LifeMap = (): JSX.Element => {
         mapTypeControl: false,
         styles: currentThemeMode === ThemeMode.Dark ? DarkStyle : LightStyle,
       }}
-      center={Positions.UMD}
-      zoom={5}
+      center={Positions.CHICAGO}
+      zoom={4}
     >
       <ButtonGroupControl />
       {/* <MarkerWithInfoBox */}
@@ -168,6 +169,15 @@ export const LifeMap = (): JSX.Element => {
         offset={new google.maps.Size(30, -30)}
         content={InfoWindowContents.umdContent}
         href="umd"
+      />
+      <MarkerWithInfoBox
+        infoBox={infoBox}
+        markerRef={msrMarker}
+        icon={MarkerIcons.workIcon}
+        position={Positions.MSR}
+        offset={new google.maps.Size(30, -30)}
+        content={InfoWindowContents.msrContent}
+        href="msr"
       />
     </GoogleMap>
   ));
