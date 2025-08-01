@@ -48,7 +48,7 @@ const App: React.FC<Record<string, never>> = () => {
               <Route path="/blog/*" element={<Blogs />} />
               <Route path="/map" element={<Map />} />
               <Route path="/projects/*" element={<Projects />} />
-              <Route path="/about" element={<About />} />
+              {/* <Route path="/about" element={<About />} /> */}
               {/* <Route path="/cv" element={<CV />} /> */}
             </Routes>
           </React.Suspense>
