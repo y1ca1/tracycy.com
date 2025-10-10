@@ -24,7 +24,7 @@ const Home = (): JSX.Element => (
   <>
     <div className="flex flex-col items-start mt-12 mb-16  lg:justify-between ">
       <p className="mt-12 text-xl font-medium  sm:text-xl text-left">
-        Hi! I'm Yi, a first-year Ph.D. student in Computer Science at the{' '}
+        Hi! I'm Yi, a second-year Ph.D. student in Computer Science at the{' '}
         <a
           href="https://umd.edu/"
           className="text-secondary hover:text-primary underline"
@@ -40,7 +40,7 @@ const Home = (): JSX.Element => (
           {' '}
           PLUM@UMD
         </a>{' '}
-        and currently advised by Prof.{' '}
+        and advised by Prof.{' '}
         <a
           href="https://msurbatovich.github.io/"
           className="text-secondary hover:text-primary underline"
@@ -48,10 +48,14 @@ const Home = (): JSX.Element => (
           {' '}
           Milijana Surbatovich
         </a>{' '}
-        . I am broadly interested in the theory and practice of programming
-        languages, especially type systems, logics, formal methods, and their
-        application in various computing systems and architectures. Previously,
-        I received my M.S. in Electrical and Computer Engineering from{' '}
+        . Meanwhile, I also work closely with Prof.{' '}
+        <a
+          href="https://www.andrew.cmu.edu/user/bparno/"
+          className="text-secondary hover:text-primary underline"
+        >
+          Bryan Parno
+        </a>{' '}
+        at{' '}
         <a
           href="https://www.cmu.edu/"
           className="text-secondary hover:text-primary underline"
@@ -59,29 +63,13 @@ const Home = (): JSX.Element => (
           {' '}
           Carnegie Mellon University
         </a>{' '}
-        , where I worked at{' '}
-        <a
-          href="https://www.cylab.cmu.edu/"
-          className="text-secondary hover:text-primary underline"
-        >
-          {' '}
-          CyLab
-        </a>{' '}
-        with Prof.{' '}
-        <a
-          href="https://www.andrew.cmu.edu/user/bparno/"
-          className="text-secondary hover:text-primary underline"
-        >
-          Bryan Parno
-        </a>{' '}
-        and Prof.{' '}
-        <a
-          href="https://www.andrew.cmu.edu/user/liminjia/"
-          className="text-secondary hover:text-primary underline"
-        >
-          Limin Jia
-        </a>{' '}
-        on Rust and formal verification.
+        .
+        <br />
+        <br />I am interested in building correct and secure
+        systems/architectures in principled ways, leveraging programming
+        languages and formal methods. Recently, I have been building verified,
+        secure, performant parsers and serializers, as well as type systems and
+        a verified, optimizing compiler for dataflow architectures.
       </p>
 
       {/* <div className='relative '> */}
