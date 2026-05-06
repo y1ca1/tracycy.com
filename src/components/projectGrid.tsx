@@ -23,6 +23,78 @@ export const RecentPubs = () => (
         <div className="flex rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col transition duration-300 ease-in-out hover:ring-4 hover:ring-opacity-60 hover:ring-offset-2 hover:ring-pink-400/75">
           <div className="flex h-full flex-col justify-center gap-4 p-6">
             <h5 className="text-2xl font-bold tracking-tight text-primary">
+              Let It Flow: A Formally Verified Compilation Framework for
+              Asynchronous Dataflow
+            </h5>
+            <p className="font-normal text-secondary">
+              Zhengyao Lin, <strong>Yi Cai</strong>, Milijana Surbatovich
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Badge color="purple">PLDI 2026</Badge>
+              <div className="w-full"></div>
+              <Badge color="info">Compiler Verification</Badge>
+              <Badge color="info">Type Systems</Badge>
+              <Badge color="info">Dataflow Architectures</Badge>
+              <Badge color="info">Coarse-Grained Reconfigurable Arrays</Badge>
+            </div>
+            <div className="flex mt-4 gap-3">
+              <a
+                href="#"
+                className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
+                onClick={e => {
+                  e.preventDefault();
+                  const bibtex = document.getElementById('bibtex-wavelet');
+                  if (bibtex) bibtex.classList.toggle('hidden');
+                }}
+              >
+                <BibTeXAlt className="transition-transform ease-in-out hover:-translate-y-1 hover:text-accent fill-accent" />
+              </a>
+              <a
+                href="/papers/let-it-flow-pldi26.pdf"
+                target="_blank"
+                className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
+              >
+                <PDFAlt className="transition-transform ease-in-out hover:-translate-y-1 hover:text-accent fill-accent" />
+              </a>
+              <a
+                href="https://github.com/plum-umd/wavelet"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
+              >
+                <GithubCat className="transition-transform ease-in-out hover:-translate-y-1 hover:text-accent fill-accent " />
+              </a>
+            </div>
+            <div
+              id="bibtex-wavelet"
+              className="hidden mt-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-md overflow-auto text-xs font-mono"
+            >
+              <pre className="whitespace-pre overflow-x-auto">
+                {`@article{wavelet,
+  author = {Lin, Zhengyao and Cai, Yi and Surbatovich, Milijana},
+  title = {Let It Flow: A Formally Verified Compilation Framework for Asynchronous Dataflow},
+  year = {2026},
+  issue_date = {June 2026},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  volume = {10},
+  number = {PLDI},
+  url = {https://doi.org/10.1145/3808263},
+  doi = {10.1145/3808263},
+  journal = {Proc. ACM Program. Lang.},
+  month = jun,
+  articleno = {185},
+  numpages = {25}
+}`}
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="max-w-sm">
+        <div className="flex rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 flex-col transition duration-300 ease-in-out hover:ring-4 hover:ring-opacity-60 hover:ring-offset-2 hover:ring-pink-400/75">
+          <div className="flex h-full flex-col justify-center gap-4 p-6">
+            <h5 className="text-2xl font-bold tracking-tight text-primary">
               Vest: Verified, Secure, High-Performance Parsing and Serialization
               for Rust
             </h5>
@@ -45,7 +117,7 @@ export const RecentPubs = () => (
                 className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
                 onClick={e => {
                   e.preventDefault();
-                  const bibtex = document.getElementById('bibtex');
+                  const bibtex = document.getElementById('bibtex-vest');
                   if (bibtex) bibtex.classList.toggle('hidden');
                 }}
               >
@@ -68,7 +140,7 @@ export const RecentPubs = () => (
               </a>
             </div>
             <div
-              id="bibtex"
+              id="bibtex-vest"
               className="hidden mt-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-md overflow-auto text-xs font-mono"
             >
               <pre className="whitespace-pre overflow-x-auto">
