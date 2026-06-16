@@ -82,8 +82,8 @@ const Home = (): JSX.Element => (
       {/* </div> */}
     </div>
     <RecentPubs />
-    <RecentProjectGrid />
-    <PastProjectGrid />
+    {/* <RecentProjectGrid /> */}
+    {/* <PastProjectGrid /> */}
   </>
 );
 
