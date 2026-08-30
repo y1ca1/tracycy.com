@@ -9,10 +9,19 @@ export const TableOfContents = () => {
   const [headings, setHeadings] = React.useState<HTMLHeadingElement[]>([]);
 
   React.useEffect(() => {
-    const headingElements: HTMLHeadingElement[] = Array.from(
-      document.querySelectorAll('[data-heading]'),
-    );
-    setHeadings(headingElements);
+    const updateHeadings = () => {
+      const headingElements: HTMLHeadingElement[] = Array.from(
+        document.querySelectorAll('[data-heading]'),
+      );
+      if (headingElements.length > 0) {
+        setHeadings(headingElements);
+      }
+    };
+
+    updateHeadings();
+    const observer = new MutationObserver(updateHeadings);
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => observer.disconnect();
   }, []);
 
   // Function to determine the Heading Level based on `nodeName` (H2, H3, etc)

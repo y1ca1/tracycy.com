@@ -1,27 +1,10 @@
-import React, { Suspense } from 'react';
-import { RotatingSquare } from 'react-loader-spinner';
-import { useImage } from 'react-image';
+import React from 'react';
 
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   location: string | string[];
 }
 
 export const Image = ({ location, ...props }: ImageProps) => {
-  const { src } = useImage({
-    srcList: location,
-  });
-  return (
-    <Suspense
-      fallback={
-        <RotatingSquare
-          height="100"
-          width="100"
-          color="grey"
-          ariaLabel="loading"
-        />
-      }
-    >
-      <img src={src} {...props} />
-    </Suspense>
-  );
+  const src = Array.isArray(location) ? location[0] : location;
+  return <img src={src} loading="lazy" {...props} />;
 };

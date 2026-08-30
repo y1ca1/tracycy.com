@@ -14,24 +14,32 @@ export const BlogTabs = () => {
         url: 'll-external-vs-internal-choice',
         title: 'Linear Logic: External Choice (&) vs Internal Choice (⊕)',
         date: 'Sept 2023',
-        commentCount: 0,
-        likeCount: 0,
       },
       {
         id: 2,
         url: 'fpl',
         title: 'Recaps of 15-312 (Principles of Programming Languages)',
         date: 'Dec 2022',
-        commentCount: 0,
-        likeCount: 0,
       },
       {
         id: 3,
         url: 'my-personal-website',
         title: 'Introducing my personal website!',
         date: 'July 2022',
-        commentCount: 0,
-        likeCount: 0,
+      },
+    ],
+    PL: [
+      {
+        id: 1,
+        url: 'll-external-vs-internal-choice',
+        title: 'Linear Logic: External Choice (&) vs Internal Choice (⊕)',
+        date: 'Sept 2023',
+      },
+      {
+        id: 2,
+        url: 'fpl',
+        title: 'Recaps of 15-312 (Principles of Programming Languages)',
+        date: 'Dec 2022',
       },
     ],
     Tech: [
@@ -40,18 +48,6 @@ export const BlogTabs = () => {
         url: 'my-personal-website',
         title: 'Introducing my personal website!',
         date: 'July 2022',
-        commentCount: 0,
-        likeCount: 0,
-      },
-    ],
-    Life: [
-      {
-        id: 1,
-        url: 'time-in-waterloo',
-        title: 'My wonderful time in Waterloo',
-        date: 'August 2022',
-        commentCount: 0,
-        likeCount: 0,
       },
     ],
   });
@@ -94,16 +90,12 @@ export const BlogTabs = () => {
                       {post.title}
                     </h3>
 
-                    <div className="mt-1 flex space-x-1 text-sm font-normal leading-4">
-                      <li>{post.date}</li>
-                      {/* <li>&middot;</li> */}
-                      {/* <li>{post.commentCount} comments</li> */}
-                      {/* <li>&middot;</li> */}
-                      {/* <li>{post.likeCount} likes</li> */}
+                    <div className="mt-1 flex space-x-1 text-sm font-normal leading-4 text-secondary">
+                      <span>{post.date}</span>
                     </div>
 
                     <Link
-                      to={post.url}
+                      to={`/blog/${post.url}`}
                       className={classNames(
                         'absolute inset-0 rounded-md',
                         'ring-pink-400/75 focus:z-10 focus:outline-none focus:ring-2',

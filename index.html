@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a122e" />
+    <meta
+      name="description"
+      content="Yi Cai, Research Intern at RiSE, MSR | PhD Student in Computer Science at the University of Maryland | MS in Electrical and Computer Engineering at Carnegie Mellon University | Former Software Engineer at Cyphercor Inc."
+    />
+    <link rel="icon" href="/newicon.png" />
+    <title>Yi Cai's Personal Website</title>
+
+    <!-- Zero-FOUC Instant Theme Loading Script -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('themeMode');
+          var isDark = stored
+            ? JSON.parse(stored) === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          } else {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- KaTeX CSS for math formulas -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css"
+      crossorigin="anonymous"
+    />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-4DHLGRJRV5"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-4DHLGRJRV5');
+    </script>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>

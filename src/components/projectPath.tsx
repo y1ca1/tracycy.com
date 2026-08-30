@@ -2,7 +2,7 @@ import React from 'react';
 import { ProjectModal } from '@/components/projectModal';
 import { ProjectInfo, projects } from '@/data/projects';
 
-const ProjectMap = (props: any) => {
+const ProjectMap = (props: React.SVGProps<SVGSVGElement>) => {
   const [projectInfo, setProjectInfo] = React.useState<ProjectInfo>({
     name: '',
     icon: <></>,
@@ -28,9 +28,6 @@ const ProjectMap = (props: any) => {
       <svg
         className="w-full h-full"
         viewBox="0 0 511.999 511.999"
-        style={{
-          enableBackground: 'new 0 0 511.999 511.999',
-        }}
         xmlns="http://www.w3.org/2000/svg"
         {...props}
       >

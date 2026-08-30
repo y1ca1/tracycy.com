@@ -3,7 +3,6 @@ import React from 'react';
 import { Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { Tooltip } from 'flowbite-react';
 import { LightBulbIcon } from '@heroicons/react/solid';
-import { RotatingSquare } from 'react-loader-spinner';
 import { SpikeBounce } from '@/components/spike';
 import { ProjectPathV1 } from '@/components/projectPath';
 import { TableOfContents } from '@/components/tableOfContents';
@@ -39,31 +38,31 @@ const Index = (): JSX.Element => {
   );
 };
 
+const renderProjectContent = (name?: string) => {
+  switch (name) {
+    case 'malloc':
+      return <Malloc components={components} />;
+    case 'biquadris':
+      return <Biquadris components={components} />;
+    case 'hindley-milner-inference':
+      return <HM components={components} />;
+    case 'vest':
+      return <Vest components={components} />;
+    default:
+      return <Navigate to="/projects" replace={true} />;
+  }
+};
+
 const ProjectLayout = (): JSX.Element => {
   const { projectName } = useParams();
-
-  const ContentSwitch = ({ name }: { name?: string }) => {
-    switch (name) {
-      case 'malloc':
-        return <Malloc components={components} />;
-      case 'biquadris':
-        return <Biquadris components={components} />;
-      case 'hindley-milner-inference':
-        return <HM components={components} />;
-      case 'vest':
-        return <Vest components={components} />;
-      default:
-        return <Navigate to="/projects" replace={true} />;
-    }
-  };
 
   return (
     <div className="relative flex justify-between mt-12 mb-12 flex-row-reverse">
       <aside className="sticky hidden overflow-auto h-128 max-w-xs mt-8 ml-6 top-16 lg:block">
         <TableOfContents />
       </aside>
-      <article className="max-w-2xl xl:max-w-3xl min-w-0 text-base lg:text-lg ">
-        <ContentSwitch name={projectName} />
+      <article className="max-w-2xl xl:max-w-3xl min-w-0 text-base lg:text-lg">
+        {renderProjectContent(projectName)}
       </article>
     </div>
   );
@@ -72,12 +71,9 @@ const ProjectLayout = (): JSX.Element => {
 const Projects = (): JSX.Element => (
   <React.Suspense
     fallback={
-      <RotatingSquare
-        height="100"
-        width="100"
-        color="grey"
-        ariaLabel="loading"
-      />
+      <div className="flex items-center justify-center min-h-[40vh]">
+        <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin" />
+      </div>
     }
   >
     <Routes>

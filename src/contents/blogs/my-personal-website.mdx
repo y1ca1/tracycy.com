@@ -4,10 +4,11 @@ publishedAt: '2022-08-01'
 readingTime: '10'
 ---
 
-# {title}
+# {frontmatter.title}
 
-*{publishedAt}* • *{readingTime} min read*
-***
+_{frontmatter.publishedAt}_ • _{frontmatter.readingTime} min read_
+
+---
 
 ## Heading 2
 
@@ -19,7 +20,7 @@ Some other stuff.
 
 This is some **bold** texts.
 
-This is some *italicized text*
+This is some _italicized text_
 
 > This is a blockquote
 
@@ -32,7 +33,7 @@ Ordered List:
 Unordered List:
 
 - First item
-    - 2nd level item
+  - 2nd level item
 - Second item
 - Third item
 

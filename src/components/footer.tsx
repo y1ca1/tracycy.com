@@ -4,21 +4,18 @@ import GithubAlt from '@/assets/icons/github-alt.svg';
 import LinkedInBlack from '@/assets/icons/linkedin-black.svg';
 import EmailBlack from '@/assets/icons/email-black.svg';
 
-const Footer = (): JSX.Element => {
-  const [navigation, setNavigation] = React.useState<Navigation[]>([
-    { name: 'Blog', href: '/blog', current: false },
-    { name: 'Map', href: '/map', current: false },
-    // { name: 'CV', href: '/cv', current: false },
-    // { name: 'Projects', href: '/projects', current: false },
-    // { name: 'About', href: '/about', current: false },
-  ]);
+const FOOTER_NAVIGATION = [
+  { name: 'Blog', href: '/blog' },
+  { name: 'Map', href: '/map' },
+];
 
+const Footer = (): JSX.Element => {
   return (
     <footer className="relative w-full h-56 overflow-hidden bg-primary text-secondary">
       <div className="container h-full px-5 pt-24 pb-12 m-auto md:max-w-screen-md lg:max-w-screen-xl md:px-20">
         <div className="container flex-col justify-between md:space-y-8">
           <nav className="flex-row items-center justify-center hidden space-x-6 text-md lg:flex md:justify-end ">
-            {navigation.map(nav => (
+            {FOOTER_NAVIGATION.map(nav => (
               <NavLink
                 key={nav.name}
                 to={nav.href}
@@ -50,7 +47,7 @@ const Footer = (): JSX.Element => {
                   rel="noopener noreferrer"
                   className="focus-visible:outline-accent focus:text-accent"
                 >
-                  <GithubAlt className="transition-transform ease-in-out hover:-translate-y-1 hover:text-accent fill-accent " />
+                  <GithubAlt className="w-8 h-8 transition-transform ease-in-out hover:-translate-y-1 hover:text-accent fill-accent" />
                 </a>
               </span>
               <span>
@@ -60,7 +57,7 @@ const Footer = (): JSX.Element => {
                   title="Email"
                   className="focus-visible:outline-accent focus:text-accent"
                 >
-                  <EmailBlack className="transition-transform ease-in-out hover:-translate-y-1 hover:text-accent fill-accent " />
+                  <EmailBlack className="w-8 h-8 transition-transform ease-in-out hover:-translate-y-1 hover:text-accent fill-accent" />
                 </a>
               </span>
               <span>
@@ -72,7 +69,7 @@ const Footer = (): JSX.Element => {
                   rel="noopener noreferrer"
                   className="focus-visible:outline-accent focus:text-accent"
                 >
-                  <LinkedInBlack className="mb-2 transition-transform ease-in-out hover:-translate-y-1 hover:text-accent fill-accent " />
+                  <LinkedInBlack className="w-8 h-8 mb-2 transition-transform ease-in-out hover:-translate-y-1 hover:text-accent fill-accent" />
                 </a>
               </span>
             </div>

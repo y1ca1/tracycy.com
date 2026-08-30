@@ -4,9 +4,9 @@ publishedAt: '2022-12-10'
 readingTime: '20'
 ---
 
-# {title}
+# {frontmatter.title}
 
-_{publishedAt}_ • _{readingTime} min read_
+_{frontmatter.publishedAt}_ • _{frontmatter.readingTime} min read_
 
 ---
 
@@ -84,7 +84,7 @@ substitution:
 So λ-calculus is a universal model of computation on "finitary objects" (encodable as numbers).
 
 - Y-combinator:
-`Y ≜ λproto. (λx. proto (x x)) (λx. proto (x x))`
+  `Y ≜ λproto. (λx. proto (x x)) (λx. proto (x x))`
 - Also booleans, pairs, Barendregt's numerals, etc.
 
 ## Defining a language
@@ -213,7 +213,7 @@ e ::= <>                           (1-intro)
       Γ ⊢ e: 0
 ---------------------(0-ELIM)    (no 0-INTRO)
  Γ ⊢ 0_case{ρ}(e): ρ
-  
+
   Γ ⊢ e: τ1 + τ2  Γ, x: τ1 ⊢ e1: ρ  Γ, x: τ2 ⊢ e2: ρ
 ----------------------------------------------------(+ELIM)
   Γ ⊢ +_case{τ1,τ2}(e; x.e1; x.e2): ρ
@@ -221,7 +221,7 @@ e ::= <>                           (1-intro)
    Γ ⊢ x: τ1  Γ ⊢ e2: τ2
 --------------------------(->INTRO)
   Γ ⊢ λx:τ1. e2: τ1 -> τ2
-  
+
   Γ ⊢ e1: τ1 -> τ2  Γ ⊢ e2: τ1
 -------------------------------(->ELIM)
           Γ ⊢ e1 e2: τ2
@@ -354,7 +354,7 @@ natrec{ρ}(s(e); e0; x.e1) |-> [natrec{ρ}(e; e0; x.e1)/x]e1
   Γ ⊢ n: nat  Γ ⊢ e: list
 -----------------------------(list-I2)
   Γ ⊢ cons(n; e): list
-  
+
     Γ ⊢ e: list  Γ ⊢ e0: ρ  Γ, x: nat, y: ρ ⊢ e1: ρ
 -----------------------------------------------------(list-E)
         Γ ⊢ listrec{ρ}(e; e0; x.y.e1 ): ρ
@@ -390,11 +390,11 @@ Now if we consider `natrec[ρ]` as a function of type `(ρ × (ρ -> ρ)) -> nat
   Γ ⊢ e: nat  Γ, x: 1 + ρ ⊢ e1: ρ
 ------------------------------------(E)
   Γ ⊢ natrec{ρ}(e; x.e1): ρ
-  
+
 (* Dynamics (some omitted) *)
 
 --------------------------------------
-natrec{ρ}(fold(e); x.e1) 
+natrec{ρ}(fold(e); x.e1)
 |-> case e {
   1·<> => [1·<>/x]e1
 | 2·e' => [2·natrec{ρ}(e'; x.e1)/x]e1
@@ -407,7 +407,7 @@ natrec{ρ}(fold(e); x.e1)
  Γ ⊢ e: 1 + (nat × list)
 -------------------------(I)
     Γ ⊢ fold(e): list
-  
+
   Γ ⊢ e: list  Γ, x: 1 + (nat × ρ) ⊢ e1: ρ
 --------------------------------------------(E)
         Γ ⊢ listrec{ρ}(e; x.e1): ρ
@@ -529,7 +529,7 @@ val UNFOLD : list -> unit + (nat * list) =
         Γ ⊢ e: conat
 ---------------------------(E)
   Γ ⊢ unfold(e): 1 + conat
-  
+
    Γ ⊢ e0: σ  Γ, x: σ ⊢ e1: 1 + σ
 ------------------------------------(I)
     Γ ⊢ gen(e0; x.e1): conat
@@ -543,7 +543,7 @@ val UNFOLD : list -> unit + (nat * list) =
         e |-> e'
 ------------------------
 unfold(e) |-> unfold(e')
-  
+
 -----------------------------------------
 unfold(gen(e0; x.e1)) |-> case [e0/x]e1 {
   1·<> => 1·<>
@@ -557,7 +557,7 @@ unfold(gen(e0; x.e1)) |-> case [e0/x]e1 {
         Γ ⊢ e: stream
 --------------------------------(E)
 Γ ⊢ unfold(e): 1 + nat × stream
-  
+
  Γ ⊢ e0: σ  Γ, x: σ ⊢ e1: 1 + nat × σ
 --------------------------------------(I)
       Γ ⊢ gen(e0; x.e1): stream
@@ -705,12 +705,12 @@ map[t.τ1 + τ2](x.e')(e) |-> case e {
 (* Dynamics *)
 
 ------------------------------------------------------------------
-rec{t.τ}(fold(e); x.e') |-> [map[t.τ](y.rec{t.τ}(y; x.e'))(e)/x]e' 
+rec{t.τ}(fold(e); x.e') |-> [map[t.τ](y.rec{t.τ}(y; x.e'))(e)/x]e'
 
 (* recall: *)
 
 --------------------------------------
-natrec{ρ}(fold(e); x.e1) 
+natrec{ρ}(fold(e); x.e1)
 |-> case e {
   1·<> => [1·<>/x]e1
 | 2·e' => [2·natrec{ρ}(e'; x.e1)/x]e1
@@ -737,7 +737,7 @@ rec{t.τ_natlist}(e; f) ≜ List.foldr (f o r) (f l·<>) e
 (* Co-inductive types *)
 
 (* Statics *)
-  
+
           Γ ⊢ e: ν(t.τ)
 -----------------------------------(ν-E)
   Γ ⊢ unfold{t.τ}(e): [ν(t.τ)/t]τ
@@ -787,7 +787,7 @@ Inspiration: **Y-combinator**, which can implement a fixed-point and hence enabl
 
 (* Expressions *)
 e ::= x
-    | λx:τ. e                      
+    | λx:τ. e
     | e1 e2
     | z
     | s(e)
@@ -825,7 +825,7 @@ ifz{ρ}(s(e); e0; x.e1) |-> [e/x]e1
 
 (* assuming we have primitive "lazy list" *)
 (* define map using fix *)
-(* map ≜ fix m: (lnat ⇀ lnat) ⇀ list ⇀ list is 
+(* map ≜ fix m: (lnat ⇀ lnat) ⇀ list ⇀ list is
         λf. λl. case l {
           nil => nil
         | cons(h,t) => cons(f h, m f t)
@@ -984,7 +984,7 @@ R ≜ self{nat -> ρ}(f'.λn: nat. case unfold(n) {
 })
 
 (* recall: *)
-natrec{ρ}(fold(e); x.e1) 
+natrec{ρ}(fold(e); x.e1)
 |-> case e {
   1·<> => [1·<>/x]e1
 | 2·e' => [2·natrec{ρ}(e'; x.e1)/x]e1
@@ -998,7 +998,7 @@ natrec{ρ}(e; x.e1) ≜ R(e)
 R ≜ fun{nat;ρ}(r.n. [map[t.1 + t](r)(unfold(n))/x]e1)
 
 (* cf: *)
-rec{t.τ}(fold(e); x.e') |-> [map[t.τ](y.rec{t.τ}(y; x.e'))(e)/x]e' 
+rec{t.τ}(fold(e); x.e') |-> [map[t.τ](y.rec{t.τ}(y; x.e'))(e)/x]e'
 
 (* lazy types in by-name setting *)
 (* not identical to co-inductive types! *)
@@ -1156,7 +1156,7 @@ f ::= succ(-) | ap(-;e2) | ap(v1;-) | ...
  k ▷ succ(e) |-> k;succ(-) ▷ e
 
 -----------------------------
- k;succ(-) ◁ n |-> k ◁ n + 1 
+ k;succ(-) ◁ n |-> k ◁ n + 1
 
 -------------------------
  k;succ(-) ◀ v |-> k ◀ v
@@ -1267,7 +1267,7 @@ e ::= letcc{τ}(x.e) | throw[ρ](v1; v2)
 ----------------------
  Γ ⊢ letcc{τ}(x.e): τ
 
- 
+
 Γ ⊢ v1: τ cont  Γ ⊢ v2: τ
 -------------------------
  Γ ⊢ throw[ρ](v1; v2): ρ

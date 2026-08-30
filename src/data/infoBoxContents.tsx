@@ -1,6 +1,5 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { Card } from 'flowbite-react';
 import uestcLogoUrl from '@/assets/icons/experience/uestc-logo.png';
 import chaoyangLogoUrl from '@/assets/icons/experience/cyxy.png';
 import erzhongLogoUrl from '@/assets/icons/experience/yysez.png';

@@ -76,17 +76,12 @@ export const ProjectModal = ({
                       title="GitHub Repo"
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="bg-secondary border border-gray-300 hover:bg-stone-400 focus:ring-blue-300 dark:border-gray-600 dark:hover:bg-accent dark:hover:border-gray-700 dark:focus:ring-gray-700 focus:!ring-2 group flex h-min w-fit items-center justify-center p-0.5 text-center font-medium focus:z-10 rounded-lg"
                     >
-                      <button
-                        className="bg-secondary border border-gray-300 hover:bg-stone-400 focus:ring-blue-300 disabled:hover:bg-white dark:border-gray-600 dark:hover:bg-accent dark:hover:border-gray-700 dark:focus:ring-gray-700 focus:!ring-2 group flex h-min w-fit items-center justify-center p-0.5 text-center font-medium focus:z-10 rounded-lg"
-                        type="button"
-                        tabIndex={0}
-                      >
-                        <span className="flex items-center rounded-md text-sm px-4 py-2">
-                          <GithubAlt />
-                          GitHub
-                        </span>
-                      </button>
+                      <span className="flex items-center rounded-md text-sm px-4 py-2">
+                        <GithubAlt />
+                        GitHub
+                      </span>
                     </a>
                   )}
                   {project.href && (
@@ -94,17 +89,12 @@ export const ProjectModal = ({
                       to={project.href}
                       aria-label="Visit Project Documentation"
                       title="Project Documentation"
+                      className="bg-secondary border border-gray-300 hover:bg-stone-400 focus:ring-blue-300 dark:border-gray-600 dark:hover:bg-accent dark:hover:border-gray-700 dark:focus:ring-gray-700 focus:!ring-2 group flex h-min w-fit items-center justify-center p-0.5 text-center font-medium focus:z-10 rounded-lg"
                     >
-                      <button
-                        className="bg-secondary border border-gray-300 hover:bg-stone-400 focus:ring-blue-300 disabled:hover:bg-white dark:border-gray-600 dark:hover:bg-accent dark:hover:border-gray-700 dark:focus:ring-gray-700 focus:!ring-2 group flex h-min w-fit items-center justify-center p-0.5 text-center font-medium focus:z-10 rounded-lg"
-                        type="button"
-                        tabIndex={1}
-                      >
-                        <span className="flex items-center rounded-md text-sm px-4 py-2">
-                          <ReadMe className="px-1 py-1" />
-                          README
-                        </span>
-                      </button>
+                      <span className="flex items-center rounded-md text-sm px-4 py-2">
+                        <ReadMe className="px-1 py-1" />
+                        README
+                      </span>
                     </Link>
                   )}
                 </div>

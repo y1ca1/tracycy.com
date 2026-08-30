@@ -46,12 +46,11 @@ export const components: MDXComponents = {
     }
 
     return (
-      <Link to={href}>
-        <a
-          {...props}
-          className="underline text-secondary hover:text-accent focus-visible:outline-accent focus-visible:text-accent"
-        />
-      </Link>
+      <Link
+        to={href}
+        className="underline text-secondary hover:text-accent focus-visible:outline-accent focus-visible:text-accent"
+        {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
+      />
     );
   },
   strong: ({ ...props }) => <strong {...props} className="font-semibold" />,

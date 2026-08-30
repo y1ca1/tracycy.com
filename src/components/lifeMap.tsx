@@ -1,7 +1,6 @@
 import React from 'react';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import { InfoBox } from '@react-google-maps/infobox';
-import { RotatingSquare } from 'react-loader-spinner';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { ThemeMode } from '@/types/theme';
 import { ButtonGroupControl } from '@/components/customMapControls';
@@ -29,17 +28,11 @@ export const LifeMap = (): JSX.Element => {
     });
   }
 
-  const chaoyangMarker = React.useRef<google.maps.Marker>();
-  const erzhongMarker = React.useRef<google.maps.Marker>();
   const yizhongMarker = React.useRef<google.maps.Marker>();
-  const beijingMarker = React.useRef<google.maps.Marker>();
   const uestcMarker = React.useRef<google.maps.Marker>();
-  const thaiMarker = React.useRef<google.maps.Marker>();
   const lankaMarker = React.useRef<google.maps.Marker>();
   const albertaMarker = React.useRef<google.maps.Marker>();
-  const banffMarker = React.useRef<google.maps.Marker>();
   const waterlooMarker = React.useRef<google.maps.Marker>();
-  const algonquinMarker = React.useRef<google.maps.Marker>();
   const cyphercorMarker = React.useRef<google.maps.Marker>();
   const cmuMarker = React.useRef<google.maps.Marker>();
   const umdCSMarker = React.useRef<google.maps.Marker>();
@@ -189,12 +182,9 @@ export const LifeMap = (): JSX.Element => {
   return (
     <>
       {!isLoaded ? (
-        <RotatingSquare
-          height="100"
-          width="100"
-          color="grey"
-          ariaLabel="loading"
-        />
+        <div className="flex items-center justify-center h-[618px]">
+          <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin" />
+        </div>
       ) : (
         <MapComponent />
       )}

@@ -1,20 +1,12 @@
 import React from 'react';
-import { RotatingSquare } from 'react-loader-spinner';
 import { SpikeBounce } from '@/components/spike';
-import { components } from '@/components/mdxComponents';
-const MyPersonalWebsite = React.lazy(
-  () => import('@/contents/blogs/my-personal-website.mdx'),
-);
 
 const About = (): JSX.Element => (
   <React.Suspense
     fallback={
-      <RotatingSquare
-        height="100"
-        width="100"
-        color="grey"
-        ariaLabel="loading"
-      />
+      <div className="flex items-center justify-center min-h-[40vh]">
+        <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin" />
+      </div>
     }
   >
     <>

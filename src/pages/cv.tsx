@@ -1,15 +1,11 @@
 import React from 'react';
-import { RotatingSquare } from 'react-loader-spinner';
 
 const CV = (): JSX.Element => (
   <React.Suspense
     fallback={
-      <RotatingSquare
-        height="100"
-        width="100"
-        color="grey"
-        ariaLabel="loading"
-      />
+      <div className="flex items-center justify-center min-h-[40vh]">
+        <div className="w-10 h-10 border-4 border-accent border-t-transparent rounded-full animate-spin" />
+      </div>
     }
   >
     <div className="relative w-full h-128 rounded-2xl overflow-hidden mt-24 mb-12">

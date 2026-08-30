@@ -19,22 +19,19 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-const Header = (): JSX.Element => {
-  const [navigation, setNavigation] = React.useState<Navigation[]>([
-    { name: 'Blog', href: '/blog', current: false },
-    { name: 'Map', href: '/map', current: false },
-    // { name: 'CV', href: '/cv', current: false },
-    // { name: 'Projects', href: '/projects', current: false },
-    // { name: 'About', href: '/about', current: false },
-  ]);
+const NAVIGATION_ITEMS = [
+  { name: 'Blog', href: '/blog' },
+  { name: 'Map', href: '/map' },
+];
 
+const Header = (): JSX.Element => {
   const [currentThemeMode, setThemeMode] = useThemeMode();
 
   const toggleThemeMode = (checked = currentThemeMode === ThemeMode.Dark) =>
     setThemeMode(checked ? ThemeMode.Dark : ThemeMode.Light);
 
   return (
-    <Disclosure as="nav" className="bg-primary ">
+    <Disclosure as="nav" className="bg-primary">
       {({ open }) => (
         <>
           <div className="max-w-screen-xl mx-auto pt-6 px-2 sm:px-6 lg:px-8">
@@ -55,17 +52,7 @@ const Header = (): JSX.Element => {
                   to="/"
                   aria-label="Cai Yi's Website logo, go to homepage."
                 >
-                  <div
-                    className="flex-shrink-0 flex items-center overflow-hidden transition-transform ease-in-out rounded-full hover:scale-125 hover:rotate-12"
-                    onClick={() =>
-                      setNavigation(
-                        navigation.map(navs => ({
-                          ...navs,
-                          current: false,
-                        })),
-                      )
-                    }
-                  >
+                  <div className="flex-shrink-0 flex items-center overflow-hidden transition-transform ease-in-out rounded-full hover:scale-125 hover:rotate-12">
                     {currentThemeMode === ThemeMode.Dark ? (
                       <>
                         <YLight className="block h-8 w-auto" />
@@ -87,7 +74,7 @@ const Header = (): JSX.Element => {
                 </NavLink>
                 <div className="hidden lg:block lg:ml-6">
                   <div className="flex space-x-4">
-                    {navigation.map((nav, index) => (
+                    {NAVIGATION_ITEMS.map(nav => (
                       <NavLink
                         key={nav.name}
                         to={nav.href}
@@ -97,15 +84,6 @@ const Header = (): JSX.Element => {
                               ? 'bg-secondary text-primary'
                               : 'text-secondary transition duration-300 ease-in-out hover:bg-gray-300 dark:hover:bg-pink-300/50 hover:text-primary',
                             'px-3 py-2 rounded-md text-md font-medium',
-                          )
-                        }
-                        aria-current={nav.current ? 'page' : undefined}
-                        onClick={() =>
-                          setNavigation(
-                            navigation.map((navs, i) => ({
-                              ...navs,
-                              current: i === index,
-                            })),
                           )
                         }
                       >
@@ -133,15 +111,17 @@ const Header = (): JSX.Element => {
                       <img
                         className="h-8 w-8 md:h-12 md:w-12 rounded-full"
                         src={avatarUrl}
+                        alt="Yi Cai avatar"
                       />
                     </Menu.Button>
                   </div>
-                  <Menu.Items className="absolute right-0 mt-2 w-32 rounded-2xl shadow-lg dark:bg-gray-700 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div className="py-1 ">
+                  <Menu.Items className="absolute right-0 mt-2 w-36 rounded-2xl shadow-lg dark:bg-gray-700 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                    <div className="py-1">
                       <Menu.Item>
-                        {({}) => (
-                          <p className="dark:text-white text-gray-900 block px-4 py-2 text-sm">
+                        {() => (
+                          <p className="dark:text-white text-gray-900 block px-4 py-2 text-xs">
                             My Chinese name is 蔡羿 (Ts'eye Yee).
+                            <br />
                             <br />
                             People like to call me Yi (like the letter "E").
                           </p>
@@ -165,33 +145,21 @@ const Header = (): JSX.Element => {
           >
             <Disclosure.Panel className="lg:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
-                {navigation.map((nav, index) => (
-                  <Disclosure.Button
+                {NAVIGATION_ITEMS.map(nav => (
+                  <NavLink
                     key={nav.name}
-                    className={classNames(
-                      nav.current
-                        ? 'bg-secondary text-primary'
-                        : 'text-secondary hover:bg-gray-300 dark:hover:bg-pink-300/50 hover:text-primary',
-                      'block px-3 py-2 rounded-md text-base font-medium',
-                    )}
-                    aria-current={nav.current ? 'page' : undefined}
+                    to={nav.href}
+                    className={({ isActive }) =>
+                      classNames(
+                        isActive
+                          ? 'bg-secondary text-primary'
+                          : 'text-secondary hover:bg-gray-300 dark:hover:bg-pink-300/50 hover:text-primary',
+                        'block px-3 py-2 rounded-md text-base font-medium',
+                      )
+                    }
                   >
-                    <NavLink
-                      className="py-2"
-                      key={nav.name}
-                      to={nav.href}
-                      onClick={() =>
-                        setNavigation(
-                          navigation.map((item, i) => ({
-                            ...item,
-                            current: i === index,
-                          })),
-                        )
-                      }
-                    >
-                      {nav.name}
-                    </NavLink>
-                  </Disclosure.Button>
+                    {nav.name}
+                  </NavLink>
                 ))}
               </div>
             </Disclosure.Panel>

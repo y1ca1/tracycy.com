@@ -1,18 +1,11 @@
 import React from 'react';
 import { Card } from 'flowbite-react';
-import { AnimationOnScroll } from 'react-animation-on-scroll';
 import { useThemeMode } from '@/hooks/useThemeMode';
 import { ThemeMode } from '@/types/theme';
-import { Accordion } from '@/components/accordion';
 import yysyzUrl from '@/assets/icons/experience/yysyz.png';
 import uestcUrl from '@/assets/icons/experience/uestc.png';
 import uestcWhiteUrl from '@/assets/icons/experience/uestc-white.png';
-import uestcSeseUrl from '@/assets/icons/experience/uestc-sese.png';
-import uglasgowUrl from '@/assets/icons/experience/UoG_colour.png';
-import uglasgowWhiteUrl from '@/assets/icons/experience/UoG_keyline.png';
-import PlusSign from '@/assets/icons/plus-sign.svg';
 import Ualberta from '@/assets/icons/experience/ualberta.svg';
-import ualbertaEngUrl from '@/assets/icons/experience/ualberta-eng.png';
 import uwaterlooUrl from '@/assets/icons/experience/uwaterloo.png';
 import cyphercorUrl from '@/assets/icons/experience/cyphercor.png';
 import cmuUrl from '@/assets/icons/experience/cmu.png';

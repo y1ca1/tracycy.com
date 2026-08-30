@@ -2,7 +2,6 @@ import React from 'react';
 import { isMobile } from 'react-device-detect';
 import { Tooltip } from 'flowbite-react';
 import { LightBulbIcon } from '@heroicons/react/solid';
-import { SpikeBounce } from '@/components/spike';
 import { LifeMap } from '@/components/lifeMap';
 import { ExperienceList } from '@/components/experienceList';
 import { ScrollToMap } from '@/components/scrollToMap';
@@ -12,7 +11,6 @@ const Experience = (): JSX.Element => {
 
   return (
     <div>
-      {/* <SpikeBounce /> */}
       <div className="flex flex-row justify-between">
         {/* Dummy flex item */}
         <div className="flex w-1/12"></div>
